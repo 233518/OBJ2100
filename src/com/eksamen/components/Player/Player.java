@@ -22,7 +22,6 @@ public class Player {
         this.gjettetOrd = "";
         this.name = name;
     }
-
     /**
      * Metode for å gjette ord.
      * @param ord Ordet spilleren vil gjette på
@@ -75,8 +74,8 @@ public class Player {
     }
 
     /**
-     * Metode for å få vite om det er spilleren sin tur til å beskrive ordet.
-     * @return Returnerer true eller false om det er spilleren sin tur til å beskrive ordet for andre å gjette.
+     * Metode for å velge om det spilleren sin tur til å gjette ord.
+     * @param turGjetteOrd True betyr at det blir spillerens tur, false = det er ikke spilleren sin tur lenger.
      */
     public void setTurGjetteOrd(boolean turGjetteOrd) {
         this.turGjetteOrd = turGjetteOrd;
@@ -95,8 +94,8 @@ public class Player {
     }
 
     /**
-     * Metode for å finne ut om det er spilleren sin tur til å beskrive ord.
-     * @return Returner true/false om det er spillren sin til til å beskrive ord
+     * Metode for å få vite om det er spilleren sin tur til å beskrive ordet.
+     * @return Returnerer true eller false om det er spilleren sin tur til å beskrive ordet for andre å gjette.
      */
     public boolean isTurBeskriveOrd() {
         return turBeskriveOrd;
