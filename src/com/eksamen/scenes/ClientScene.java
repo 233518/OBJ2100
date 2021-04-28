@@ -7,6 +7,6 @@ import javafx.scene.Scene;
 public class ClientScene extends Scene {
     private Client clientUi;
     public ClientScene() {
-        super(new Client.getGrid());
+        super(new Client().getClientGui());
     }
 }

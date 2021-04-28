@@ -16,7 +16,7 @@ public class MainClient extends Application {
 
     @Override
     public void start(Stage stage) {
-        Client test = new Client();
+        //Client test = new Client();
 
         scene = new ClientScene();
 

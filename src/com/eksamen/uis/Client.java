@@ -15,11 +15,8 @@ public class Client {
     private Button sendBtn;
     private TextField clientGuess;
     private TextField serverDescription;
-    private Scene scene;
-    private Stage stage;
 
-    public Client(Stage stage) {
-        this.stage = stage;
+    public Client() {
         makeClientGui();
     }
 
@@ -36,9 +33,9 @@ public class Client {
         clientGui.setTop(serverDescription);
         clientGuiBottom.getChildren().add(sendBtn);
         clientGuiBottom.setAlignment(Pos.CENTER);
-        scene = new Scene(clientGui);
-        stage.setScene(scene);
-        stage.show();
     }
 
+    public BorderPane getClientGui() {
+        return clientGui;
+    }
 }

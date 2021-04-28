@@ -35,4 +35,7 @@ public class Server {
     spill.add(nesteKnapp, 0, 4);
     }
 
+    public GridPane getGrid() {
+        return spill;
+    }
 }
