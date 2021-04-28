@@ -5,6 +5,7 @@ import com.eksamen.uis.MainUi;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
@@ -22,7 +23,7 @@ public class Main extends Application {
         server.start();
 
         Connection con = DriverManager.getConnection("jdbc:sqlite:OppgaveDB.db");
-        scene = new Scene(new MainUi().getGrid(), 640, 480);
+        scene = new Scene(new Pane(), 640, 480);
 
         stage.setScene(scene);
         stage.show();
