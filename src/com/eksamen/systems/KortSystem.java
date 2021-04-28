@@ -1,7 +1,6 @@
 package com.eksamen.systems;
 
 import com.eksamen.components.Kort;
-import com.sun.tools.jdeprscan.scan.Scan;
 
 import java.io.File;
 import java.io.FileNotFoundException;
