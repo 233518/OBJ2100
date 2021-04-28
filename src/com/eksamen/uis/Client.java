@@ -49,4 +49,8 @@ public class Client {
     public BorderPane getClientGui() {
         return clientGui;
     }
+
+    public Button getSendBtn() {
+        return sendBtn;
+    }
 }
