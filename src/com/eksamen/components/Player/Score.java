@@ -26,7 +26,7 @@ public class Score {
      * Metode for å returnere den totale poengsummen
      * @return Terurnerer total poengsum.
      */
-    protected int getScore() {
+    public int getScore() {
         return score;
     }
 }
