@@ -8,8 +8,16 @@ import javafx.scene.text.Text;
 
 public class Server {
 
-    public void spillVindu{
+    Text question1;
+    Text ord;
+    Text question2;
+    Text beskrivelse;
+    Button nesteKnapp;
+    GridPane spill;
 
+    public Server() {}
+
+    public void makeServerGUI() {
     // Komponenter i bruk
     Text question1 = new Text("Hva er ordet?");
     TextField ord = new TextField();
