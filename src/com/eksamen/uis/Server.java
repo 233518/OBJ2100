@@ -9,30 +9,32 @@ import javafx.scene.text.Text;
 public class Server {
 
     Text question1;
-    Text ord;
+    TextField ord;
     Text question2;
-    Text beskrivelse;
+    TextField beskrivelse;
     Button nesteKnapp;
     GridPane spill;
 
-    public Server() {}
+    public Server() {
+        makeServerGUI();
+    }
 
     public void makeServerGUI() {
-    // Komponenter i bruk
-    Text question1 = new Text("Hva er ordet?");
-    TextField ord = new TextField();
-    Text question2 = new Text("Forklaring for ordet?");
-    TextField beskrivelse = new TextField();
-    Button nesteKnapp = new Button("Neste");
+        // Komponenter i bruk
+        question1 = new Text("Hva er ordet?");
+        ord = new TextField();
+        question2 = new Text("Forklaring for ordet?");
+        beskrivelse = new TextField();
+        nesteKnapp = new Button("Neste");
 
-    // Oppsett
-    GridPane spill = new GridPane();
-    spill.setPadding(new Insets(10,10,10,10));
-    spill.add(question1, 0, 0);
-    spill.add(ord, 0, 1);
-    spill.add(question2, 0, 2);
-    spill.add(beskrivelse, 0, 3);
-    spill.add(nesteKnapp, 0, 4);
+        // Oppsett
+        spill = new GridPane();
+        spill.setPadding(new Insets(10,10,10,10));
+        spill.add(question1, 0, 0);
+        spill.add(ord, 0, 1);
+        spill.add(question2, 0, 2);
+        spill.add(beskrivelse, 0, 3);
+        spill.add(nesteKnapp, 0, 4);
     }
 
     public GridPane getGrid() {
