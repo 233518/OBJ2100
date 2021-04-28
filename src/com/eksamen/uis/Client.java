@@ -14,6 +14,7 @@ public class Client {
     private HBox clientGuiBottom;
     private Button sendBtn;
     private TextField clientGuess;
+    private TextField serverDescription;
     private Scene scene;
     private Stage stage;
 
@@ -27,9 +28,12 @@ public class Client {
         clientGuiBottom = new HBox();
         clientGui.setPrefSize(500, 500);
         sendBtn = new Button("Gjett");
+        serverDescription = new TextField();
+        serverDescription.setEditable(false);
         clientGuess = new TextField("Gjett hva ordet er her");
         clientGui.setCenter(clientGuess);
         clientGui.setBottom(clientGuiBottom);
+        clientGui.setTop(serverDescription);
         clientGuiBottom.getChildren().add(sendBtn);
         clientGuiBottom.setAlignment(Pos.CENTER);
         scene = new Scene(clientGui);
