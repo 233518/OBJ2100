@@ -126,4 +126,12 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Metode for å returnere spillerens beskrivelse av ordet.
+     * @return Returnerer spillrens beskrivelse av ordet.
+     */
+    public String getOrdBeskrivelse() {
+        return ordBeskrivelse;
+    }
 }
