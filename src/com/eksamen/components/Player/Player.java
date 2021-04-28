@@ -9,6 +9,7 @@ public class Player {
     private boolean turGjetteOrd; //Er det denne spilleren sin tur til å gjette?
     private boolean turBeskriveOrd;
     private String gjettetOrd;
+    private String ordBeskrivelse;
     private String name;
 
     /**
@@ -20,6 +21,7 @@ public class Player {
         this.score = new Score();
         this.turGjetteOrd = false;
         this.gjettetOrd = "";
+        this.ordBeskrivelse = "";
         this.name = name;
     }
     /**
@@ -51,7 +53,7 @@ public class Player {
             }else if(ord.equals("")) {
                 throw new Exception("Du må gjette et ord!");
             }else {
-                this.gjettetOrd = ord;
+                this.ordBeskrivelse = ord;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
