@@ -1,10 +1,8 @@
 package com.eksamen;
 
 import com.eksamen.networking.Server;
-import com.eksamen.uis.MainUi;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
