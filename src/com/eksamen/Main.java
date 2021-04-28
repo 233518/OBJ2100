@@ -1,6 +1,7 @@
 package com.eksamen;
 
 import com.eksamen.networking.Server;
+import com.eksamen.scenes.ServerScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -11,17 +12,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main extends Application {
-    public Scene scene;
+    public ServerScene scene;
     public static Server server;
 
     @Override
     public void start(Stage stage) throws SQLException {
-
         server = new Server();
         server.start();
 
-        Connection con = DriverManager.getConnection("jdbc:sqlite:OppgaveDB.db");
-        scene = new Scene(new Pane(), 640, 480);
+        scene = new ServerScene();
 
         stage.setScene(scene);
         stage.show();
