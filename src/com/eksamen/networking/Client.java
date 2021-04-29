@@ -1,31 +1,44 @@
 package com.eksamen.networking;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Client {
-    private int port;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
+public class Client extends Thread {
     private Socket socket;
-    private boolean running;
+    private InputStreamReader input;
+    private OutputStreamWriter output;
+    private BufferedReader bufferedReader;
+    private BufferedWriter bufferedWriter;
 
     public Client() {
         try {
-            port = 8000;
-            socket = new Socket("localhost", port);
-            out = new ObjectOutputStream(socket.getOutputStream());
+            socket = new Socket("localhost", 1234);
+
+            input = new InputStreamReader(socket.getInputStream());
+            output = new OutputStreamWriter(socket.getOutputStream());
+
+            bufferedReader = new BufferedReader(input);
+            bufferedWriter = new BufferedWriter(output);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void run() {
+        while(true) {
+            try {
+                System.out.println(bufferedReader.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void sendMessage() {
         try {
-            out.writeObject("Hi");
+            bufferedWriter.write("Hi");
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,25 +1,23 @@
 package com.eksamen.networking;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
 public class Server extends Thread {
-    private int port;
-    private ServerSocket server;
+    private int port = 1234;
     private Socket socket;
-    private boolean running;
-    private ArrayList<ClientHandler> clients;
+    private ServerSocket serverSocket;
+    private InputStreamReader input;
+    private OutputStreamWriter output;
+    private BufferedReader bufferedReader;
+    private BufferedWriter bufferedWriter;
 
     public Server() {
         try {
-            port = 8000;
-            server = new ServerSocket(port);
-            clients = new ArrayList<>();
+            serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -27,33 +25,30 @@ public class Server extends Thread {
 
     public void run(){
         try {
-            running = true;
-            while(running) {
-                socket = server.accept();
-                ClientHandler client = new ClientHandler(socket);
-                clients.add(client);
-                client.start();
-                System.out.println("Client connected");
+            while(true) {
+                socket = serverSocket.accept();
+                input = new InputStreamReader(socket.getInputStream());
+                output = new OutputStreamWriter(socket.getOutputStream());
+
+                bufferedReader = new BufferedReader(input);
+                bufferedWriter = new BufferedWriter(output);
+
+                while (true) {
+                    String msgFromClient = bufferedReader.readLine();
+                    System.out.println(msgFromClient);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public void stopServer() {
+    public void sendMessage() {
         try {
-            System.out.println("Closing server socket...");
-            running = false;
-            for (ClientHandler client: clients) {
-                client.shutdown();
-            }
-            socket.close();
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            bufferedWriter.write("Hi");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public ArrayList<ClientHandler> getClients() {
-        return clients;
     }
 }

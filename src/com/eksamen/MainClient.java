@@ -1,13 +1,9 @@
 package com.eksamen;
 
-import com.eksamen.networking.Client;
 import com.eksamen.networking.Server;
 import com.eksamen.scenes.ClientScene;
-import com.eksamen.scenes.ServerScene;
+import com.eksamen.uis.ClientUi;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainClient extends Application {
@@ -16,9 +12,7 @@ public class MainClient extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Client test = new Client();
-
-        scene = new ClientScene();
+        scene = new ClientScene(new ClientUi());
 
         stage.setScene(scene);
         stage.show();

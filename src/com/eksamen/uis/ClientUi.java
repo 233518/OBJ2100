@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Client {
+public class ClientUi {
     private BorderPane clientGui;
     private HBox clientGuiBottom;
     private VBox clientGuiCenter;
@@ -21,7 +21,7 @@ public class Client {
     private TextField serverDescription;
     private Label lbl;
 
-    public Client() {
+    public ClientUi() {
         makeClientGui();
     }
 

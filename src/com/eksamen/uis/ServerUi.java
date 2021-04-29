@@ -6,16 +6,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-public class Server {
+public class ServerUi {
 
-    Text question1;
-    TextField ord;
-    Text question2;
-    TextField beskrivelse;
-    Button nesteKnapp;
-    GridPane spill;
+    private Text question1;
+    private TextField ord;
+    private Text question2;
+    private TextField beskrivelse;
+    private Button nesteKnapp;
+    private GridPane spill;
 
-    public Server() {
+    public ServerUi() {
         makeServerGUI();
     }
 
@@ -39,5 +39,9 @@ public class Server {
 
     public GridPane getGrid() {
         return spill;
+    }
+
+    public Button getNesteKnapp() {
+        return nesteKnapp;
     }
 }
