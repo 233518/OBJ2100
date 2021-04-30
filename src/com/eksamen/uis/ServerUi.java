@@ -44,4 +44,8 @@ public class ServerUi {
     public Button getNesteKnapp() {
         return nesteKnapp;
     }
+
+    public TextField getBeskrivelse() {
+        return beskrivelse;
+    }
 }

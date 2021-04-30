@@ -53,4 +53,8 @@ public class ClientUi {
     public Button getSendBtn() {
         return sendBtn;
     }
+
+    public TextField getClientGuess() {
+        return clientGuess;
+    }
 }
