@@ -26,14 +26,17 @@ public class Client extends Thread {
     }
 
     public void run() {
-        while(true) {
-            try {
+        try {
+            while(true) {
                 System.out.println(bufferedReader.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        }catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
         }
     }
+
     public void sendMessage() {
         try {
             bufferedWriter.write("Hi");

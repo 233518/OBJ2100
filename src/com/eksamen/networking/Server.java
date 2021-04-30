@@ -40,6 +40,8 @@ public class Server extends Thread {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
         }
     }
     public void sendMessage() {
