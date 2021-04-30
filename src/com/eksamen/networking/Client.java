@@ -3,9 +3,13 @@ package com.eksamen.networking;
 import com.eksamen.uis.ClientUi;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ *
+ */
 public class Client extends Thread {
     private Socket socket;
     private InputStreamReader input;
@@ -14,6 +18,10 @@ public class Client extends Thread {
     private BufferedWriter bufferedWriter;
     private ClientUi client;
 
+    /**
+     *
+     * @param client
+     */
     public Client(ClientUi client) {
         try {
             this.client = client;
@@ -25,12 +33,18 @@ public class Client extends Thread {
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Connection refused");
+            //e.printStackTrace();
         }
     }
 
+    /**
+     *
+     */
     public void run() {
         try {
+            if(socket == null)
+                return;
             while(true) {
                 String message = bufferedReader.readLine();
                 client.getServerDescription().setText(message);
@@ -42,11 +56,16 @@ public class Client extends Thread {
         }
     }
 
+    /**
+     *
+     */
     public void sendMessage() {
         try {
-            bufferedWriter.write("Hi");
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
+            if(socket != null) {
+                bufferedWriter.write("Hi");
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
