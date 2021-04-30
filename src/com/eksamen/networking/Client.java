@@ -1,5 +1,7 @@
 package com.eksamen.networking;
 
+import com.eksamen.uis.ClientUi;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,9 +12,11 @@ public class Client extends Thread {
     private OutputStreamWriter output;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private ClientUi client;
 
-    public Client() {
+    public Client(ClientUi client) {
         try {
+            this.client = client;
             socket = new Socket("localhost", 1234);
 
             input = new InputStreamReader(socket.getInputStream());
@@ -28,7 +32,8 @@ public class Client extends Thread {
     public void run() {
         try {
             while(true) {
-                System.out.println(bufferedReader.readLine());
+                String message = bufferedReader.readLine();
+                client.getServerDescription().setText(message);
             }
         }catch (IOException e) {
             e.printStackTrace();
@@ -46,4 +51,6 @@ public class Client extends Thread {
             e.printStackTrace();
         }
     }
+
+
 }

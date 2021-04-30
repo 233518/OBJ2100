@@ -1,5 +1,6 @@
 package com.eksamen.scenes;
 
+import com.eksamen.components.Player.Player;
 import com.eksamen.networking.Client;
 import com.eksamen.uis.ClientUi;
 import javafx.event.ActionEvent;
@@ -9,12 +10,14 @@ import javafx.scene.Scene;
 public class ClientScene extends Scene {
     private ClientUi clientUi;
     private Client client;
+    private Player player;
 
     public ClientScene(ClientUi clientUi) {
         super(clientUi.getClientGui());
         this.clientUi = clientUi;
+        this.player = new Player("Hei");
 
-        client = new com.eksamen.networking.Client();
+        client = new Client(clientUi);
         client.start();
 
         clientUi.getSendBtn().setOnAction(new EventHandler<ActionEvent>() {
@@ -23,6 +26,5 @@ public class ClientScene extends Scene {
                 client.sendMessage();
             }
         });
-
     }
 }

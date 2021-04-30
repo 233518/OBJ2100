@@ -44,12 +44,11 @@ public class Server extends Thread {
             new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
         }
     }
-    public void sendMessage() {
+    public void sendMessage(String forklaring) {
         try {
-            bufferedWriter.write("Hi");
+            bufferedWriter.write(forklaring);
             bufferedWriter.newLine();
             bufferedWriter.flush();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

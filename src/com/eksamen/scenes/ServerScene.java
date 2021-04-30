@@ -15,13 +15,13 @@ public class ServerScene extends Scene {
         super(serverui.getGrid());
         this.serverui = serverui;
 
-        server = new com.eksamen.networking.Server();
+        server = new Server();
         server.start();
 
         serverui.getNesteKnapp().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                server.sendMessage();
+                server.sendMessage(serverui.getBeskrivelse().getText());
             }
         });
     }

@@ -57,4 +57,8 @@ public class ClientUi {
     public TextField getClientGuess() {
         return clientGuess;
     }
+
+    public TextField getServerDescription() {
+        return serverDescription;
+    }
 }
