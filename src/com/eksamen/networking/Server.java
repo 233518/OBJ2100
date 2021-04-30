@@ -46,9 +46,10 @@ public class Server extends Thread {
     }
     public void sendMessage() {
         try {
+            bufferedWriter.write("Hi");
             bufferedWriter.newLine();
             bufferedWriter.flush();
-            bufferedWriter.write("Hi");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
