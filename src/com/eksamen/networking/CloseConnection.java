@@ -4,11 +4,6 @@ import java.io.*;
 import java.net.Socket;
 
 public class CloseConnection {
-    private Socket socket;
-    private InputStreamReader input;
-    private OutputStreamWriter output;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
 
     public void closeConnection(Socket socket, InputStreamReader input, OutputStreamWriter output, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {
