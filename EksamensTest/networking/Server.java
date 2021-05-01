@@ -23,17 +23,18 @@ public class Server extends Thread {
         }
     }
 
+    //Kjøres av thread
     public void run(){
         try {
-            while(true) {
-                socket = serverSocket.accept();
+            Test: while (true) {
+                socket = serverSocket.accept(); //"Lytter" etter klient koblinger
                 input = new InputStreamReader(socket.getInputStream());
                 output = new OutputStreamWriter(socket.getOutputStream());
 
                 bufferedReader = new BufferedReader(input);
                 bufferedWriter = new BufferedWriter(output);
 
-                while (true) {
+                Test2: while (true) {
                     String msgFromClient = bufferedReader.readLine();
                     System.out.println(msgFromClient);
                 }

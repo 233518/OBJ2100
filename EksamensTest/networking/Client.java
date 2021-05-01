@@ -8,6 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
+ * Opretter en ny klasse
  *
  */
 public class Client extends Thread {
@@ -18,10 +19,7 @@ public class Client extends Thread {
     private BufferedWriter bufferedWriter;
     private ClientUi client;
 
-    /**
-     *
-     * @param client
-     */
+    //Kobler opp klient til serveren og initialiserer streams/buffers
     public Client(ClientUi client) {
         try {
             this.client = client;
@@ -34,13 +32,11 @@ public class Client extends Thread {
             bufferedWriter = new BufferedWriter(output);
         } catch (IOException e) {
             System.out.println("Connection refused");
-            //e.printStackTrace();
         }
     }
 
-    /**
-     *
-     */
+    //Kjøres av thread
+    //Kjører i en loop som leser inn meldinger mottat fra server
     public void run() {
         try {
             if(socket == null)
@@ -52,13 +48,12 @@ public class Client extends Thread {
         }catch (IOException e) {
             e.printStackTrace();
         } finally {
+            //avslutter kobling
             new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
         }
     }
 
-    /**
-     *
-     */
+    //Sender melding til server
     public void sendMessage() {
         try {
             if(socket != null) {
