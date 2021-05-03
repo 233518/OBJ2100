@@ -17,7 +17,5 @@ public class TestSceneServer extends Scene {
     public TestSceneServer(Stage stage, TestLayout testLayout) {
         super(testLayout.getPane());
         this.testLayout = testLayout;
-        nettverk = new ServerNetworking();
-        nettverk.start();
     }
 }
