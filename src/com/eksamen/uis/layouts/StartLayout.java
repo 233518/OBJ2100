@@ -22,6 +22,7 @@ public class StartLayout {
         beskjed = new Label("Skriv brukernavn: ");
         skrivBrukernavn = new TextField();
         enter = new Button("Enter");
+        enter.setMinWidth(150);
         startPane.setPadding(new Insets(10,10,10,10));
 
         // Plassering
