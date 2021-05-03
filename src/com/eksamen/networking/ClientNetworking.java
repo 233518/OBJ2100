@@ -39,6 +39,7 @@ public class ClientNetworking extends Thread {
                 return;
             while(true) {
                 String message = bufferedReader.readLine();
+                System.out.println(message);
             }
         }catch (IOException e) {
             e.printStackTrace();

@@ -28,10 +28,16 @@ public class ServerNetworking extends Thread {
                 System.out.println("Client connected");
                 ClientSocket client = new ClientSocket(socket);
                 clients.add(client);
-                client.run();
+                client.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void sendMessagesToClients() {
+        for(ClientSocket client : clients) {
+            client.sendMessage("HelloClients");
         }
     }
 }
