@@ -24,7 +24,6 @@ public class ClientScene extends Scene {
     private MessageSystem message;
     private RomChat romChat;
 
-
     public ClientScene(Stage stage, ClientUi clientUi, String username) {
         super(clientUi.getHovedPane());
         this.clientUi = clientUi;

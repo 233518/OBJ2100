@@ -5,6 +5,7 @@ import com.eksamen.scenes.ClientScene;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class SyncClient {
     private BufferedWriter bufferedWriter;
@@ -34,7 +35,8 @@ public class SyncClient {
      */
     public void newRoomServer(String message) {
         String[] messageArray = message.split(":");
-        clientScene.getRomSystem().opprettRom(messageArray[0],messageArray[1]);
+        Rom rom = new Rom(messageArray[0],messageArray[1]);
+        clientScene.getRomSystem().opprettRom(rom);
         clientScene.getRooms().add(new Rom(messageArray[0], messageArray[1]));
     }
 
@@ -46,7 +48,7 @@ public class SyncClient {
     public void syncServer(String message, Rom rom) {
         switch(message) {
             case "newRoom":
-                newRoomServer(message);
+                newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn());
         }
     }
 
@@ -56,10 +58,10 @@ public class SyncClient {
      * @param rom
      */
     public void newRoomClient(String message) {
-        String[] messageSplit = message.split(":");
-
+        try {
+            bufferedWriter.write(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-
-
 }

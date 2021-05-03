@@ -1,6 +1,7 @@
 package com.eksamen.systems;
 
 import com.eksamen.components.Bruker;
+import com.eksamen.components.Rom;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.systems.romsystem.RomTabell;
 import com.eksamen.uis.layouts.HovedLayout;
@@ -39,8 +40,9 @@ public class InputSystem {
 
     public void opprettRom(){
         romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
+            Rom rom = new Rom("Rom 1", bruker.getName());
             romSystem = new RomSystem(romListeUI, bruker);
-            romSystem.opprettRom("Rom 1", bruker.getName());
+            romSystem.opprettRom(rom);
             hovedLayout.lagNyTab("Rom 1");
 
         });
