@@ -6,10 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class ClientScene extends Scene {
+    private ClientUi clientUi;
     private ClientNetworking nettverk;
-    public ClientScene(Parent parent) {
-        super(parent);
+    public ClientScene(ClientUi clientUi) {
+        super(clientUi.getHovedPane());
+        this.clientUi = clientUi;
         nettverk = new ClientNetworking();
         nettverk.start();
+
     }
 }

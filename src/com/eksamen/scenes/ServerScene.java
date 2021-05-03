@@ -1,13 +1,18 @@
 package com.eksamen.scenes;
 
+import com.eksamen.Main;
 import com.eksamen.networking.ServerNetworking;
+import com.eksamen.uis.ServerUi;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class ServerScene extends Scene {
-    public ServerScene(Parent parent) {
-        super(parent);
-        ServerNetworking server = new ServerNetworking();
-        server.start();
+    private ServerUi serverUi;
+    private ServerNetworking nettverk;
+    public ServerScene(ServerUi serverUi) {
+        super(serverUi.getHovedPane());
+        this.serverUi = serverUi;
+        nettverk = new ServerNetworking();
+        nettverk.start();
     }
 }
