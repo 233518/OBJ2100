@@ -15,21 +15,26 @@ public class InputSystem {
     private HovedLayout hovedLayout;
     private RomListeUI romListeUI;
     private RomSystem romSystem;
+    private Rom rom;
 
 
-    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat) {
+    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, Rom rom){
         this.romListeUI = romListeUI;
         this.bruker = bruker;
         this.hovedLayout = hovedLayout;
         this.message = message;
         this.romChat = romChat;
+        this.rom = rom;
         sendMelding();
         bliMedRom();
         opprettRom();
         visOpprettRom();
     }
 
-    public void sendMelding() {
+    /**
+     * ActionEvent for å sende melding
+     */
+    public void sendMelding(){
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
             message = new MessageSystem(bruker.getName(), melding);
@@ -38,8 +43,11 @@ public class InputSystem {
         });
     }
 
-    public void opprettRom() {
-        romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
+    /**
+     * ActionEvent for å opprette rom
+     */
+    public void opprettRom(){
+        romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
             romSystem = new RomSystem(romListeUI, bruker);
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
             romSystem.opprettRom(rom);
@@ -50,15 +58,18 @@ public class InputSystem {
 
     public void visOpprettRom() {
         romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
-            System.out.println("Halla på deg");
             romListeUI.visOpprettRom();
         });
     }
 
+    /**
+     * ActionEvent for å bli med i ett chatterom
+     */
     public void bliMedRom(){
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             RomTabell rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
-            hovedLayout.lagNyTab(rom.getRomNavn());
+            //hovedLayout.lagNyTab(rom.getRomNavn());
+            //romChat.oppdaterDeltakerListe(rom.getBrukere());
         });
     }
 

@@ -1,5 +1,11 @@
 package com.eksamen.uis.layouts;
 
+import com.eksamen.components.Bruker;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
+import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.systems.romsystem.RomTabell;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -7,6 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
 
 public class RomChat {
     private TextField meldingsBoks;
@@ -65,13 +73,13 @@ public class RomChat {
 
         //Adder kolonner i tabeller
         deltakerKolonne1 = new TableColumn<>("Brukernavn");
-        deltakerKolonne1.setCellValueFactory(new PropertyValueFactory<>("aktivbrukernavn"));
+        deltakerKolonne1.setCellValueFactory(new PropertyValueFactory<DeltakerTabell, String>("aktivbrukernavn"));
         inndataKolonne1 = new TableColumn<>("Tid");
-        inndataKolonne1.setCellValueFactory(new PropertyValueFactory<>("tid"));
+        inndataKolonne1.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("tid"));
         inndataKolonne2 = new TableColumn<>("Brukernavn");
-        inndataKolonne2.setCellValueFactory(new PropertyValueFactory<>("brukernavn"));
+        inndataKolonne2.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("brukernavn"));
         inndataKolonne3 = new TableColumn<>("Melding");
-        inndataKolonne3.setCellValueFactory(new PropertyValueFactory<>("melding"));
+        inndataKolonne3.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("melding"));
         inndata.getColumns().addAll(inndataKolonne1, inndataKolonne2, inndataKolonne3);
         deltakere.getColumns().add(deltakerKolonne1);
 
@@ -109,5 +117,33 @@ public class RomChat {
 
     public void setDeltakere(TableView deltakere) {
         this.deltakere = deltakere;
+    }
+
+    public void oppdaterDeltakerListe(ArrayList<Bruker> liste) {
+        ObservableList<Bruker> tableViewItems = deltakere.getItems();
+        ObservableList<Bruker> deltakerArrayList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < tableViewItems.size(); i++){
+            deltakerArrayList.add(tableViewItems.get(i));
+        }
+        for (int i = 0; i < liste.size(); i++){
+            deltakerArrayList.add(liste.get(i));
+        }
+
+        deltakere.setItems(deltakerArrayList);
+    }
+
+    public void oppdaterMeldingListe(ObservableList<InndataTabell> liste) {
+        ObservableList<InndataTabell> tableViewItems = inndata.getItems();
+        ObservableList<InndataTabell> inndataArrayList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < tableViewItems.size(); i++){
+            inndataArrayList.add(tableViewItems.get(i));
+        }
+        for (int i = 0; i < liste.size(); i++){
+            inndataArrayList.add(liste.get(i));
+        }
+
+        deltakere.setItems(inndataArrayList);
     }
 }
