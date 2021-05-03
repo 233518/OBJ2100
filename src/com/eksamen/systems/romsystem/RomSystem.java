@@ -45,20 +45,4 @@ public class RomSystem {
         //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();
     }
 
-
-    //Ferdig utfyller Til testing
-    /* public void opprettRomOgBruker() {
-        Bruker bruker0 = new Bruker("Sigve");
-        Bruker bruker1 = new Bruker("Ørjan");
-        Bruker bruker2 = new Bruker("Sivert");
-        Bruker bruker3 = new Bruker("Govert");
-
-        opprettRom("Rom 1", bruker0);
-        opprettRom("Rom 2", bruker1);
-        opprettRom("Rom 3", bruker2);
-        opprettRom("Rom 4", bruker3);
-
-        romListeUi.getRomTableView().setItems(getRom());
-    }
-    */
 }
