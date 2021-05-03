@@ -45,7 +45,6 @@ public class RomSystem {
         System.out.println(romArrayList.size());
         ObservableList<RomTabell> liste = FXCollections.observableArrayList();
         for (int i = 0; i < romArrayList.size(); i++) {
-            System.out.println("Hallo?");
             liste.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBruker().getName()));
         }
         return liste;
