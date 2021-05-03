@@ -19,7 +19,6 @@ public class StartScene extends Scene {
         start.getEnter().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Hi?");
                 stage.setScene(new ClientScene(stage, new ClientUi(), start.getSkrivBrukernavn().getText()));
             }
         });

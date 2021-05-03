@@ -1,9 +1,13 @@
 package com.eksamen.networking;
 
+import com.eksamen.components.Bruker;
+import com.eksamen.components.Rom;
+
 import java.io.*;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Opretter en ny klasse
@@ -15,6 +19,7 @@ public class ClientNetworking extends Thread {
     private OutputStreamWriter output;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private ArrayList<Rom> rooms;
 
     //Kobler opp klient til serveren og initialiserer streams/buffers
     public ClientNetworking() {
@@ -56,6 +61,19 @@ public class ClientNetworking extends Thread {
                 bufferedWriter.write("Hi");
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getRoomListe() {
+        try {
+            while (bufferedReader.readLine() != null) {
+                String message = bufferedReader.readLine();
+                String[] string = message.split(":");
+                rooms.add(new Rom(string[0], new Bruker(string[1])));
+                System.out.println(message);
             }
         } catch (IOException e) {
             e.printStackTrace();
