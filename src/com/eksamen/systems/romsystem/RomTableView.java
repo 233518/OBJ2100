@@ -16,12 +16,9 @@ public class RomTableView {
 
     private TableView tableView() {
         try {
-            TableColumn<RomTabell, Integer> idKolonne = new TableColumn<>("ID");
             TableColumn<RomTabell, String> romKolonne = new TableColumn<>("Rom");
             TableColumn<RomTabell, String> brukerKolonne = new TableColumn<>("Laget av");
 
-            idKolonne.setMinWidth(50);
-            idKolonne.setCellValueFactory(new PropertyValueFactory<RomTabell, Integer>("id"));
 
             romKolonne.setMinWidth(50);
             romKolonne.setCellValueFactory(new PropertyValueFactory<RomTabell, String>("romNavn"));
@@ -34,7 +31,7 @@ public class RomTableView {
 
             romTableView.setItems(getRom());
 
-            romTableView.getColumns().addAll(idKolonne, romKolonne, brukerKolonne);
+            romTableView.getColumns().addAll(romKolonne, brukerKolonne);
         }catch (Exception e){
             System.out.println("Kunne ikke konfigurere tableview: " +e);
         }
@@ -44,7 +41,7 @@ public class RomTableView {
     private ObservableList<RomTabell> getRom() {
         ObservableList<RomTabell> listen = FXCollections.observableArrayList();
         for (int i = 0; i < romArrayList.size(); i++) {
-            listen.add(new RomTabell(romArrayList.get(i).getId(),romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBruker().getName()));
+            listen.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBruker().getName()));
         }
         return listen;
     }
@@ -55,14 +52,14 @@ public class RomTableView {
         Bruker bruker2 = new Bruker("Sivert");
         Bruker bruker3 = new Bruker("Govert");
 
-        opprettRom(0, "Rom 1", bruker0);
-        opprettRom(1, "Rom 2", bruker1);
-        opprettRom(2, "Rom 3", bruker2);
-        opprettRom(3, "Rom 4", bruker3);
+        opprettRom("Rom 1", bruker0);
+        opprettRom("Rom 2", bruker1);
+        opprettRom("Rom 3", bruker2);
+        opprettRom("Rom 4", bruker3);
     }
 
-    private void opprettRom(int id, String romNavn, Bruker bruker) {
-        romArrayList.add(new Rom(id, romNavn, bruker));
+    private void opprettRom( String romNavn, Bruker bruker) {
+        romArrayList.add(new Rom(romNavn, bruker));
     }
 
     public TableView<RomTabell> getRomTableView() {

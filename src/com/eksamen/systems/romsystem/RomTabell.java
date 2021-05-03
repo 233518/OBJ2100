@@ -4,23 +4,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class RomTabell {
-    private SimpleIntegerProperty id;
     private SimpleStringProperty romNavn;
     private SimpleStringProperty opprettetNavn;
 
-    public RomTabell(int id, String romNavn, String opprettetNavn) {
-        this.id = new SimpleIntegerProperty(id);
+    public RomTabell(String romNavn, String opprettetNavn) {
         this.romNavn = new SimpleStringProperty(romNavn);
         this.opprettetNavn = new SimpleStringProperty((opprettetNavn));
-    }
-
-
-    public int getId() {
-        return id.get();
-    }
-
-    public SimpleIntegerProperty idProperty() {
-        return id;
     }
 
     public String getRomNavn() {
@@ -37,10 +26,6 @@ public class RomTabell {
 
     public SimpleStringProperty opprettetNavnProperty() {
         return opprettetNavn;
-    }
-
-    public void setId(SimpleIntegerProperty id) {
-        this.id = id;
     }
 
     public void setRomNavn(SimpleStringProperty romNavn) {
