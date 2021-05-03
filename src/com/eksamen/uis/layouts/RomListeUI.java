@@ -3,6 +3,8 @@ package com.eksamen.uis.layouts;
 import com.eksamen.systems.romsystem.RomTableView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -14,6 +16,7 @@ public class RomListeUI {
     private final VBox vBox = new VBox();
     private final HBox nyttRomHBox = new HBox();
     private final HBox hBoxButtons = new HBox();
+
     private TextField textField = new TextField();
     private Button buttonLeggTilRom;
     private Button buttonNyttRom;
@@ -33,12 +36,14 @@ public class RomListeUI {
         textField.setMinSize(100,30);
         buttonLeggTilRom.setMinSize(60, 30);
         buttonNyttRom = new Button("Nytt rom");
+
         nyttRomHBox.getChildren().addAll(textField, buttonLeggTilRom);
 
         hBoxButtons.getChildren().addAll(buttonNyttRom, buttonBliMed, buttonForlat);
         vBox.getChildren().addAll(hBoxButtons, romTableView.getRomTableView());
         return vBox;
     }
+
 
     /**
      * Getter for TextField som brukes til å opprette rom.
