@@ -6,6 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Klasse for å opprette UI til romlisten.
+ */
 public class RomListeUI {
     private VBox vBox = new VBox();
     private HBox nyttRomHBox = new HBox();
@@ -17,6 +20,10 @@ public class RomListeUI {
     private Button buttonForlat;
     private RomTableView romTableView = new RomTableView();
 
+    /**
+     * Metode for å opprette alle elementene og sette de sammen i vBox som holder på alle elementene.
+     * @return Returnerer vBoxen som holder på hele UI'et til romlisten.
+     */
     public VBox getRomUI() {
         buttonLeggTilRom = new Button("Legg til");
         buttonBliMed = new Button("Bli med i rom");
@@ -33,34 +40,64 @@ public class RomListeUI {
         return vBox;
     }
 
+    /**
+     * Getter for TextField som brukes til å opprette rom.
+     * @return Returnerer textField
+     */
     public TextField getTextField() {
         return textField;
     }
 
+    /**
+     * Metode for å legge til HBox som inneholder UI med funksjonalitet til å opprette rom.
+     */
     public void visOpprettRom() {
         vBox.getChildren().addAll(nyttRomHBox);
     }
 
+    /**
+     * Metode for å skjule HBox som inneholder UI med funksjonalitet til å opprette rom.
+     */
     public void skjulOpprettRom() {
         vBox.getChildren().remove(nyttRomHBox);
     }
 
+    /**
+     * Metode som returnerer tableviewen.
+     * @return Returnerer tableviewen.
+     */
     public RomTableView getRomTableView() {
         return romTableView;
     }
 
+    /**
+     * Metode for å returnere knappen som man trykker på for å vise UI som har funksjonalitet til å opprette rom.
+     * @return returnerer knappen som man trykker på for å vise UI som har funksjonalitet til å opprette rom.
+     */
     public Button getButtonNyttRom() {
         return buttonNyttRom;
     }
 
+    /**
+     * Metode for å returnere knappen som legger til ett nytt rom.
+     * @return Returnerer knappen som legger til ett nytt rom.
+     */
     public Button getButtonLeggTilRom() {
         return buttonLeggTilRom;
     }
 
+    /**
+     * Metode for å returnere knappen som lar deg bli med i ett rom.
+     * @return Returnerer knappen som lar deg bli med i ett rom.
+     */
     public Button getButtonBliMed() {
         return buttonBliMed;
     }
 
+    /**
+     * Metode for å returnere knappen som lar deg forlate ett rom.
+     * @return Returnerer knappen som lar forlate ett rom.
+     */
     public Button getButtonForlat() {
         return buttonForlat;
     }
