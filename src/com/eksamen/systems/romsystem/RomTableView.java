@@ -2,10 +2,13 @@ package com.eksamen.systems.romsystem;
 
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.ArrayList;
 
 public class RomTableView {
     //private ArrayList<Rom> romArrayList = new ArrayList<Rom>();
@@ -35,10 +38,16 @@ public class RomTableView {
 
     public void oppdaterTableView(ObservableList<RomTabell> liste) {
         ObservableList<RomTabell> tableViewItems = romTableView.getItems();
-        System.out.println(romTableView.getItems().size());
-        //tableViewItems.add(tableViewItems.size()+1, liste.get(1));
-        romTableView.setItems(liste);
-        romTableView.getItems();
+        ObservableList<RomTabell> romArrayList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < tableViewItems.size(); i++){
+            romArrayList.add(tableViewItems.get(i));
+        }
+        for (int i = 0; i < liste.size(); i++){
+            romArrayList.add(liste.get(i));
+        }
+
+        romTableView.setItems(romArrayList);
     }
 
 
