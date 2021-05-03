@@ -1,4 +1,4 @@
-package com.eksamen.uis.layouts.romlisteui;
+package com.eksamen.uis.layouts;
 
 import com.eksamen.systems.romsystem.RomTableView;
 import javafx.scene.control.Button;

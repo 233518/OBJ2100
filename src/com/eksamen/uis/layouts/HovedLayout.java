@@ -1,6 +1,5 @@
 package com.eksamen.uis.layouts;
 
-import com.eksamen.uis.layouts.romlisteui.RomListeUI;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
