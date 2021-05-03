@@ -18,13 +18,12 @@ public class InputSystem {
     private Rom rom;
 
 
-    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, Rom rom){
+    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat){
         this.romListeUI = romListeUI;
         this.bruker = bruker;
         this.hovedLayout = hovedLayout;
         this.message = message;
         this.romChat = romChat;
-        this.rom = rom;
         sendMelding();
         bliMedRom();
         opprettRom();
@@ -47,7 +46,7 @@ public class InputSystem {
      * ActionEvent for å opprette rom
      */
     public void opprettRom(){
-        romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
+        romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             romSystem = new RomSystem(romListeUI, bruker);
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
             romSystem.opprettRom(rom);
@@ -68,7 +67,7 @@ public class InputSystem {
     public void bliMedRom(){
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             RomTabell rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
-            //hovedLayout.lagNyTab(rom.getRomNavn());
+            hovedLayout.lagNyTab(rom.getRomNavn());
             //romChat.oppdaterDeltakerListe(rom.getBrukere());
         });
     }
