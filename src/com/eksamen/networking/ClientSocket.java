@@ -46,11 +46,13 @@ public class ClientSocket extends Thread {
     public void sendRomListe(ArrayList<Rom> rooms) {
         try {
             if(bufferedWriter != null) {
-                for(Rom room : rooms) {
-                    System.out.println("Wtf");
-                    bufferedWriter.write(room.getRomNavn() + ":" + room.getBrukerNavn());
-                    bufferedWriter.newLine();
-                    bufferedWriter.flush();
+                if(rooms.size() > 0) {
+                    for(Rom room : rooms) {
+                        System.out.println("Wtf");
+                        bufferedWriter.write(room.getRomNavn() + ":" + room.getBrukerNavn());
+                        bufferedWriter.newLine();
+                        bufferedWriter.flush();
+                    }
                 }
                 bufferedWriter.write("Ferdig");
                 bufferedWriter.newLine();

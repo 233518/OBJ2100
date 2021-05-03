@@ -22,9 +22,6 @@ public class ServerScene extends Scene {
         nettverk = new ServerNetworking(this);
         nettverk.start();
         rooms = new ArrayList<>();
-        rooms.add(new Rom("Rom1", "Admin"));
-        rooms.add(new Rom("Rom2", "Hei"));
-        rooms.add(new Rom("Rom3", "Adwqdwq"));
         serverUi.getHovedLayout().getRomListe().getButtonNyttRom().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
