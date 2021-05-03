@@ -1,4 +1,5 @@
 package com.eksamen;
+import com.eksamen.networking.ClientNetworking;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.uis.ClientUi;
 import javafx.application.Application;
