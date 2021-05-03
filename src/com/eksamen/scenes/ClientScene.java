@@ -3,6 +3,7 @@ package com.eksamen.scenes;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ClientNetworking;
+import com.eksamen.systems.InputSystem;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ClientUi;
 import javafx.scene.Parent;
@@ -17,6 +18,8 @@ public class ClientScene extends Scene {
     private Bruker bruker;
     private RomSystem romSystem;
     private ArrayList<Rom> rooms;
+    private InputSystem inputSystem;
+
 
     public ClientScene(Stage stage, ClientUi clientUi, String username) {
         super(clientUi.getHovedPane());
@@ -28,5 +31,6 @@ public class ClientScene extends Scene {
         bruker = new Bruker(username);
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
+        inputSystem = new InputSystem(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout());
     }
 }
