@@ -9,8 +9,13 @@ public class HovedLayout {
     private TabPane tabPane;
     public HovedLayout(){
         romChat = new RomChat();
+        //romListe = new RomListeUI();
         romListe = new RomListeUI();
         lagLayout();
+    }
+
+    public RomListeUI getRomListe() {
+        return romListe;
     }
 
     public void lagLayout(){

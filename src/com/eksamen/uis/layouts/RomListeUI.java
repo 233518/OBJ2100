@@ -27,6 +27,10 @@ public class RomListeUI {
         return vBox;
     }
 
+    public RomTableView getRomTableView() {
+        return romTableView;
+    }
+
     private void metode() {
 
     }
