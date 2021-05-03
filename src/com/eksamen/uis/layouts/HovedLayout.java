@@ -17,14 +17,19 @@ public class HovedLayout {
     public void lagLayout(){
         tabPane = new TabPane();
         Tab tab1 = new Tab("Romliste");
-        Tab tab2 = new Tab("Chat");
         tab1.setClosable(false);
         tab1.setContent(romListe.getRomTableView());
-        tab2.setContent(romChat.getBorderpane());
-        tabPane.getTabs().addAll(tab1, tab2);
+        tabPane.getTabs().add(tab1);
     }
 
     public TabPane getTabPane() {
         return tabPane;
+    }
+
+    public void lagNyTab(){
+        Tab tab = new Tab();
+        tabPane.getTabs().add(tab);
+        tab.setText("Navn på chatterom");
+        tab.setContent(romChat.getBorderpane());
     }
 }
