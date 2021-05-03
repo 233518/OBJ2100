@@ -34,7 +34,11 @@ public class RomTableView {
     }
 
     public void oppdaterTableView(ObservableList<RomTabell> liste) {
+        ObservableList<RomTabell> tableViewItems = romTableView.getItems();
+        System.out.println(romTableView.getItems().size());
+        //tableViewItems.add(tableViewItems.size()+1, liste.get(1));
         romTableView.setItems(liste);
+        romTableView.getItems();
     }
 
 
