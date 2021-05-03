@@ -16,4 +16,8 @@ public class ServerUi {
     public GridPane getHovedPane() {
         return hovedPane;
     }
+
+    public TestLayout getTest() {
+        return test;
+    }
 }
