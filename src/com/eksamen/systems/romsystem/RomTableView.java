@@ -33,7 +33,7 @@ public class RomTableView {
         return romTableView;
     }
 
-    public void setItems(ObservableList<RomTabell> liste) {
+    public void oppdaterTableView(ObservableList<RomTabell> liste) {
         romTableView.setItems(liste);
     }
 

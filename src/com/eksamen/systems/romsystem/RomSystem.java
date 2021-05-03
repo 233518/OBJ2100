@@ -24,8 +24,27 @@ public class RomSystem {
         for(Rom room : roomsListe) {
             opprettRom(room.getRomNavn(), room.getBrukerNavn());
         }
-        romListeUi.getRomTableView().setItems(getRom());
+        romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
+
+    public void opprettRom(String romNavn, String brukernavn) {
+        romArrayList.add(new Rom(romNavn, brukernavn));
+        romListeUi.getRomTableView().oppdaterTableView(getRom());
+    }
+
+     public ObservableList<RomTabell> getRom() {
+        System.out.println(romArrayList.size());
+        ObservableList<RomTabell> liste = FXCollections.observableArrayList();
+        for (int i = 0; i < romArrayList.size(); i++) {
+            liste.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBrukerNavn()));
+        }
+        return liste;
+    }
+
+    public void bliMedIRom(){
+        //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();
+    }
+
 
     //Ferdig utfyller Til testing
     /* public void opprettRomOgBruker() {
@@ -42,21 +61,4 @@ public class RomSystem {
         romListeUi.getRomTableView().setItems(getRom());
     }
     */
-
-    public void opprettRom(String romNavn, String brukernavn) {
-        romArrayList.add(new Rom(romNavn, brukernavn));
-    }
-
-     public ObservableList<RomTabell> getRom() {
-        System.out.println(romArrayList.size());
-        ObservableList<RomTabell> liste = FXCollections.observableArrayList();
-        for (int i = 0; i < romArrayList.size(); i++) {
-            liste.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBrukerNavn()));
-        }
-        return liste;
-    }
-
-    public void bliMedIRom(){
-        //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();
-    }
 }
