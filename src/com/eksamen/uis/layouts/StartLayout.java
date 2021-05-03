@@ -5,6 +5,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Layout for oppstart av programmet, for da må en skrive inn et brukernavn.
+ *
+ */
+
 public class StartLayout {
     private GridPane startPane;
     private Label beskjed;
@@ -23,5 +28,6 @@ public class StartLayout {
         startPane.add(skrivBrukernavn,1,0);
         startPane.add(enter, 2,0);
     }
+
     public GridPane getStartPane() {return startPane;}
 }
