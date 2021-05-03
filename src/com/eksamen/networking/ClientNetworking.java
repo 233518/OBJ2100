@@ -1,11 +1,9 @@
 package com.eksamen.networking;
 
-import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
+import com.eksamen.scenes.ClientScene;
 
 import java.io.*;
-import java.net.ConnectException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -20,9 +18,10 @@ public class ClientNetworking extends Thread {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private ArrayList<Rom> rooms;
+    private SyncClient syncClient;
 
     //Kobler opp klient til serveren og initialiserer streams/buffers
-    public ClientNetworking() {
+    public ClientNetworking(ClientScene clientScene) {
         try {
             socket = new Socket("localhost", 1234);
 
@@ -33,6 +32,8 @@ public class ClientNetworking extends Thread {
             bufferedWriter = new BufferedWriter(output);
 
             rooms = new ArrayList<>();
+
+            syncClient = new SyncClient(bufferedWriter, clientScene);
 
             getRoomListe();
         } catch (IOException e) {
@@ -48,6 +49,7 @@ public class ClientNetworking extends Thread {
                 return;
             while(true) {
                 String message = bufferedReader.readLine();
+                syncClient.syncClient(message);
                 System.out.println(message);
             }
         }catch (IOException e) {
@@ -55,19 +57,6 @@ public class ClientNetworking extends Thread {
         } finally {
             //avslutter kobling
             new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
-        }
-    }
-
-    //Sender melding til server
-    public void sendMessage() {
-        try {
-            if(socket != null) {
-                bufferedWriter.write("Hi");
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

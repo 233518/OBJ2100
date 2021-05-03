@@ -37,4 +37,8 @@ public class ClientScene extends Scene {
     public RomSystem getRomSystem() {
         return romSystem;
     }
+
+    public ArrayList<Rom> getRooms() {
+        return rooms;
+    }
 }

@@ -39,18 +39,6 @@ public class ClientSocket extends Thread {
             }
         }
     }
-    public void sendMessage(String forklaring) {
-        try {
-            if(bufferedWriter != null) {
-                bufferedWriter.write(forklaring);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Sender liste med alle rom til klient
      * @param scene scene
@@ -71,5 +59,16 @@ public class ClientSocket extends Thread {
         } catch(IOException e) {
              e.printStackTrace();
         }
+    }
+
+    public void newRoom(String roomName, String brukerNavn) {
+        try {
+            bufferedWriter.write("newRoom" + ":" + roomName + ":" + brukerNavn);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.eksamen.networking;
 
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ServerScene;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -43,7 +44,12 @@ public class ServerNetworking extends Thread {
 
     public void sendMessagesToClients() {
         for(ClientSocket client : clients) {
-            client.sendMessage("HelloClients");
+            //client.sendMessage("HelloClients");
+        }
+    }
+    public void sendNewRoom(String roomName, String brukernavn) {
+        for(ClientSocket client : clients) {
+            client.newRoom(roomName, brukernavn);
         }
     }
     public void leggTilRom(ServerScene scene, Rom rom) {
