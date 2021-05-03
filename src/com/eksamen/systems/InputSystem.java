@@ -6,7 +6,6 @@ import com.eksamen.systems.romsystem.RomTabell;
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
-import javafx.scene.control.Button;
 
 public class InputSystem {
     private RomChat romChat;
@@ -17,7 +16,7 @@ public class InputSystem {
     private RomSystem romSystem;
 
 
-    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat){
+    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat) {
         this.romListeUI = romListeUI;
         this.bruker = bruker;
         this.hovedLayout = hovedLayout;
@@ -26,9 +25,10 @@ public class InputSystem {
         sendMelding();
         bliMedRom();
         opprettRom();
+        visOpprettRom();
     }
 
-            public void sendMelding(){
+    public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
             message = new MessageSystem(bruker.getName(), melding);
@@ -37,12 +37,19 @@ public class InputSystem {
         });
     }
 
-    public void opprettRom(){
-        romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
+    public void opprettRom() {
+        romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             romSystem = new RomSystem(romListeUI, bruker);
-            romSystem.opprettRom("Rom 1", bruker.getName());
-            hovedLayout.lagNyTab("Rom 1");
+            romSystem.opprettRom(romListeUI.getTextField().getText(), bruker.getName());
+            hovedLayout.lagNyTab(romListeUI.getTextField().getText());
+            romListeUI.skjulOpprettRom();
+        });
+    }
 
+    public void visOpprettRom() {
+        romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
+            System.out.println("Halla på deg");
+            romListeUI.visOpprettRom();
         });
     }
 

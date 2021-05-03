@@ -1,12 +1,10 @@
 package com.eksamen.scenes;
 
-import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ServerNetworking;
 import com.eksamen.uis.ServerUi;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -22,7 +20,7 @@ public class ServerScene extends Scene {
         nettverk = new ServerNetworking(this);
         nettverk.start();
         rooms = new ArrayList<>();
-        serverUi.getHovedLayout().getRomListe().getButtonNyttRom().setOnAction(new EventHandler<ActionEvent>() {
+        serverUi.getHovedLayout().getRomListe().getButtonLeggTilRom().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 nettverk.sendNewRoom("Halla123", "Admin");
