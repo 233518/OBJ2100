@@ -3,6 +3,7 @@ package com.eksamen.uis.layouts;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -11,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class RomChat {
     private TextField meldingsBoks;
-    private TextArea inndata;
+    private TableView inndata;
     private Button sendKnapp;
     private BorderPane borderpane;
     private HBox bottomBorderPane;
@@ -26,7 +27,7 @@ public class RomChat {
         borderpane = new BorderPane();
         bottomBorderPane = new HBox();
         centerBorderPane = new VBox();
-        inndata = new TextArea();
+        inndata = new TableView();
         sendKnapp = new Button("Send");
         meldingsBoks = new TextField();
 
@@ -47,7 +48,6 @@ public class RomChat {
 
         //Modifikasjon til inndata
         inndata.setEditable(false);
-        inndata.setWrapText(true);
 
         //Spacing mellom komponenter
         bottomBorderPane.setSpacing(20);
@@ -63,11 +63,11 @@ public class RomChat {
         return borderpane;
     }
 
-    public TextArea getInndata() {
+    public TableView getInndata() {
         return inndata;
     }
 
-    public void setInndata(TextArea inndata) {
+    public void setInndata(TableView inndata) {
         this.inndata = inndata;
     }
 
