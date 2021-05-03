@@ -10,15 +10,15 @@ import javafx.scene.layout.VBox;
  * Klasse for å opprette UI til romlisten.
  */
 public class RomListeUI {
-    private VBox vBox = new VBox();
-    private HBox nyttRomHBox = new HBox();
+    private final RomTableView romTableView = new RomTableView();
+    private final VBox vBox = new VBox();
+    private final HBox nyttRomHBox = new HBox();
+    private final HBox hBoxButtons = new HBox();
     private TextField textField = new TextField();
-    private HBox hBoxButtons = new HBox();
     private Button buttonLeggTilRom;
     private Button buttonNyttRom;
     private Button buttonBliMed;
     private Button buttonForlat;
-    private RomTableView romTableView = new RomTableView();
 
     /**
      * Metode for å opprette alle elementene og sette de sammen i vBox som holder på alle elementene.
