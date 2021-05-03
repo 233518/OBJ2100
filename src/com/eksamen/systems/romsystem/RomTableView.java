@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class RomTableView {
-    private TableView<RomTabell> romTableView = new TableView<>();
+    private final TableView<RomTabell> romTableView = new TableView<>();
 
     private TableView tableView() {
         try {
@@ -16,10 +16,10 @@ public class RomTableView {
             TableColumn<RomTabell, String> brukerKolonne = new TableColumn<>("Laget av");
 
             romKolonne.setMinWidth(50);
-            romKolonne.setCellValueFactory(new PropertyValueFactory<RomTabell, String>("romNavn"));
+            romKolonne.setCellValueFactory(new PropertyValueFactory<>("romNavn"));
 
             brukerKolonne.setMinWidth(50);
-            brukerKolonne.setCellValueFactory(new PropertyValueFactory<RomTabell, String>("opprettetNavn"));
+            brukerKolonne.setCellValueFactory(new PropertyValueFactory<>("opprettetNavn"));
 
             romTableView.getColumns().addAll(romKolonne, brukerKolonne);
         }catch (Exception e){
@@ -37,12 +37,8 @@ public class RomTableView {
         ObservableList<RomTabell> tableViewItems = romTableView.getItems();
         ObservableList<RomTabell> romArrayList = FXCollections.observableArrayList();
 
-        for (int i = 0; i < tableViewItems.size(); i++){
-            romArrayList.add(tableViewItems.get(i));
-        }
-        for (int i = 0; i < liste.size(); i++){
-            romArrayList.add(liste.get(i));
-        }
+        romArrayList.addAll(tableViewItems);
+        romArrayList.addAll(liste);
         romTableView.setItems(romArrayList);
     }
 
