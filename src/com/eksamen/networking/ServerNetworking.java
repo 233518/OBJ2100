@@ -1,5 +1,8 @@
 package com.eksamen.networking;
 
+import com.eksamen.components.Rom;
+import com.eksamen.scenes.ServerScene;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -11,9 +14,11 @@ public class ServerNetworking extends Thread {
     private Socket socket;
     private ServerSocket serverSocket;
     private ArrayList<ClientSocket> clients;
+    private ServerScene scene;
 
-    public ServerNetworking() {
+    public ServerNetworking(ServerScene scene) {
         try {
+            this.scene = scene;
             serverSocket = new ServerSocket(port);
             clients = new ArrayList<>();
         } catch (IOException e) {
@@ -29,6 +34,7 @@ public class ServerNetworking extends Thread {
                 ClientSocket client = new ClientSocket(socket);
                 clients.add(client);
                 client.start();
+                sendRoomsToClient(client);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,5 +45,11 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.sendMessage("HelloClients");
         }
+    }
+    public void leggTilRom(ServerScene scene, Rom rom) {
+        scene.getRooms().add(rom);
+    }
+    private void sendRoomsToClient(ClientSocket client) {
+        client.sendRomListe(scene.getRooms());
     }
 }
