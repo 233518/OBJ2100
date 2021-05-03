@@ -31,7 +31,9 @@ public class RomListe {
         }catch (Exception e){
             System.out.println("Kunne ikke konfigurere tableview: " +e);
         }
+    }
 
-
+    public TableView<RomTabell> getRomTableView() {
+        return romTableView;
     }
 }
