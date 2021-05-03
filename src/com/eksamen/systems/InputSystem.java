@@ -2,6 +2,7 @@ package com.eksamen.systems;
 
 import com.eksamen.components.Bruker;
 import com.eksamen.systems.romsystem.RomSystem;
+import com.eksamen.systems.romsystem.RomTabell;
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
@@ -16,10 +17,13 @@ public class InputSystem {
     private RomSystem romSystem;
 
 
-    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout){
+    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat){
         this.romListeUI = romListeUI;
         this.bruker = bruker;
         this.hovedLayout = hovedLayout;
+        this.message = message;
+        this.romChat = romChat;
+        sendMelding();
         bliMedRom();
         opprettRom();
     }
@@ -28,6 +32,8 @@ public class InputSystem {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
             message = new MessageSystem(bruker.getName(), melding);
+            System.out.println(message.getBrukernavn() + " " + message.getMelding() + " " + message.getTimestamp());
+
         });
     }
 
@@ -36,12 +42,14 @@ public class InputSystem {
             romSystem = new RomSystem(romListeUI, bruker);
             romSystem.opprettRom("Rom 1", bruker.getName());
             hovedLayout.lagNyTab("Rom 1");
+
         });
     }
 
     public void bliMedRom(){
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
-            System.out.println("hello");
+            RomTabell rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
+            hovedLayout.lagNyTab(rom.getRomNavn());
         });
     }
 
