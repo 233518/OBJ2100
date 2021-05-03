@@ -1,25 +1,29 @@
 package com.eksamen.uis;
 
+import com.eksamen.uis.layouts.HovedLayout;
+import com.eksamen.uis.layouts.RomChat;
+import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.StartLayout;
 import com.eksamen.uis.layouts.TestLayout;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class ClientUi {
     private GridPane hovedPane;
-    private TestLayout test;
+    private HovedLayout hovedLayout;
 
     public ClientUi() {
-        test = new TestLayout();
+        hovedLayout = new HovedLayout();
         hovedPane = new GridPane();
-        hovedPane.getChildren().add(test.getPane());
+        hovedPane.getChildren().add(hovedLayout.getTabPane());
     }
 
     public GridPane getHovedPane() {
         return hovedPane;
     }
 
-    public TestLayout getTest() {
-        return test;
+    public HovedLayout getHovedLayout() {
+        return hovedLayout;
     }
 }
