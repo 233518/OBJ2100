@@ -4,8 +4,10 @@ import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ClientNetworking;
 import com.eksamen.systems.InputSystem;
+import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ClientUi;
+import com.eksamen.uis.layouts.RomChat;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,6 +21,8 @@ public class ClientScene extends Scene {
     private RomSystem romSystem;
     private ArrayList<Rom> rooms;
     private InputSystem inputSystem;
+    private MessageSystem message;
+    private RomChat romChat;
 
 
     public ClientScene(Stage stage, ClientUi clientUi, String username) {
@@ -31,7 +35,7 @@ public class ClientScene extends Scene {
         bruker = new Bruker(username);
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
-        inputSystem = new InputSystem(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout());
+        inputSystem = new InputSystem(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat());
     }
 
     public RomSystem getRomSystem() {

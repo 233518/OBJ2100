@@ -1,6 +1,9 @@
 package com.eksamen.systems;
 
+import com.eksamen.components.Bruker;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class MessageSystem {
     private String timestamp;
@@ -33,4 +36,6 @@ public class MessageSystem {
     public String getMelding() {
         return melding;
     }
+
+    public String getTimestamp(){return timestamp;}
 }

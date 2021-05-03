@@ -26,6 +26,10 @@ public class HovedLayout {
         tabPane.getTabs().add(tab1);
     }
 
+    public RomChat getRomChat() {
+        return romChat;
+    }
+
     public TabPane getTabPane() {
         return tabPane;
     }
