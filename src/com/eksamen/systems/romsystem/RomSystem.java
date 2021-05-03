@@ -43,7 +43,7 @@ public class RomSystem {
     }
     */
 
-    private void opprettRom(String romNavn, String brukernavn) {
+    public void opprettRom(String romNavn, String brukernavn) {
         romArrayList.add(new Rom(romNavn, brukernavn));
     }
 
