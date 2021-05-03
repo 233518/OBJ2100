@@ -1,16 +1,16 @@
 package com.eksamen.uis.layouts;
 
-import com.eksamen.uis.layouts.RomListe.RomListe;
+import com.eksamen.uis.layouts.romlisteui.RomListeUI;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 public class HovedLayout {
     private RomChat romChat;
-    private RomListe romListe;
+    private RomListeUI romListe;
     private TabPane tabPane;
     public HovedLayout(){
         romChat = new RomChat();
-        romListe = new RomListe();
+        romListe = new RomListeUI();
         lagLayout();
     }
 
@@ -18,7 +18,7 @@ public class HovedLayout {
         tabPane = new TabPane();
         Tab tab1 = new Tab("Romliste");
         tab1.setClosable(false);
-        tab1.setContent(romListe.getRomTableView());
+        tab1.setContent(romListe.getRomUI());
         tabPane.getTabs().add(tab1);
     }
 
