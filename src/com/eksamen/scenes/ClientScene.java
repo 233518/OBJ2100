@@ -25,12 +25,16 @@ public class ClientScene extends Scene {
         super(clientUi.getHovedPane());
         this.clientUi = clientUi;
         rooms = new ArrayList<>();
-        nettverk = new ClientNetworking();
+        nettverk = new ClientNetworking(this);
         nettverk.start();
         rooms = nettverk.getRooms();
         bruker = new Bruker(username);
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
         inputSystem = new InputSystem(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout());
+    }
+
+    public RomSystem getRomSystem() {
+        return romSystem;
     }
 }

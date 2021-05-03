@@ -24,7 +24,7 @@ public class InputSystem {
         opprettRom();
     }
 
-    public void sendMelding(){
+            public void sendMelding(){
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
             message = new MessageSystem(bruker.getName(), melding);
