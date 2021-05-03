@@ -2,6 +2,7 @@ package com.eksamen.uis;
 
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
+import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.StartLayout;
 import com.eksamen.uis.layouts.TestLayout;
 import javafx.scene.layout.BorderPane;
@@ -21,5 +22,8 @@ public class ClientUi {
     public GridPane getHovedPane() {
         return hovedPane;
     }
-    
+
+    public HovedLayout getHovedLayout() {
+        return hovedLayout;
+    }
 }
