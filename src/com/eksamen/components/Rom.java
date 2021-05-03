@@ -1,18 +1,17 @@
 package com.eksamen.components;
 
+import java.util.ArrayList;
+
 public class Rom {
-    private int id;
     private String romNavn;
     private Bruker bruker;
+    private ArrayList<String> meldinger;
+    private ArrayList<Bruker> brukere;
 
-    public Rom(int id, String romNavn, Bruker bruker) {
-        this.id = id;
+    public Rom(String romNavn, Bruker bruker) {
         this.romNavn = romNavn; //Navn på rommet
         this.bruker = bruker; //Navnet på den som opprettet rommet
-    }
-
-    public int getId() {
-        return id;
+        this.meldinger = new ArrayList<>();
     }
 
     public String getRomNavn() {
