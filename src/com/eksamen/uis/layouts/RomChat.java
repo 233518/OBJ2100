@@ -14,8 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.ArrayList;
-
 public class RomChat {
     private TextField meldingsBoks;
     private TableView inndata;
@@ -75,7 +73,7 @@ public class RomChat {
         deltakerKolonne1 = new TableColumn<>("Brukernavn");
         deltakerKolonne1.setCellValueFactory(new PropertyValueFactory<DeltakerTabell, String>("aktivbrukernavn"));
         inndataKolonne1 = new TableColumn<>("Tid");
-        inndataKolonne1.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("tid"));
+        inndataKolonne1.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("tidspunkt"));
         inndataKolonne2 = new TableColumn<>("Brukernavn");
         inndataKolonne2.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("brukernavn"));
         inndataKolonne3 = new TableColumn<>("Melding");
@@ -119,17 +117,11 @@ public class RomChat {
         this.deltakere = deltakere;
     }
 
-    public void oppdaterDeltakerListe(ArrayList<Bruker> liste) {
+    public void oppdaterDeltakerListe(ObservableList<Bruker> liste) {
         ObservableList<Bruker> tableViewItems = deltakere.getItems();
         ObservableList<Bruker> deltakerArrayList = FXCollections.observableArrayList();
-
-        for (int i = 0; i < tableViewItems.size(); i++){
-            deltakerArrayList.add(tableViewItems.get(i));
-        }
-        for (int i = 0; i < liste.size(); i++){
-            deltakerArrayList.add(liste.get(i));
-        }
-
+        //deltakerArrayList.addAll(tableViewItems);
+        deltakerArrayList.addAll(liste);
         deltakere.setItems(deltakerArrayList);
     }
 
@@ -137,13 +129,8 @@ public class RomChat {
         ObservableList<InndataTabell> tableViewItems = inndata.getItems();
         ObservableList<InndataTabell> inndataArrayList = FXCollections.observableArrayList();
 
-        for (int i = 0; i < tableViewItems.size(); i++){
-            inndataArrayList.add(tableViewItems.get(i));
-        }
-        for (int i = 0; i < liste.size(); i++){
-            inndataArrayList.add(liste.get(i));
-        }
-
-        deltakere.setItems(inndataArrayList);
+        //inndataArrayList.addAll(tableViewItems);
+        inndataArrayList.addAll(liste);
+        inndata.setItems(inndataArrayList);
     }
 }

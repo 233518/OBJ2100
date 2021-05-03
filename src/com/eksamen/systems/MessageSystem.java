@@ -1,41 +1,34 @@
 package com.eksamen.systems;
 
 import com.eksamen.components.Bruker;
+import com.eksamen.components.Rom;
+import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.systems.romsystem.RomTabell;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MessageSystem {
-    private String timestamp;
-    private String brukernavn;
-    private String melding;
+
+    public ArrayList<InndataTabell> meldingArrayList;
 
     //MessageSystem msg = new MessageSystem("Brukernavn", "Melding");
-    public MessageSystem(String brukernavn, String melding){
-        this.brukernavn = brukernavn;
-        this.melding = melding;
-        this.timestamp = hentTidspunkt(LocalDateTime.now());
+    public MessageSystem(){
+
     }
 
-    /**
-     * Henter kun tidspunktet i datoen
-     * @param dato
-     * @return Tidspunkt i string
-     */
-    public String hentTidspunkt(LocalDateTime dato){
-        String time = String.valueOf(dato.getHour());
-        String minutt = String.valueOf(dato.getMinute());
-        String sekund = String.valueOf(dato.getSecond());
-        return time+":"+minutt+":"+sekund;
+    public void nyMelding(Rom rom, InndataTabell melding){
+        rom.leggTilMld(melding);
     }
 
-    public String getBrukernavn() {
-        return brukernavn;
+    public ObservableList<InndataTabell> getMeldinger(Rom rom) {
+        //System.out.println(meldingArrayList.size());
+        ObservableList<InndataTabell> liste = FXCollections.observableArrayList();
+        for(InndataTabell melding : rom.getMeldinger()){
+            liste.add(melding);
+        }
+        return liste;
     }
-
-    public String getMelding() {
-        return melding;
-    }
-
-    public String getTimestamp(){return timestamp;}
 }

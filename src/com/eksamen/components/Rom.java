@@ -1,11 +1,14 @@
 package com.eksamen.components;
 
+import com.eksamen.systems.MessageSystem;
+import com.eksamen.systems.chatsystem.InndataTabell;
+
 import java.util.ArrayList;
 
 public class Rom {
     private String romNavn;
     private String brukerNavn;
-    private ArrayList<String> meldinger;
+    private ArrayList<InndataTabell> meldinger;
     private ArrayList<Bruker> brukere;
 
     public Rom(String romNavn, String brukerNavn) {
@@ -23,12 +26,16 @@ public class Rom {
         return brukerNavn;
     }
 
-    public ArrayList<String> getMeldinger() {
+    public ArrayList<InndataTabell> getMeldinger() {
         return meldinger;
     }
 
     public ArrayList<Bruker> getBrukere() {
         return brukere;
+    }
+
+    public void leggTilMld(InndataTabell melding){
+        meldinger.add(melding);
     }
 }
 

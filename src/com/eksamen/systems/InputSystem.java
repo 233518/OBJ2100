@@ -2,6 +2,7 @@ package com.eksamen.systems;
 
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
+import com.eksamen.systems.chatsystem.InndataTabell;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.systems.romsystem.RomTabell;
 import com.eksamen.uis.layouts.HovedLayout;
@@ -11,6 +12,7 @@ import com.eksamen.uis.layouts.RomListeUI;
 public class InputSystem {
     private RomChat romChat;
     private MessageSystem message;
+    private InndataTabell inndataTabell;
     private Bruker bruker;
     private HovedLayout hovedLayout;
     private RomListeUI romListeUI;
@@ -24,6 +26,7 @@ public class InputSystem {
         this.hovedLayout = hovedLayout;
         this.message = message;
         this.romChat = romChat;
+        rom = bruker.getRom();
         sendMelding();
         bliMedRom();
         opprettRom();
@@ -36,9 +39,10 @@ public class InputSystem {
     public void sendMelding(){
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
-            message = new MessageSystem(bruker.getName(), melding);
-            System.out.println(message.getBrukernavn() + " " + message.getMelding() + " " + message.getTimestamp());
-
+            inndataTabell = new InndataTabell(bruker.getName(), melding);
+            System.out.println(inndataTabell);
+            message.nyMelding(rom, inndataTabell);
+            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
 
@@ -52,6 +56,8 @@ public class InputSystem {
             romSystem.opprettRom(rom);
             hovedLayout.lagNyTab(romListeUI.getTextField().getText());
             romListeUI.skjulOpprettRom();
+            bruker.setRom(rom);
+            setRom();
         });
     }
 
@@ -66,10 +72,17 @@ public class InputSystem {
      */
     public void bliMedRom(){
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
-            RomTabell rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
-            hovedLayout.lagNyTab(rom.getRomNavn());
+            RomTabell romTabell = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
+            hovedLayout.lagNyTab(romTabell.getRomNavn());
+
+            Rom rom = new Rom(romTabell.getRomNavn(), romTabell.getOpprettetNavn());
+            bruker.setRom(rom);
+            setRom();
             //romChat.oppdaterDeltakerListe(rom.getBrukere());
         });
     }
 
+    public void setRom(){
+        rom = bruker.getRom();
+    }
 }
