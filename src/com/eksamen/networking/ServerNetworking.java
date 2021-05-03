@@ -32,7 +32,7 @@ public class ServerNetworking extends Thread {
             while (true) {
                 socket = serverSocket.accept(); //"Lytter" etter klient koblinger
                 System.out.println("Client connected");
-                ClientSocket client = new ClientSocket(socket);
+                ClientSocket client = new ClientSocket(socket, scene);
                 clients.add(client);
                 client.start();
                 sendRoomsToClient(client);

@@ -15,13 +15,16 @@ public class ClientSocket extends Thread {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
-    public ClientSocket(Socket socket) {
+    private SyncServer syncServer;
+
+    public ClientSocket(Socket socket, ServerScene serverScene) {
         this.socket = socket;
         try {
             input = new InputStreamReader(socket.getInputStream());
             output = new OutputStreamWriter(socket.getOutputStream());
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
+            syncServer = new SyncServer(bufferedWriter, serverScene);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,6 +35,7 @@ public class ClientSocket extends Thread {
             try {
                 while (true) {
                     String msgFromClient = bufferedReader.readLine();
+                    syncServer.syncServer(msgFromClient);
                     System.out.println(msgFromClient);
                 }
             } catch (IOException e) {

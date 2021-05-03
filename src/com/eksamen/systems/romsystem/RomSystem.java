@@ -22,13 +22,13 @@ public class RomSystem {
 
     public void fyllInnTableview(ArrayList<Rom> roomsListe) {
         for(Rom room : roomsListe) {
-            opprettRom(room.getRomNavn(), room.getBrukerNavn());
+            opprettRom(room);
         }
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
 
-    public void opprettRom(String romNavn, String brukernavn) {
-        romArrayList.add(new Rom(romNavn, brukernavn));
+    public void opprettRom(Rom rom) {
+        romArrayList.add(rom);
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
 
