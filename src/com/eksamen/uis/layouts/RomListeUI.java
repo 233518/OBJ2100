@@ -34,4 +34,16 @@ public class RomListeUI {
     private void metode() {
 
     }
+
+    public Button getButtonNyttRom() {
+        return buttonNyttRom;
+    }
+
+    public Button getButtonBliMed() {
+        return buttonBliMed;
+    }
+
+    public Button getButtonForlat() {
+        return buttonForlat;
+    }
 }

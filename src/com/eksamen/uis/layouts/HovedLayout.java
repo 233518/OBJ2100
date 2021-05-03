@@ -30,10 +30,10 @@ public class HovedLayout {
         return tabPane;
     }
 
-    public void lagNyTab(){
+    public void lagNyTab(String navn){
         Tab tab = new Tab();
         tabPane.getTabs().add(tab);
-        tab.setText("Navn på chatterom");
+        tab.setText(navn);
         tab.setContent(romChat.getBorderpane());
     }
 }
