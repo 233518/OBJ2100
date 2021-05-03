@@ -18,11 +18,17 @@ public class RomSystem {
         this.romListeUi = romListeUi;
         this.bruker = bruker;
         romArrayList = new ArrayList<Rom>();
-        //romListeUi.getRomTableView().setItems(getRom());
+    }
+
+    public void fyllInnTableview(ArrayList<Rom> roomsListe) {
+        for(Rom room : roomsListe) {
+            opprettRom(room.getRomNavn(), room.getBrukerNavn());
+        }
+        romListeUi.getRomTableView().setItems(getRom());
     }
 
     //Ferdig utfyller Til testing
-    public void opprettRomOgBruker() {
+    /* public void opprettRomOgBruker() {
         Bruker bruker0 = new Bruker("Sigve");
         Bruker bruker1 = new Bruker("Ørjan");
         Bruker bruker2 = new Bruker("Sivert");
@@ -35,18 +41,17 @@ public class RomSystem {
 
         romListeUi.getRomTableView().setItems(getRom());
     }
+    */
 
-    public void opprettRom(String romNavn, Bruker bruker) {
-        romArrayList.add(new Rom(romNavn, bruker));
-        System.out.println(romArrayList.size());
+    private void opprettRom(String romNavn, String brukernavn) {
+        romArrayList.add(new Rom(romNavn, brukernavn));
     }
 
      public ObservableList<RomTabell> getRom() {
         System.out.println(romArrayList.size());
         ObservableList<RomTabell> liste = FXCollections.observableArrayList();
         for (int i = 0; i < romArrayList.size(); i++) {
-            System.out.println("Hallo?");
-            liste.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBruker().getName()));
+            liste.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBrukerNavn()));
         }
         return liste;
     }

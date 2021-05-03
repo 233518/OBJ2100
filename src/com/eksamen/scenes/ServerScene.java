@@ -20,9 +20,9 @@ public class ServerScene extends Scene {
         nettverk = new ServerNetworking(this);
         nettverk.start();
         rooms = new ArrayList<>();
-        rooms.add(new Rom("Rom1", new Bruker("Admin")));
-        rooms.add(new Rom("Rom2", new Bruker("Hei")));
-        rooms.add(new Rom("Rom3", new Bruker("Adwqdwq")));
+        rooms.add(new Rom("Rom1", "Admin"));
+        rooms.add(new Rom("Rom2", "Hei"));
+        rooms.add(new Rom("Rom3", "Adwqdwq"));
     }
 
     public ArrayList<Rom> getRooms() {

@@ -59,10 +59,14 @@ public class ClientSocket extends Thread {
         try {
             if(bufferedWriter != null) {
                 for(Rom room : rooms) {
+                    System.out.println("Wtf");
                     bufferedWriter.write(room.getRomNavn() + ":" + room.getBrukerNavn());
                     bufferedWriter.newLine();
                     bufferedWriter.flush();
                 }
+                bufferedWriter.write("Ferdig");
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
             }
         } catch(IOException e) {
              e.printStackTrace();

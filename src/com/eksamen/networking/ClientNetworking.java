@@ -31,6 +31,10 @@ public class ClientNetworking extends Thread {
 
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
+
+            rooms = new ArrayList<>();
+
+            getRoomListe();
         } catch (IOException e) {
             System.out.println("Connection refused");
         }
@@ -69,16 +73,20 @@ public class ClientNetworking extends Thread {
 
     public void getRoomListe() {
         try {
-            while (bufferedReader.readLine() != null) {
+            do {
                 String message = bufferedReader.readLine();
-                String[] string = message.split(":");
-                rooms.add(new Rom(string[0], new Bruker(string[1])));
+                if(message.equals("Ferdig")) break;
                 System.out.println(message);
-            }
+                String[] string = message.split(":");
+                rooms.add(new Rom(string[0], string[1]));
+
+            } while(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
+    public ArrayList<Rom> getRooms() {
+        return rooms;
+    }
 }
