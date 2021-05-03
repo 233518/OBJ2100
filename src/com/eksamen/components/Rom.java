@@ -10,4 +10,20 @@ public class Rom {
         this.romNavn = romNavn; //Navn på rommet
         this.bruker = bruker; //Navnet på den som opprettet rommet
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getRomNavn() {
+        return romNavn;
+    }
+
+    public Bruker getBruker() {
+        return bruker;
+    }
+
+    public String getBrukerNavn() {
+        return bruker.getName();
+    }
 }
