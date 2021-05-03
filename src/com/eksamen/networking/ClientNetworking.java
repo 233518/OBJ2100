@@ -60,6 +60,16 @@ public class ClientNetworking extends Thread {
         }
     }
 
+    public void sendMelding() {
+        try {
+            bufferedWriter.write("Halla");
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void getRoomListe() {
         try {
             do {
@@ -73,6 +83,10 @@ public class ClientNetworking extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void newRoom(String message, Rom rom) {
+        syncClient.syncServer(message, rom);
     }
 
     public ArrayList<Rom> getRooms() {

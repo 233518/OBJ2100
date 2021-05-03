@@ -46,9 +46,11 @@ public class SyncClient {
      * @param rom
      */
     public void syncServer(String message, Rom rom) {
+        System.out.println(message);
         switch(message) {
             case "newRoom":
                 newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn());
+                break;
         }
     }
 
@@ -59,7 +61,10 @@ public class SyncClient {
      */
     public void newRoomClient(String message) {
         try {
+            System.out.println("Sender info til server");
             bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

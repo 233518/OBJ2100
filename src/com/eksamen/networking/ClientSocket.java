@@ -20,8 +20,8 @@ public class ClientSocket extends Thread {
     public ClientSocket(Socket socket, ServerScene serverScene) {
         this.socket = socket;
         try {
-            input = new InputStreamReader(socket.getInputStream());
-            output = new OutputStreamWriter(socket.getOutputStream());
+            input = new InputStreamReader(this.socket.getInputStream());
+            output = new OutputStreamWriter(this.socket.getOutputStream());
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
             syncServer = new SyncServer(bufferedWriter, serverScene);
@@ -31,16 +31,15 @@ public class ClientSocket extends Thread {
     }
 
     public void run() {
-        while (true) {
-            try {
-                while (true) {
-                    String msgFromClient = bufferedReader.readLine();
-                    syncServer.syncServer(msgFromClient);
-                    System.out.println(msgFromClient);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            while (true) {
+                String msgFromClient = bufferedReader.readLine();
+                System.out.println("Starter du=?!");
+                syncServer.syncServer(msgFromClient);
+                System.out.println(msgFromClient);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     /**
