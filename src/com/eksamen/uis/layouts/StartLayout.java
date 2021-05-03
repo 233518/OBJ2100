@@ -6,22 +6,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class StartLayout {
-    private GridPane grid;
+    private GridPane startPane;
     private Label beskjed;
     private TextField skrivBrukernavn;
     private String brukernavn;
     private Button enter;
 
     public StartLayout() {
-        grid = new GridPane();
+        startPane = new GridPane();
         beskjed = new Label("Skriv brukernavn: ");
         skrivBrukernavn = new TextField();
         enter = new Button("Enter");
 
         // Plassering
-        grid.add(beskjed, 0,0);
-        grid.add(skrivBrukernavn,1,0);
-        grid.add(enter, 2,0);
+        startPane.add(beskjed, 0,0);
+        startPane.add(skrivBrukernavn,1,0);
+        startPane.add(enter, 2,0);
     }
-
+    public GridPane getStartPane() {return startPane;}
 }
