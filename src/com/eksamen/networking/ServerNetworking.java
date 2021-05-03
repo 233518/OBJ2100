@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 
-public class Server extends Thread {
+public class ServerNetworking extends Thread {
     private int port = 1234;
     private Socket socket;
     private ServerSocket serverSocket;
@@ -15,7 +15,7 @@ public class Server extends Thread {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
-    public Server() {
+    public ServerNetworking() {
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {

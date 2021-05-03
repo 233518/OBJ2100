@@ -1,7 +1,5 @@
 package com.eksamen.networking;
 
-import com.eksamen.uis.ClientUi;
-
 import java.io.*;
 import java.net.ConnectException;
 import java.net.ServerSocket;
@@ -11,18 +9,16 @@ import java.net.Socket;
  * Opretter en ny klasse
  *
  */
-public class Client extends Thread {
+public class ClientNetworking extends Thread {
     private Socket socket;
     private InputStreamReader input;
     private OutputStreamWriter output;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private ClientUi client;
 
     //Kobler opp klient til serveren og initialiserer streams/buffers
-    public Client(ClientUi client) {
+    public ClientNetworking() {
         try {
-            this.client = client;
             socket = new Socket("localhost", 1234);
 
             input = new InputStreamReader(socket.getInputStream());
@@ -43,7 +39,6 @@ public class Client extends Thread {
                 return;
             while(true) {
                 String message = bufferedReader.readLine();
-                client.getServerDescription().setText(message);
             }
         }catch (IOException e) {
             e.printStackTrace();
