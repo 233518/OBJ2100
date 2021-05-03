@@ -1,4 +1,4 @@
-package com.eksamen.uis.layouts.romlisteui;
+package com.eksamen.systems.romsystem;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

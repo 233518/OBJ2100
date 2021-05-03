@@ -1,5 +1,6 @@
 package com.eksamen.uis.layouts.romlisteui;
 
+import com.eksamen.systems.romsystem.RomTableView;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,8 +17,17 @@ public class RomListeUI {
         buttonNyttRom = new Button("Nytt rom");
         buttonBliMed = new Button("Bli med i rom");
         buttonForlat = new Button("Forlat rom");
+
+        //ActioEvents
+
+        buttonNyttRom.setOnAction(e -> metode());
+
         hBoxButtons.getChildren().addAll(buttonNyttRom, buttonBliMed, buttonForlat);
         vBox.getChildren().addAll(hBoxButtons, romTableView.getRomTableView());
         return vBox;
+    }
+
+    private void metode() {
+
     }
 }

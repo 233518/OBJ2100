@@ -1,4 +1,4 @@
-package com.eksamen.uis.layouts.romlisteui;
+package com.eksamen.systems.romsystem;
 
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
