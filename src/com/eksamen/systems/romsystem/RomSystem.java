@@ -21,7 +21,6 @@ public class RomSystem {
         //romListeUi.getRomTableView().setItems(getRom());
     }
 
-
     //Ferdig utfyller Til testing
     public void opprettRomOgBruker() {
         Bruker bruker0 = new Bruker("Sigve");
@@ -39,7 +38,6 @@ public class RomSystem {
 
     public void opprettRom(String romNavn, Bruker bruker) {
         romArrayList.add(new Rom(romNavn, bruker));
-        System.out.println("Hallo?");
         System.out.println(romArrayList.size());
     }
 
@@ -52,7 +50,6 @@ public class RomSystem {
         }
         return liste;
     }
-
 
     public void bliMedIRom(){
         //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();

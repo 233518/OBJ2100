@@ -18,7 +18,7 @@ public class RomListeUI {
         buttonBliMed = new Button("Bli med i rom");
         buttonForlat = new Button("Forlat rom");
 
-        //ActioEvents
+        //ActionEvents
 
         buttonNyttRom.setOnAction(e -> metode());
 
