@@ -1,5 +1,6 @@
 package com.eksamen.uis.layouts;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,7 +15,6 @@ public class StartLayout {
     private GridPane startPane;
     private Label beskjed;
     private TextField skrivBrukernavn;
-    private String brukernavn;
     private Button enter;
 
     public StartLayout() {
@@ -22,6 +22,7 @@ public class StartLayout {
         beskjed = new Label("Skriv brukernavn: ");
         skrivBrukernavn = new TextField();
         enter = new Button("Enter");
+        startPane.setPadding(new Insets(10,10,10,10));
 
         // Plassering
         startPane.add(beskjed, 0,0);
