@@ -8,18 +8,29 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-
+/**
+ * Klasse for RomSystem
+ */
 public class RomSystem {
     private Bruker bruker;
     public ArrayList<Rom> romArrayList;
     private RomListeUI romListeUi;
 
+    /**
+     * Constructor for å opprette RomSystemet.
+     * @param romListeUi Brukergrensesnittet (UI) til romlisten/velgeren.
+     * @param bruker Brukren som opprettet rommet.
+     */
     public RomSystem(RomListeUI romListeUi, Bruker bruker){
         this.romListeUi = romListeUi;
         this.bruker = bruker;
         romArrayList = new ArrayList<Rom>();
     }
 
+    /**
+     * Metode for å fylle inn Arraylisten med rom ved hjelp av opprettRom, så oppdatere Tableviewen.
+     * @param roomsListe Arraylist<Rom> Med rom.
+     */
     public void fyllInnTableview(ArrayList<Rom> roomsListe) {
         for(Rom room : roomsListe) {
             opprettRom(room);
@@ -27,17 +38,24 @@ public class RomSystem {
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
 
+    /**
+     * Metode for å legge til ett nytt rom og legger det til i tableView.
+     * @param rom Rommet som skal bli lagt til.
+     */
     public void opprettRom(Rom rom) {
         romArrayList.add(rom);
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
 
+    /**
+     * Metode for å gjøre om arraylist med rom til ObservarbleList med rom og returnere det.
+     * @return Returnerer observablelist med rom fra romArrayList.
+     */
      public ObservableList<RomTabell> getRom() {
-        System.out.println(romArrayList.size());
         ObservableList<RomTabell> liste = FXCollections.observableArrayList();
-        for (int i = 0; i < romArrayList.size(); i++) {
-            liste.add(new RomTabell(romArrayList.get(i).getRomNavn(), romArrayList.get(i).getBrukerNavn()));
-        }
+         for (Rom rom : romArrayList) {
+             liste.add(new RomTabell(rom.getRomNavn(), rom.getBrukerNavn()));
+         }
         return liste;
     }
 

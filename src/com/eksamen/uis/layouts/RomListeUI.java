@@ -3,6 +3,8 @@ package com.eksamen.uis.layouts;
 import com.eksamen.systems.romsystem.RomTableView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -10,15 +12,16 @@ import javafx.scene.layout.VBox;
  * Klasse for å opprette UI til romlisten.
  */
 public class RomListeUI {
-    private VBox vBox = new VBox();
-    private HBox nyttRomHBox = new HBox();
+    private final RomTableView romTableView = new RomTableView();
+    private final VBox vBox = new VBox();
+    private final HBox nyttRomHBox = new HBox();
+    private final HBox hBoxButtons = new HBox();
+
     private TextField textField = new TextField();
-    private HBox hBoxButtons = new HBox();
     private Button buttonLeggTilRom;
     private Button buttonNyttRom;
     private Button buttonBliMed;
     private Button buttonForlat;
-    private RomTableView romTableView = new RomTableView();
 
     /**
      * Metode for å opprette alle elementene og sette de sammen i vBox som holder på alle elementene.
@@ -33,12 +36,14 @@ public class RomListeUI {
         textField.setMinSize(100,30);
         buttonLeggTilRom.setMinSize(60, 30);
         buttonNyttRom = new Button("Nytt rom");
+
         nyttRomHBox.getChildren().addAll(textField, buttonLeggTilRom);
 
         hBoxButtons.getChildren().addAll(buttonNyttRom, buttonBliMed, buttonForlat);
         vBox.getChildren().addAll(hBoxButtons, romTableView.getRomTableView());
         return vBox;
     }
+
 
     /**
      * Getter for TextField som brukes til å opprette rom.

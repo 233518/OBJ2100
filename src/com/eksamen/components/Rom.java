@@ -4,6 +4,7 @@ import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.chatsystem.InndataTabell;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Rom {
     private String romNavn;
@@ -36,6 +37,19 @@ public class Rom {
 
     public void leggTilMld(InndataTabell melding){
         meldinger.add(melding);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rom rom = (Rom) o;
+        return Objects.equals(romNavn, rom.romNavn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(romNavn);
     }
 }
 
