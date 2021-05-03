@@ -3,6 +3,7 @@ package com.eksamen;
 import com.eksamen.networking.ServerNetworking;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.scenes.ServerScene;
+import com.eksamen.scenes.TestSceneServer;
 import com.eksamen.uis.ClientUi;
 import com.eksamen.uis.ServerUi;
 import javafx.application.Application;
@@ -15,9 +16,9 @@ public class Main extends Application {
     private ServerUi serverUi;
 
     @Override
-    public void start(Stage stage) throws SQLException {
+    public void start(Stage stage) {
         serverUi = new ServerUi();
-        scene = new ServerScene(serverUi.getHovedPane());
+        scene = new ServerScene(stage, serverUi);
         stage.setScene(scene);
         stage.show();
     }

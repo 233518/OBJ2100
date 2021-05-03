@@ -1,5 +1,6 @@
 package com.eksamen.uis;
 
+import com.eksamen.uis.layouts.StartLayout;
 import com.eksamen.uis.layouts.TestLayout;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;

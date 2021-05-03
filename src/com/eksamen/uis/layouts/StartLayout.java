@@ -30,4 +30,12 @@ public class StartLayout {
     }
 
     public GridPane getStartPane() {return startPane;}
+
+    public TextField getSkrivBrukernavn() {
+        return skrivBrukernavn;
+    }
+
+    public Button getEnter() {
+        return enter;
+    }
 }
