@@ -1,4 +1,4 @@
-package com.eksamen;
+package com.eksamen.components;
 
 public class Bruker {
     private String name;
