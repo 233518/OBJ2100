@@ -12,6 +12,7 @@ public class Rom {
         this.romNavn = romNavn; //Navn på rommet
         this.brukerNavn = brukerNavn; //Navnet på den som opprettet rommet
         this.meldinger = new ArrayList<>();
+        this.brukere = new ArrayList<>();
     }
 
     public String getRomNavn() {
@@ -21,4 +22,13 @@ public class Rom {
     public String getBrukerNavn() {
         return brukerNavn;
     }
+
+    public ArrayList<String> getMeldinger() {
+        return meldinger;
+    }
+
+    public ArrayList<Bruker> getBrukere() {
+        return brukere;
+    }
 }
+
