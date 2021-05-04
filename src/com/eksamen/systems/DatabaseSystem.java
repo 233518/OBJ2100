@@ -10,9 +10,11 @@ import java.util.ArrayList;
 
 public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
+    private LoggSystem loggSystem;
 
     public DatabaseSystem(LoggSystem loggSystem) {
         lagTabell();
+        this.loggSystem = loggSystem;
     }
     public DatabaseSystem() {
         lagTabell();
@@ -50,6 +52,8 @@ public class DatabaseSystem implements Logging {
             sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
             Statement statement = sqlConnection.createStatement();
             statement.executeUpdate("insert into logg(bruker, melding, ip, rom, dato) values('"+bruker+"','"+melding+"','"+ip+"','"+rom+"','"+ LocalDateTime.now().toString()+"')");
+            //Denne gir feilmelding
+            loggSystem.oppdaterTableView();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
