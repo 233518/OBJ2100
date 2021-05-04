@@ -56,7 +56,7 @@ public class ServerInput extends InputSystem {
                 }
             } catch(Exception e){
                 System.out.println(e);
-                Feilmelding.visFeilmelding("Noe gikk galt" + e);
+                Feilmelding.visFeilmelding("Noe gikk galt");
             }
         });
     }
