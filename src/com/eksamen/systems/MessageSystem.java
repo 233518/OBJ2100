@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import com.eksamen.networking.ClientNetworking;
+
 public class MessageSystem {
 
     public ArrayList<InndataTabell> meldingArrayList;
