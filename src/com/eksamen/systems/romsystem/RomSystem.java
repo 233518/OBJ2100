@@ -78,5 +78,6 @@ public class RomSystem {
     public void slettRom(Rom rom, ArrayList array) {
          romArrayList.remove(rom);
          array.remove(rom);
+         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
 }
