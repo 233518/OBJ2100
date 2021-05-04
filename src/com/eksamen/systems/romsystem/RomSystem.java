@@ -55,7 +55,7 @@ public class RomSystem {
      public ObservableList<Rom> getRom() {
         ObservableList<Rom> liste = FXCollections.observableArrayList();
          for (Rom rom : romArrayList) {
-             liste.add(new Rom(rom.getRomNavn(), rom.getBrukerNavn()));
+             liste.add(rom);
          }
         return liste;
     }
