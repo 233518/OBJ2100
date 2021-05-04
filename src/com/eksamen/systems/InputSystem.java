@@ -31,6 +31,7 @@ public abstract class InputSystem {
         bliMedRom();
         opprettRom();
         visOpprettRom();
+        OkKnappAlleredeOpprettetRom();
     }
 
     /**
@@ -48,9 +49,15 @@ public abstract class InputSystem {
      */
     public void visOpprettRom() {
         romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
-            romListeUI.visOpprettRom();
+            if (this.bruker.getRom().getBrukerNavn() != bruker.getName()){
+                romListeUI.visOpprettRom();
+            }else {
+                romListeUI.visAlleredeOpprettetRom();
+            }
         });
     }
+
+    public abstract void OkKnappAlleredeOpprettetRom();
 
     /**
      * ActionEvent for å bli med i ett chatterom

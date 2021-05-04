@@ -47,6 +47,13 @@ public class ServerInput extends InputSystem {
     }
 
     @Override
+    public void OkKnappAlleredeOpprettetRom() {
+        romListeUI.getAlleredeRomButton().setOnAction(actionEvent -> {
+            romListeUI.skjulAlleredeOpprettetRom();
+        });
+    }
+
+    @Override
     public void bliMedRom() {
 
     }

@@ -32,17 +32,29 @@ public class ClientInput extends InputSystem{
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
-            romSystem = new RomSystem(romListeUI, bruker);
-            Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
-            romSystem.opprettRom(rom);
-            hovedLayout.lagNyTab(romListeUI.getTextField().getText());
-            deltakerTabell = new DeltakerTabell(bruker.getName());
-            rom.leggTilDeltaker(deltakerTabell);
-            romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
-            romListeUI.skjulOpprettRom();
-            bruker.setRom(rom);
-            setRom();
-            clientNetworking.newRoom("newRoom", rom);
+            if (this.bruker.getRom().getBrukerNavn() != bruker.getName()) {
+                romSystem = new RomSystem(romListeUI, bruker);
+                Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+                romSystem.opprettRom(rom);
+                hovedLayout.lagNyTab(romListeUI.getTextField().getText());
+                deltakerTabell = new DeltakerTabell(bruker.getName());
+                rom.leggTilDeltaker(deltakerTabell);
+                romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
+                romListeUI.skjulOpprettRom();
+                bruker.setRom(rom);
+                setRom();
+                clientNetworking.newRoom(romListeUI.getTextField().getText(), rom);
+            }else {
+                romListeUI.skjulOpprettRom();
+                romListeUI.visAlleredeOpprettetRom();
+            }
+        });
+    }
+
+    @Override
+    public void OkKnappAlleredeOpprettetRom() {
+        romListeUI.getAlleredeRomButton().setOnAction(actionEvent -> {
+            romListeUI.skjulAlleredeOpprettetRom();
         });
     }
 

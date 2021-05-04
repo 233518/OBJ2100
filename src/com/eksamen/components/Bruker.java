@@ -22,6 +22,7 @@ public class Bruker {
         return name;
     }
 
+
     /**
      * Metode for å sette kallenavnet til brukeren.
      * @param name kallenavnet til brukeren.
