@@ -71,7 +71,7 @@ public class RomChat {
 
         //Adder kolonner i tabeller
         deltakerKolonne1 = new TableColumn<>("Brukernavn");
-        deltakerKolonne1.setCellValueFactory(new PropertyValueFactory<DeltakerTabell, String>("aktivbrukernavn"));
+        deltakerKolonne1.setCellValueFactory(new PropertyValueFactory<DeltakerTabell, String>("brukernavn"));
         inndataKolonne1 = new TableColumn<>("Tid");
         inndataKolonne1.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("tidspunkt"));
         inndataKolonne2 = new TableColumn<>("Brukernavn");
@@ -117,9 +117,9 @@ public class RomChat {
         this.deltakere = deltakere;
     }
 
-    public void oppdaterDeltakerListe(ObservableList<Bruker> liste) {
-        ObservableList<Bruker> tableViewItems = deltakere.getItems();
-        ObservableList<Bruker> deltakerArrayList = FXCollections.observableArrayList();
+    public void oppdaterDeltakerListe(ObservableList<DeltakerTabell> liste) {
+        ObservableList<DeltakerTabell> tableViewItems = deltakere.getItems();
+        ObservableList<DeltakerTabell> deltakerArrayList = FXCollections.observableArrayList();
         //deltakerArrayList.addAll(tableViewItems);
         deltakerArrayList.addAll(liste);
         deltakere.setItems(deltakerArrayList);

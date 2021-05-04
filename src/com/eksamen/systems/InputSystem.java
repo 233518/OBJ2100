@@ -2,6 +2,7 @@ package com.eksamen.systems;
 
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.systems.romsystem.RomTabell;
@@ -18,6 +19,7 @@ public abstract class InputSystem {
     protected RomListeUI romListeUI;
     protected RomSystem romSystem;
     protected Rom rom;
+    protected DeltakerTabell deltakerTabell;
 
     public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat){
         this.romListeUI = romListeUI;

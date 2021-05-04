@@ -2,6 +2,7 @@ package com.eksamen.systems.romsystem;
 
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.uis.layouts.RomListeUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,15 @@ public class RomSystem {
          }
         return liste;
     }
+
+    public ObservableList<DeltakerTabell> getDeltakere(Rom rom) {
+        ObservableList<DeltakerTabell> liste = FXCollections.observableArrayList();
+        for(DeltakerTabell deltaker : rom.getBrukere()){
+            liste.add(deltaker);
+        }
+        return liste;
+    }
+
 
     public void bliMedIRom(){
         //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();

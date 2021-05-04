@@ -26,7 +26,6 @@ public class MessageSystem {
     }
 
     public ObservableList<InndataTabell> getMeldinger(Rom rom) {
-        //System.out.println(meldingArrayList.size());
         ObservableList<InndataTabell> liste = FXCollections.observableArrayList();
         for(InndataTabell melding : rom.getMeldinger()){
             liste.add(melding);

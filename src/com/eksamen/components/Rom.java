@@ -1,6 +1,7 @@
 package com.eksamen.components;
 
 import com.eksamen.systems.MessageSystem;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class Rom {
     private String romNavn;
     private String brukerNavn;
     private ArrayList<InndataTabell> meldinger;
-    private ArrayList<Bruker> brukere;
+    private ArrayList<DeltakerTabell> brukere;
 
     public Rom(String romNavn, String brukerNavn) {
         this.romNavn = romNavn; //Navn på rommet
@@ -31,12 +32,16 @@ public class Rom {
         return meldinger;
     }
 
-    public ArrayList<Bruker> getBrukere() {
+    public ArrayList<DeltakerTabell> getBrukere() {
         return brukere;
     }
 
     public void leggTilMld(InndataTabell melding){
         meldinger.add(melding);
+    }
+
+    public void leggTilDeltaker(DeltakerTabell deltaker){
+        brukere.add(deltaker);
     }
 
     @Override
