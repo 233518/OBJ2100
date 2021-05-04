@@ -2,31 +2,25 @@ package com.eksamen.systems;
 
 import com.eksamen.utils.Logging;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDateTime;
 
 public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
 
     public DatabaseSystem() {
-        lagOppkoblingTabell();
-        lagOpprettetRomTabell();
-        lagMeldingTabell();
-        lagBliMedTabell();
-        lagForlatTabell();
+        lagTabell();
     }
 
     /**
-     * Metode for å lage oppkoblings tabellen i databasen.
+     * Metode for å lage logg tabell i databasen.
      */
     @Override
-    public void lagOppkoblingTabell() {
+    public void lagTabell() {
         try {
             sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
             Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("create table if not exists oppkobling (id integer NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY, bruker TEXT, ip TEXT, dato TEXT)");
+            statement.executeUpdate("create table if not exists logg (id integer NOT NULL UNIQUE PRIMARY KEY, bruker TEXT, melding TEXT, ip TEXT, rom TEXT, dato TEXT)");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -39,99 +33,18 @@ public class DatabaseSystem implements Logging {
     }
 
     /**
-     * Metode for å lage blimed tabellen i databasen.
-     */
-    @Override
-    public void lagBliMedTabell() {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("create table if not exists bliMedRom (id integer NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY, bruker TEXT, ip TEXT, rom TEXT, dato TEXT)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å lage forlat tabellen i databasen.
-     */
-    @Override
-    public void lagForlatTabell() {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("create table if not exists forlatRom (id integer NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY, bruker TEXT, ip TEXT, rom TEXT, dato TEXT)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å lage melding tabellen i databasen.
-     */
-    @Override
-    public void lagMeldingTabell() {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("create table if not exists meldinger (id integer NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY, bruker TEXT, melding TEXT, ip TEXT, rom TEXT, dato TEXT)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å lage opprettetrom tabellen i databasen.
-     */
-    @Override
-    public void lagOpprettetRomTabell() {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("create table if not exists opprettRom (id integer NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY, bruker TEXT, ip TEXT, rom TEXT, dato TEXT)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å logge melding i databasen.
+     * Metode for å logge ting i databasen.
      * @param bruker Brukernavnet i String.
      * @param melding Melding i string.
      * @param ip IP-Adressen i String.
      * @param rom Rom navnet i String.
-     * @param dato Dato i String.
      */
     @Override
-    public void loggMelding(String bruker, String melding, String ip, String rom, String dato) {
+    public void logg(String bruker, String melding, String ip, String rom) {
         try {
             sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
             Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("insert into meldinger(bruker, melding, ip, rom, dato) values('"+bruker+"','"+melding+"','"+ip+"','"+rom+"','"+dato+"')");
+            statement.executeUpdate("insert into logg(bruker, melding, ip, rom, dato) values('"+bruker+"','"+melding+"','"+ip+"','"+rom+"','"+ LocalDateTime.now().toString()+"')");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -143,123 +56,29 @@ public class DatabaseSystem implements Logging {
         }
     }
 
-    /**
-     * Metode for å logge når noen logger inn i chattesystemet i databasen.
-     * @param bruker Brukernavnet i String.
-     * @param ip IP-Adressen i String.
-     * @param rom Rom navnet i String.
-     * @param dato Dato i String.
-     */
-    @Override
-    public void loggLoggInn(String bruker, String ip, String rom, String dato) {
+    //Midlertidig metode for å printe innholdet i databasen.
+    public void print() {
         try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("insert into meldinger(bruker, melding, ip, rom, dato) values('"+bruker+"','"+ip+"','"+rom+"','"+dato+"')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            Connection con = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
+            System.out.println("Koblet til Databasen!");
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery("select * from logg");
+            System.out.println("Innhold i databasen:");
+            while (rs.next()) {
+                // Skriver ut innholdet i konsollvinduet
+                System.out.print(" | " + "ID = " + rs.getInt("id"));
+                System.out.print(" | " + "Bruker = " + rs.getString("bruker"));
+                System.out.print(" | " + "Melding = " + rs.getString("melding"));
+                System.out.print(" | " + "IP = " + rs.getString("ip"));
+                System.out.print(" | " + "Rom: = " + rs.getString("rom"));
+                System.out.print(" | " + "Dato = " + rs.getString("dato"));
+                System.out.println();
+                System.out.println(" -------------------------------------------");
             }
+            con.close();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Metode for å logge når noen blir med i et rom i databasen.
-     * @param bruker Brukernavnet i String.
-     * @param ip IP-Adressen i String.
-     * @param rom Rom navnet i String.
-     * @param dato Dato i String.
-     */
-    @Override
-    public void loggBliMed(String bruker, String ip, String rom, String dato) {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("insert into meldinger(bruker, melding, ip, rom, dato) values('"+bruker+"','"+ip+"','"+rom+"','"+dato+"')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å logge når noen logger inn i databasen.
-     * @param bruker Brukernavnet i String.
-     * @param ip IP-Adressen i String.
-     * @param rom Rom navnet i String.
-     * @param dato Dato i String.
-     */
-    @Override
-    public void loggForlat(String bruker, String ip, String rom, String dato) {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("insert into meldinger(bruker, melding, ip, rom, dato) values('"+bruker+"','"+ip+"','"+rom+"','"+dato+"')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å logge når noen logger ut i databasen.
-     * @param bruker Brukernavnet i String.
-     * @param ip IP-Adressen i String.
-     * @param rom Rom navnet i String.
-     * @param dato Dato i String.
-     */
-    @Override
-    public void loggLoggUt(String bruker, String ip, String rom, String dato) {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("insert into meldinger(bruker, melding, ip, rom, dato) values('"+bruker+"','"+ip+"','"+rom+"','"+dato+"')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metode for å logge når noen lager ett nytt rom i databasen.
-     * @param bruker Brukernavnet i String.
-     * @param ip IP-Adressen i String.
-     * @param rom Rom navnet i String.
-     * @param dato Dato i String.
-     */
-    @Override
-    public void logNewRoom(String bruker, String ip, String rom, String dato) {
-        try {
-            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = sqlConnection.createStatement();
-            statement.executeUpdate("insert into meldinger(bruker, melding, ip, rom, dato) values('"+bruker+"','"+ip+"','"+rom+"','"+dato+"')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                sqlConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
