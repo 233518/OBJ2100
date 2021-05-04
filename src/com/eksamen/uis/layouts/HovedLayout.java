@@ -11,9 +11,11 @@ public class HovedLayout {
     private RomListeUI romListe;
     private TabPane tabPane;
     private Tab tab;
+    private Serverlog serverlog;
     public HovedLayout(){
         romChat = new RomChat();
         romListe = new RomListeUI();
+        serverlog = new Serverlog();
         lagLayout();
     }
 
@@ -24,9 +26,12 @@ public class HovedLayout {
     public void lagLayout(){
         tabPane = new TabPane();
         Tab tab1 = new Tab("Romliste");
+        Tab tab2 = new Tab("ServerLog");
         tab1.setClosable(false);
         tab1.setContent(romListe.getRomUI());
-        tabPane.getTabs().add(tab1);
+        tab2.setClosable(false);
+        tab2.setContent(serverlog.getHbox());
+        tabPane.getTabs().addAll(tab1, tab2);
     }
 
     public RomChat getRomChat() {
@@ -49,8 +54,8 @@ public class HovedLayout {
     }
 
     public void slettTab(){
-        if(getTabPane().getTabs().size() == 2){
-            getTabPane().getTabs().remove(1);
+        if(getTabPane().getTabs().size() == 3){
+            getTabPane().getTabs().remove(2);
         }
     }
 
