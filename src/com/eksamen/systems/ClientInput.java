@@ -32,6 +32,7 @@ public class ClientInput extends InputSystem{
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
             System.out.println("Kjører en gang");
             clientNetworking.newMessage("newMessage", rom, bruker.getName(), melding);
+            romChat.getMeldingsBoks().setText("");
         });
     }
 
