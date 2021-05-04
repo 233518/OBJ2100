@@ -30,6 +30,7 @@ public class ClientInput extends InputSystem{
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            System.out.println("Kjører en gang");
             clientNetworking.newMessage("newMessage", rom, bruker.getName(), melding);
         });
     }
@@ -49,8 +50,9 @@ public class ClientInput extends InputSystem{
             bruker.setRom(rom);
             setRom();
             clientNetworking.newRoom("newRoom", rom);
-            forlatRom(deltakerTabell, rom, mainRoomList);
+            clientNetworking.newBruker("newBruker", rom, bruker.getName());
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            forlatRom(deltakerTabell, rom, mainRoomList);
         });
     }
 
@@ -66,7 +68,7 @@ public class ClientInput extends InputSystem{
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             hovedLayout.slettTab();
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
-            mainRoomList.add(rom);
+            //mainRoomList.add(rom);
             hovedLayout.lagNyTab(rom.getRomNavn());
             deltakerTabell = new DeltakerTabell(bruker.getName());
             rom.leggTilDeltaker(deltakerTabell);
@@ -74,6 +76,7 @@ public class ClientInput extends InputSystem{
             bruker.setRom(rom);
             setRom();
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            clientNetworking.newBruker("newBruker", rom, bruker.getName());
             forlatRom(deltakerTabell, rom, mainRoomList);
         });
     }

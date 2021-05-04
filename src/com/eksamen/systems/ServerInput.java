@@ -35,6 +35,9 @@ public class ServerInput extends InputSystem {
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+            bruker.setRom(rom);
+            setRom();
+
             mainRoomList.add(rom);
             romSystem.opprettRom(rom);
             hovedLayout.lagNyTab(romListeUI.getTextField().getText());
@@ -42,9 +45,9 @@ public class ServerInput extends InputSystem {
             rom.leggTilDeltaker(deltakerTabell);
             romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
             romListeUI.skjulOpprettRom();
-            bruker.setRom(rom);
-            setRom();
+
             serverNetworking.sendNewRoom(rom.getRomNavn(), bruker.getName());
+            serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
@@ -60,14 +63,16 @@ public class ServerInput extends InputSystem {
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
-            mainRoomList.add(rom);
+            bruker.setRom(rom);
+            setRom();
+
+            //mainRoomList.add(rom);
             hovedLayout.lagNyTab(rom.getRomNavn());
             deltakerTabell = new DeltakerTabell(bruker.getName());
             rom.leggTilDeltaker(deltakerTabell);
             romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
-            bruker.setRom(rom);
-            setRom();
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
         });
     }
 }
