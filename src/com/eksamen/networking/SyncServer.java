@@ -46,8 +46,6 @@ public class SyncServer {
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1], messageArray[2]);
         serverScene.getRooms().add(rom);
-        //ArrayList<Rom> rooms = serverScene.getRooms();
-        //rooms.add(rom);
         serverScene.getRomSystem().opprettRom(rom);
         serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
     }
@@ -63,7 +61,9 @@ public class SyncServer {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 serverScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
-                serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
+                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
+                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
+                }
             }
         }
         serverNetworking.updateClientsWithNewMessage(messageArray[1],messageArray[2],messageArray[3],clientSocket);

@@ -45,8 +45,6 @@ public class SyncClient {
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1],messageArray[2]);
         clientScene.getRooms().add(rom);
-        //ArrayList<Rom> rooms = clientScene.getRooms();
-        //rooms.add(rom);
         clientScene.getRomSystem().opprettRom(rom);
     }
 
@@ -60,7 +58,9 @@ public class SyncClient {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 clientScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
-                clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessage().getMeldinger(room));
+                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
+                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessage().getMeldinger(room));
+                }
             }
         }
     }

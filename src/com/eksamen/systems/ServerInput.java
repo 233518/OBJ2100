@@ -45,6 +45,7 @@ public class ServerInput extends InputSystem {
             bruker.setRom(rom);
             setRom();
             serverNetworking.sendNewRoom(rom.getRomNavn(), bruker.getName());
+            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
 
@@ -66,6 +67,7 @@ public class ServerInput extends InputSystem {
             romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
             bruker.setRom(rom);
             setRom();
+            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
 }

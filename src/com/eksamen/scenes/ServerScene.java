@@ -55,4 +55,8 @@ public class ServerScene extends Scene {
     public ServerUi getServerUi() {
         return serverUi;
     }
+
+    public Bruker getBruker() {
+        return bruker;
+    }
 }
