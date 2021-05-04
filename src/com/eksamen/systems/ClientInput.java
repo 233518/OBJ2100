@@ -29,8 +29,9 @@ public class ClientInput extends InputSystem{
             String melding = romChat.getMeldingsBoks().getText();
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
+            //System.out.println(rom.getMeldinger().size());
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
-            clientNetworking.newMessage("newMessage", rom, melding);
+            clientNetworking.newMessage("newMessage", rom, bruker.getName(), melding);
         });
     }
 
@@ -48,7 +49,6 @@ public class ClientInput extends InputSystem{
             bruker.setRom(rom);
             setRom();
             clientNetworking.newRoom("newRoom", rom);
-            forlatRom(bruker.getName());
         });
     }
 
@@ -69,7 +69,6 @@ public class ClientInput extends InputSystem{
             romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
             bruker.setRom(rom);
             setRom();
-            forlatRom(bruker.getName());
         });
     }
 

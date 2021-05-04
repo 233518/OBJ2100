@@ -1,5 +1,6 @@
 package com.eksamen.uis.layouts;
 
+import com.eksamen.components.Rom;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 import javafx.collections.FXCollections;
@@ -79,8 +80,6 @@ public class RomChat {
         inndata.getColumns().addAll(inndataKolonne1, inndataKolonne2, inndataKolonne3);
         deltakere.getColumns().add(deltakerKolonne1);
 
-
-
         //Legger til komponenter i panes
         centerBorderPane.getChildren().addAll(inndataLabel, inndata);
         bottomBorderPane.getChildren().addAll(meldingsBoks, sendKnapp);
@@ -124,11 +123,16 @@ public class RomChat {
     }
 
     public void oppdaterMeldingListe(ObservableList<InndataTabell> liste) {
+        ObservableList<InndataTabell> meldingListe = liste;
+        inndata.setItems(meldingListe);
+        /*
         ObservableList<InndataTabell> tableViewItems = inndata.getItems();
         ObservableList<InndataTabell> inndataArrayList = FXCollections.observableArrayList();
 
         inndataArrayList.addAll(tableViewItems);
         inndataArrayList.addAll(liste);
         inndata.setItems(inndataArrayList);
+
+         */
     }
 }
