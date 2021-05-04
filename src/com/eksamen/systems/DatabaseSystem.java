@@ -1,9 +1,11 @@
 package com.eksamen.systems;
 
+import com.eksamen.components.Logg;
 import com.eksamen.utils.Logging;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
@@ -53,6 +55,27 @@ public class DatabaseSystem implements Logging {
                 e.printStackTrace();
             }
         }
+    }
+
+    public ArrayList<Logg> getLogs() {
+        ArrayList<Logg> logg = new ArrayList<Logg>();
+        try {
+            sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
+            Statement statement = sqlConnection.createStatement();
+            ResultSet rs = statement.executeQuery("select * from logg ORDER BY id DESC LIMIT 10");
+            while (rs.next()) {
+                logg.add(new Logg(rs.getString("dato"),rs.getString("ip"),rs.getString("bruker"),rs.getString("rom"),rs.getString("melding")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                sqlConnection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return logg;
     }
 
     //Midlertidig metode for å printe innholdet i databasen.

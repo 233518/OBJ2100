@@ -1,8 +1,5 @@
 package com.eksamen.uis.layouts;
 
-import com.eksamen.components.Bruker;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -11,11 +8,11 @@ public class HovedLayout {
     private RomListeUI romListe;
     private TabPane tabPane;
     private Tab tab;
-    private Serverlog serverlog;
+    private LoggLayout loggLayout;
     public HovedLayout(){
         romChat = new RomChat();
         romListe = new RomListeUI();
-        serverlog = new Serverlog();
+        loggLayout = new LoggLayout();
         lagLayout();
     }
 
@@ -53,7 +50,7 @@ public class HovedLayout {
     public void lagLoggingTab(){
         tab = new Tab("Serverlog");
         tab.setClosable(false);
-        tab.setContent(serverlog.getHbox());
+        tab.setContent(loggLayout.getHbox());
         tabPane.getTabs().add(tab);
     }
 
