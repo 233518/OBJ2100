@@ -88,6 +88,9 @@ public class ClientNetworking extends Thread {
     public void newRoom(String message, Rom rom) {
         syncClient.syncServer(message, rom);
     }
+    public void newMessage(String message, Rom rom) {
+        syncClient.syncServer(message, rom);
+    }
 
     public ArrayList<Rom> getRooms() {
         return rooms;

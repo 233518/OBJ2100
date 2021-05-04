@@ -17,14 +17,14 @@ public class ClientSocket extends Thread {
 
     private SyncServer syncServer;
 
-    public ClientSocket(Socket socket, ServerScene serverScene) {
+    public ClientSocket(Socket socket, ServerScene serverScene, ServerNetworking serverNetworking) {
         this.socket = socket;
         try {
             input = new InputStreamReader(this.socket.getInputStream());
             output = new OutputStreamWriter(this.socket.getOutputStream());
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
-            syncServer = new SyncServer(bufferedWriter, serverScene);
+            syncServer = new SyncServer(bufferedWriter, serverScene, serverNetworking);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class ClientSocket extends Thread {
             while (true) {
                 String msgFromClient = bufferedReader.readLine();
                 System.out.println("Starter du=?!");
-                syncServer.syncServer(msgFromClient);
+                syncServer.syncServer(msgFromClient, this);
                 System.out.println(msgFromClient);
             }
         } catch (IOException e) {
@@ -74,6 +74,5 @@ public class ClientSocket extends Thread {
         } catch(IOException e) {
             e.printStackTrace();
         }
-
     }
 }
