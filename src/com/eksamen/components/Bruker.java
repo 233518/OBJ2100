@@ -11,7 +11,7 @@ public class Bruker {
      */
     public Bruker(String name) {
         this.name = name;
-        this.rom = new Rom("", "");
+        this.rom = null;
     }
 
     /**

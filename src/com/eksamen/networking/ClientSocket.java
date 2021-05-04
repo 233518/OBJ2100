@@ -102,4 +102,14 @@ public class ClientSocket extends Thread {
             e.printStackTrace();
         }
     }
+
+    public void removeRoom(String roomName) {
+        try {
+            bufferedWriter.write("removeRoom" + ":" + roomName);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -41,8 +41,29 @@ public class SyncServer {
             case "removeBruker":
                 removeBrukerServer(message, clientSocket);
                 break;
+            case "removeRoom":
+                removeRoom(message, clientSocket);
+                break;
         }
     }
+
+    private void removeRoom(String message, ClientSocket clientSocket) {
+        System.out.println("Fjerner rom fra server liste");
+        String[] messageArray = message.split(":");
+        Rom rom = null;
+        for(Rom room : serverScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                System.out.println("Fant rom som er tomt");
+                rom = room;
+            }
+        }
+        serverScene.getRooms().remove(rom);
+        serverScene.getRomSystem().removeRom(rom);
+        //serverScene.getServerUi().getHovedLayout().getRomListe().getRomTableView().oppdaterTableView(serverScene.getRomSystem().getRom());
+        serverNetworking.updateClientsWithRemoveRoom(messageArray[1], clientSocket);
+    }
+
     /**
      * Får kommando fra klient at bruker har forlatt rom
      * @param message
@@ -73,9 +94,11 @@ public class SyncServer {
             System.out.println("Fjerner deltaker fra rom");
             rom.slettDeltaker(deltakerFunnet);
         }
-        if(rom.getRomNavn().equals(serverScene.getBruker().getRom().getRomNavn())) {
-            System.out.println("Oppdaterer liste klient siden");
-            serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(rom));
+        if(serverScene.getBruker().getRom() != null) {
+            if(rom.getRomNavn().equals(serverScene.getBruker().getRom().getRomNavn())) {
+                System.out.println("Oppdaterer liste klient siden");
+                serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(rom));
+            }
         }
         serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
     }
@@ -91,8 +114,10 @@ public class SyncServer {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 room.leggTilDeltaker(new DeltakerTabell(messageArray[2]));
-                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
-                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
+                if(serverScene.getBruker().getRom() != null) {
+                    if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
+                        serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
+                    }
                 }
                 break;
             }

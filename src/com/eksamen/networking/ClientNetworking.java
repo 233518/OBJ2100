@@ -91,4 +91,8 @@ public class ClientNetworking extends Thread {
     public ArrayList<Rom> getRooms() {
         return rooms;
     }
+
+    public void removeRoom(String message, Rom rom) {
+        syncClient.syncServer(message, rom, "", "");
+    }
 }

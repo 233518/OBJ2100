@@ -54,9 +54,9 @@ public abstract class InputSystem {
      */
     public void visOpprettRom() {
         romListeUI.getButtonNyttRom().setOnAction(actionEvent -> {
-            if (this.bruker.getRom().getBrukerNavn() != bruker.getName()){
+            if(this.bruker.getRom() == null) {
                 romListeUI.visOpprettRom();
-            }else {
+            }else if(this.bruker.getRom().getBrukerNavn() == bruker.getName()) {
                 romListeUI.visAlleredeOpprettetRom();
             }
         });

@@ -88,6 +88,7 @@ public class ServerInput extends InputSystem {
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
                 mainRoomList.remove(rom);
+                serverNetworking.removeRoom("removeRoom", rom);
             }
         });
     }

@@ -103,4 +103,19 @@ public class ServerNetworking extends Thread {
             client.removeBruker(roomName, brukernavn);
         }
     }
+
+    public void updateClientsWithRemoveRoom(String roomName, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.removeRoom(roomName);
+        }
+    }
+
+    public void removeRoom(String roomName, Rom rom) {
+        for(ClientSocket client : clients) {
+            client.removeRoom(roomName);
+        }
+    }
 }

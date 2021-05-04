@@ -91,8 +91,8 @@ public class ClientInput extends InputSystem{
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
                 mainRoomList.remove(rom);
+                clientNetworking.removeRoom("removeRoom", rom);
             }
         });
     }
-
 }
