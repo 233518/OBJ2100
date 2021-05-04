@@ -35,7 +35,7 @@ public class ServerScene extends Scene {
         bruker = new Bruker("Admin");
         romSystem = new RomSystem(serverUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
-        inputSystem = new ServerInput(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat(), nettverk);
+        inputSystem = new ServerInput(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat(), romSystem,nettverk);
 
         serverUi.getHovedLayout().getRomListe().getButtonNyttRom().setOnAction(new EventHandler<ActionEvent>() {
             @Override

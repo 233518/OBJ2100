@@ -3,6 +3,7 @@ package com.eksamen.systems;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ClientNetworking;
+import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 import com.eksamen.systems.romsystem.RomSystem;
@@ -15,8 +16,8 @@ import javafx.event.EventHandler;
 public class ClientInput extends InputSystem{
     private ClientNetworking clientNetworking;
 
-    public ClientInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, ClientNetworking clientNetworking) {
-        super(romListeUI, bruker, hovedLayout, message, romChat);
+    public ClientInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat,RomSystem romSystem, ClientNetworking clientNetworking) {
+        super(romListeUI, bruker, hovedLayout, message, romChat, romSystem);
         this.clientNetworking = clientNetworking;
     }
 
@@ -27,14 +28,13 @@ public class ClientInput extends InputSystem{
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
-            clientNetworking.newMessage("newMessage", rom);
+            clientNetworking.newMessage("newMessage", rom, melding);
         });
     }
 
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
-            romSystem = new RomSystem(romListeUI, bruker);
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
             romSystem.opprettRom(rom);
             hovedLayout.lagNyTab(romListeUI.getTextField().getText());

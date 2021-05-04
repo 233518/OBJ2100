@@ -29,14 +29,14 @@ public class ClientScene extends Scene {
         super(clientUi.getHovedPane(), 800, 600);
         this.clientUi = clientUi;
         rooms = new ArrayList<>();
-        nettverk = new ClientNetworking(this);
+        nettverk = new ClientNetworking(this, bruker);
         nettverk.start();
         rooms = nettverk.getRooms();
         bruker = new Bruker(username);
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
         message = new MessageSystem();
-        inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat(), nettverk);
+        inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat(), romSystem, nettverk);
     }
 
     public RomSystem getRomSystem() {
@@ -45,5 +45,9 @@ public class ClientScene extends Scene {
 
     public ArrayList<Rom> getRooms() {
         return rooms;
+    }
+
+    public MessageSystem getMessage() {
+        return message;
     }
 }

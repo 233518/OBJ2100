@@ -13,8 +13,8 @@ import com.eksamen.uis.layouts.RomListeUI;
 public class ServerInput extends InputSystem {
     private ServerNetworking serverNetworking;
 
-    public ServerInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, ServerNetworking serverNetworking) {
-        super(romListeUI, bruker, hovedLayout, message, romChat);
+    public ServerInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat,RomSystem romSystem, ServerNetworking serverNetworking) {
+        super(romListeUI, bruker, hovedLayout, message, romChat,romSystem);
         this.serverNetworking = serverNetworking;
     }
 
