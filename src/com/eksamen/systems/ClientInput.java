@@ -9,6 +9,8 @@ import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 
 public class ClientInput extends InputSystem{
     private ClientNetworking clientNetworking;
@@ -43,6 +45,7 @@ public class ClientInput extends InputSystem{
             bruker.setRom(rom);
             setRom();
             clientNetworking.newRoom("newRoom", rom);
+            forlatRom(bruker.getName());
         });
     }
 
@@ -51,9 +54,22 @@ public class ClientInput extends InputSystem{
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
             hovedLayout.lagNyTab(rom.getRomNavn());
+            deltakerTabell = new DeltakerTabell(bruker.getName());
+            rom.leggTilDeltaker(deltakerTabell);
+            romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
             bruker.setRom(rom);
             setRom();
-            //romChat.oppdaterDeltakerListe(rom.getBrukere());
+            forlatRom(bruker.getName());
         });
     }
+
+    public void forlatRom(String name) {
+        hovedLayout.getTab().setOnCloseRequest(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                romChat.getDeltakere().getItems().remove(name);
+            }
+        });
+    }
+
 }
