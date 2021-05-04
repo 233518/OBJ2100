@@ -12,6 +12,7 @@ public class ServerUi {
         hovedPane = new GridPane();
         hovedLayout = new HovedLayout();
         hovedPane.getChildren().add(hovedLayout.getTabPane());
+        hovedLayout.lagLoggingTab();
     }
 
     public GridPane getHovedPane() {
