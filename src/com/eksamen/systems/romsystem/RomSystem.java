@@ -69,8 +69,14 @@ public class RomSystem {
     }
 
 
+
+
     public void bliMedIRom(){
         //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();
     }
 
+    public void slettRom(Rom rom, ArrayList array) {
+         romArrayList.remove(rom);
+         array.remove(rom);
+    }
 }
