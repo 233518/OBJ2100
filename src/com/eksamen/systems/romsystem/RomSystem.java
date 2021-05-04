@@ -46,7 +46,6 @@ public class RomSystem {
     public void opprettRom(Rom rom) {
         romArrayList.add(rom);
         romListeUi.getRomTableView().oppdaterTableView(getRom());
-        this.bruker.setHarLagetRom(true);
     }
 
     /**

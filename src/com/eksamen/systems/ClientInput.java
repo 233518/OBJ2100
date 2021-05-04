@@ -35,22 +35,17 @@ public class ClientInput extends InputSystem{
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
-            if (this.bruker.getRom().getBrukerNavn() != bruker.getName()) {
-                Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
-                romSystem.opprettRom(rom);
-                hovedLayout.lagNyTab(romListeUI.getTextField().getText());
-                deltakerTabell = new DeltakerTabell(bruker.getName());
-                rom.leggTilDeltaker(deltakerTabell);
-                romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
-                romListeUI.skjulOpprettRom();
-                bruker.setRom(rom);
-                setRom();
-                clientNetworking.newRoom("newRoom", rom);
-                forlatRom(bruker.getName());
-            }else {
-                romListeUI.skjulOpprettRom();
-                romListeUI.visAlleredeOpprettetRom();
-            }
+            Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+            romSystem.opprettRom(rom);
+            hovedLayout.lagNyTab(romListeUI.getTextField().getText());
+            deltakerTabell = new DeltakerTabell(bruker.getName());
+            rom.leggTilDeltaker(deltakerTabell);
+            romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
+            romListeUI.skjulOpprettRom();
+            bruker.setRom(rom);
+            setRom();
+            clientNetworking.newRoom("newRoom", rom);
+            forlatRom(bruker.getName());
         });
     }
 
