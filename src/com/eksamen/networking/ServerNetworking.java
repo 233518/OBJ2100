@@ -2,12 +2,10 @@ package com.eksamen.networking;
 
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ServerScene;
-import javafx.application.Platform;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
 
 public class ServerNetworking extends Thread {
@@ -35,7 +33,7 @@ public class ServerNetworking extends Thread {
                 ClientSocket client = new ClientSocket(socket, scene, this);
                 clients.add(client);
                 client.start();
-                sendRoomsToClient(client);
+                sendInformationToclient(client);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,8 +47,8 @@ public class ServerNetworking extends Thread {
     public void leggTilRom(ServerScene scene, Rom rom) {
         scene.getRooms().add(rom);
     }
-    private void sendRoomsToClient(ClientSocket client) {
-        client.sendRomListe(scene.getRooms());
+    private void sendInformationToclient(ClientSocket client) {
+        client.sendInformation(scene.getRooms());
     }
     public void updateClientsWithNewRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
@@ -86,6 +84,36 @@ public class ServerNetworking extends Thread {
                 continue;
             }
             client.newBruker(roomName, brukernavn);
+        }
+    }
+
+    public void updateClientsWithRemoveUserInRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.removeBruker(roomName, brukernavn);
+        }
+    }
+
+    public void removeBruker(String roomName, String brukernavn) {
+        for(ClientSocket client : clients) {
+            client.removeBruker(roomName, brukernavn);
+        }
+    }
+
+    public void updateClientsWithRemoveRoom(String roomName, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.removeRoom(roomName);
+        }
+    }
+
+    public void removeRoom(String roomName, Rom rom) {
+        for(ClientSocket client : clients) {
+            client.removeRoom(roomName);
         }
     }
 }

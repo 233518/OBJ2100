@@ -49,6 +49,7 @@ public class ServerInput extends InputSystem {
             serverNetworking.sendNewRoom(rom.getRomNavn(), bruker.getName());
             serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            forlatRom(deltakerTabell, rom, mainRoomList);
         });
     }
 
@@ -73,6 +74,22 @@ public class ServerInput extends InputSystem {
             romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
             serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
+            forlatRom(deltakerTabell, rom, mainRoomList);
+        });
+    }
+
+    public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
+        hovedLayout.getTab().setOnCloseRequest(event -> {
+            serverNetworking.removeBruker(rom.getRomNavn(), bruker.getName());
+            romChat.getDeltakere().getItems().remove(deltakerTabell);
+            rom.slettDeltaker(deltakerTabell);
+            bruker.setRom(null);
+            setRom();
+            if(romChat.getDeltakere().getItems().size() == 0){
+                romSystem.slettRom(rom, romarray);
+                mainRoomList.remove(rom);
+                serverNetworking.removeRoom("removeRoom", rom);
+            }
         });
     }
 }

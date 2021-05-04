@@ -53,6 +53,11 @@ public class RomSystem {
         Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
     }
 
+    public void removeRom(Rom rom) {
+        romArrayList.remove(rom);
+        romListeUi.getRomTableView().oppdaterTableView(getRom());
+    }
+
     /**
      * Metode for å gjøre om arraylist med rom til ObservarbleList med rom og returnere det.
      * @return Returnerer observablelist med rom fra romArrayList.
@@ -71,13 +76,6 @@ public class RomSystem {
             liste.add(deltaker);
         }
         return liste;
-    }
-
-
-
-
-    public void bliMedIRom(){
-        //RomTabell rom = romliste.getRomTableView().getSelectionModel().getSelectedItem();
     }
 
     public void slettRom(Rom rom, ArrayList array) {

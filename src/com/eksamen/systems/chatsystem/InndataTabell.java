@@ -13,7 +13,11 @@ public class InndataTabell {
         this.tidspunkt = hentTidspunkt(LocalDateTime.now());
         this.melding = melding;
     }
-
+    public InndataTabell(String brukernavn, String melding, String tidspunkt) {
+        this.brukernavn = brukernavn;
+        this.tidspunkt = tidspunkt;
+        this.melding = melding;
+    }
 
     public String getBrukernavn() {
         return brukernavn;

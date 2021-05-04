@@ -43,6 +43,9 @@ public class Rom {
     public void leggTilDeltaker(DeltakerTabell deltaker){
         brukere.add(deltaker);
     }
+    public void slettDeltaker(DeltakerTabell deltaker) {
+        brukere.remove(deltaker);
+    }
 
     @Override
     public int hashCode() {

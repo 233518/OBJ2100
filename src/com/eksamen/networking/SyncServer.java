@@ -38,7 +38,63 @@ public class SyncServer {
             case "newBruker":
                 newBrukerServer(message, clientSocket);
                 break;
+            case "removeBruker":
+                removeBrukerServer(message, clientSocket);
+                break;
+            case "removeRoom":
+                removeRoom(message, clientSocket);
+                break;
         }
+    }
+
+    private void removeRoom(String message, ClientSocket clientSocket) {
+        String[] messageArray = message.split(":");
+        Rom rom = null;
+        for(Rom room : serverScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                rom = room;
+            }
+        }
+        serverScene.getRooms().remove(rom);
+        serverScene.getRomSystem().removeRom(rom);
+        serverNetworking.updateClientsWithRemoveRoom(messageArray[1], clientSocket);
+    }
+
+    /**
+     * Får kommando fra klient at bruker har forlatt rom
+     * @param message
+     * @param clientSocket
+     */
+    private void removeBrukerServer(String message, ClientSocket clientSocket) {
+        String[] messageArray = message.split(":");
+        Rom rom = null;
+        DeltakerTabell deltakerFunnet = null;
+        for(Rom room : serverScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                rom = room;
+                break;
+            }
+        }
+        if(rom != null) {
+            for(DeltakerTabell deltaker : rom.getBrukere()) {
+                String deltakerNavn = deltaker.getBrukernavn();
+                if(deltakerNavn.equals(messageArray[2])) {
+                    deltakerFunnet = deltaker;
+                    break;
+                }
+            }
+        }
+        if(deltakerFunnet != null) {
+            rom.slettDeltaker(deltakerFunnet);
+        }
+        if(serverScene.getBruker().getRom() != null) {
+            if(rom.getRomNavn().equals(serverScene.getBruker().getRom().getRomNavn())) {
+                serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(rom));
+            }
+        }
+        serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
     }
 
     /**
@@ -52,9 +108,12 @@ public class SyncServer {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 room.leggTilDeltaker(new DeltakerTabell(messageArray[2]));
-                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
-                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
+                if(serverScene.getBruker().getRom() != null) {
+                    if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
+                        serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
+                    }
                 }
+                break;
             }
         }
         serverNetworking.updateClientsWithNewUserInRoom(messageArray[1], messageArray[2], clientSocket);
@@ -84,8 +143,10 @@ public class SyncServer {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 serverScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
-                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
-                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
+                if(serverScene.getBruker().getRom() != null) {
+                    if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
+                        serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
+                    }
                 }
             }
         }

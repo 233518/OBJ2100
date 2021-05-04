@@ -5,6 +5,7 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.utils.Disposable;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,8 +40,67 @@ public class SyncClient {
             case "newBruker":
                 newBrukerServer(message);
                 break;
+            case "removeBruker":
+                removeBrukerServer(message);
+                break;
+            case "removeRoom":
+                removeRoomServer(message);
+                break;
         }
     }
+
+    private void removeRoomServer(String message) {
+        String[] messageArray = message.split(":");
+        Rom rom = null;
+        for(Rom room : clientScene.getRooms()) {
+            if(room.getRomNavn().equals(messageArray[1])) {
+                rom = room;
+            }
+        }
+        if(rom != null) {
+            clientScene.getRomSystem().slettRom(rom, clientScene.getRooms());
+        }
+    }
+
+    /**
+     * Får kommando fra server at bruker har forlatt rom
+     * @param message
+     */
+    private void removeBrukerServer(String message) {
+        System.out.println("Fjern deltaker starter");
+        String[] messageArray = message.split(":");
+        Rom rom = null;
+        DeltakerTabell deltakerFunnet = null;
+        for(Rom room : clientScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                System.out.println("Fant rom");
+                rom = room;
+                break;
+            }
+        }
+        if(rom != null)  {
+            for(DeltakerTabell deltaker : rom.getBrukere()) {
+                String deltakerNavn = deltaker.getBrukernavn();
+                if(deltakerNavn.equals(messageArray[2])) {
+                    System.out.println("Fant deltaker");
+                    deltakerFunnet = deltaker;
+                    break;
+                }
+            }
+        }
+        if(deltakerFunnet != null) {
+            System.out.println("Fjerner deltaker fra rom");
+            rom.slettDeltaker(deltakerFunnet);
+        }
+        if(clientScene.getBruker().getRom() != null) {
+            if(rom.getRomNavn().equals(clientScene.getBruker().getRom().getRomNavn())) {
+                System.out.println("Oppdaterer liste klient siden");
+                clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(rom));
+            }
+        }
+    }
+
     /**
      * Får kommando fra server at nytt rom har blitt lagd
      * @param message
@@ -78,10 +138,11 @@ public class SyncClient {
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                System.out.println("Fant rom");
                 room.leggTilDeltaker(new DeltakerTabell(messageArray[2]));
-                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
-                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(room));
+                if(clientScene.getBruker().getRom() != null) {
+                    if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
+                        clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(room));
+                    }
                 }
             }
         }
@@ -99,8 +160,42 @@ public class SyncClient {
                 newMessageClient("newMessage:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
                 break;
             case "newBruker":
-                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
+                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1);
                 break;
+            case "removeBruker":
+                removeBrukerClient("removeBruker:" + rom.getRomNavn() + ":" + args1);
+                break;
+            case "removeRoom":
+                removeRoomClient("removeRoom:" + rom.getRomNavn());
+                break;
+        }
+    }
+
+    /**
+     * Sender kommando til server at rom blir sletta for inaktiv
+     * @param message
+     */
+    private void removeRoomClient(String message) {
+        try {
+            bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Sender kommando til server at klient gikk ut av rom
+     * @param message
+     */
+    private void removeBrukerClient(String message) {
+        try {
+            bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
