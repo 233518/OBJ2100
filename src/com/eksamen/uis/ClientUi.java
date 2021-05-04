@@ -12,9 +12,7 @@ public class ClientUi {
     public ClientUi() {
         hovedLayout = new HovedLayout();
         hovedPane = new GridPane();
-        button = new Button("Testing");
         hovedPane.getChildren().add(hovedLayout.getTabPane());
-        hovedPane.getChildren().add(button);
     }
 
     public GridPane getHovedPane() {
