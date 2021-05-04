@@ -84,5 +84,6 @@ public class RomSystem {
          romArrayList.remove(rom);
          array.remove(rom);
          romListeUi.getRomTableView().oppdaterTableView(getRom());
+
     }
 }

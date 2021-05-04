@@ -84,6 +84,9 @@ public class ClientNetworking extends Thread {
     public void newBruker(String message, Rom rom, String brukernavn) {
         syncClient.syncServer(message, rom, brukernavn, "");
     }
+    public void removeBruker(String message, Rom rom, String brukernavn) {
+        syncClient.syncServer(message, rom, brukernavn, "");
+    }
 
     public ArrayList<Rom> getRooms() {
         return rooms;

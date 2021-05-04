@@ -5,6 +5,7 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.utils.Disposable;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,8 +40,35 @@ public class SyncClient {
             case "newBruker":
                 newBrukerServer(message);
                 break;
+            case "removeBruker":
+                removeBrukerServer(message);
+                break;
         }
     }
+
+    /**
+     * Får kommando fra server at bruker har forlatt rom
+     * @param message
+     */
+    private void removeBrukerServer(String message) {
+        String[] messageArray = message.split(":");
+        loopOverRoom: for(Rom room : clientScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                for(DeltakerTabell deltaker : room.getBrukere()) {
+                    String deltakerNavn = deltaker.getBrukernavn();
+                    if(deltakerNavn.equals(messageArray[2])) {
+                        room.slettDeltaker(deltaker);
+                        break;
+                    }
+                }
+                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
+                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(room));
+                }
+            }
+        }
+    }
+
     /**
      * Får kommando fra server at nytt rom har blitt lagd
      * @param message
@@ -99,8 +127,24 @@ public class SyncClient {
                 newMessageClient("newMessage:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
                 break;
             case "newBruker":
-                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
+                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1);
                 break;
+            case "removeBruker":
+                removeBrukerClient("removeBruker:" + rom.getRomNavn() + ":" + args1);
+        }
+    }
+
+    /**
+     * Sender kommando til server at klient gikk ut av rom
+     * @param message
+     */
+    private void removeBrukerClient(String message) {
+        try {
+            bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

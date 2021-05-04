@@ -1,9 +1,11 @@
 package com.eksamen.scenes;
 
+import com.eksamen.Main;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ClientNetworking;
 import com.eksamen.systems.ClientInput;
+import com.eksamen.systems.DatabaseSystem;
 import com.eksamen.systems.InputSystem;
 import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.romsystem.RomSystem;

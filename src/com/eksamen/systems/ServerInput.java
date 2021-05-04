@@ -75,4 +75,15 @@ public class ServerInput extends InputSystem {
             serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
         });
     }
+
+    public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
+        hovedLayout.getTab().setOnCloseRequest(event -> {
+            serverNetworking.removeBruker("removeBruker", rom.getRomNavn(), bruker.getName());
+            romChat.getDeltakere().getItems().remove(deltakerTabell);
+            if(romChat.getDeltakere().getItems().size() == 0){
+                romSystem.slettRom(rom, romarray);
+                mainRoomList.remove(rom);
+            }
+        });
+    }
 }

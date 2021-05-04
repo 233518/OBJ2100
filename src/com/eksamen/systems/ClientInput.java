@@ -83,10 +83,11 @@ public class ClientInput extends InputSystem{
 
     public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
         hovedLayout.getTab().setOnCloseRequest(event -> {
+            clientNetworking.removeBruker("removeBruker", rom, bruker.getName());
             romChat.getDeltakere().getItems().remove(deltakerTabell);
-            mainRoomList.remove(rom);
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
+                mainRoomList.remove(rom);
             }
         });
     }

@@ -88,4 +88,19 @@ public class ServerNetworking extends Thread {
             client.newBruker(roomName, brukernavn);
         }
     }
+
+    public void updateClientsWithRemoveUserInRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.removeBruker(roomName, brukernavn);
+        }
+    }
+
+    public void removeBruker(String roomName, String brukernavn, String message) {
+        for(ClientSocket client : clients) {
+            client.newMessage(roomName, brukernavn, message);
+        }
+    }
 }

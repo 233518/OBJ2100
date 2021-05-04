@@ -38,7 +38,38 @@ public class SyncServer {
             case "newBruker":
                 newBrukerServer(message, clientSocket);
                 break;
+            case "removeBruker":
+                removeBrukerServer(message, clientSocket);
+                break;
         }
+    }
+    /**
+     * Får kommando fra klient at bruker har forlatt rom
+     * @param message
+     * @param clientSocket
+     */
+    private void removeBrukerServer(String message, ClientSocket clientSocket) {
+        String[] messageArray = message.split(":");
+        System.out.println("Fjerner bruker fra server rom");
+        for(Rom room : serverScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                System.out.println("Fant rom");
+                for(DeltakerTabell deltaker : room.getBrukere()) {
+                    String deltakerNavn = deltaker.getBrukernavn();
+                    if(deltakerNavn.equals(messageArray[2])) {
+                        System.out.println("Fant deltaker");
+                        room.slettDeltaker(deltaker);
+                        break;
+                    }
+                }
+                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
+                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
+                }
+
+            }
+        }
+        serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
     }
 
     /**
@@ -55,6 +86,7 @@ public class SyncServer {
                 if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
                     serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
                 }
+                break;
             }
         }
         serverNetworking.updateClientsWithNewUserInRoom(messageArray[1], messageArray[2], clientSocket);
