@@ -143,8 +143,10 @@ public class SyncServer {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 serverScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
-                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
-                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
+                if(serverScene.getBruker().getRom() != null) {
+                    if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
+                        serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
+                    }
                 }
             }
         }
