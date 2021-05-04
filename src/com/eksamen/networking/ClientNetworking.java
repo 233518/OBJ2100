@@ -24,7 +24,7 @@ public class ClientNetworking extends Thread {
     //Kobler opp klient til serveren og initialiserer streams/buffers
     public ClientNetworking(ClientScene clientScene, Bruker bruker) {
         try {
-            socket = new Socket("192.168.10.191", 1234);
+            socket = new Socket("localhost", 1234);
 
             input = new InputStreamReader(socket.getInputStream());
             output = new OutputStreamWriter(socket.getOutputStream());
