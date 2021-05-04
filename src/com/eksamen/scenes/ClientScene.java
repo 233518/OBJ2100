@@ -3,6 +3,7 @@ package com.eksamen.scenes;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ClientNetworking;
+import com.eksamen.systems.ClientInput;
 import com.eksamen.systems.InputSystem;
 import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.romsystem.RomSystem;
@@ -35,7 +36,7 @@ public class ClientScene extends Scene {
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
         message = new MessageSystem();
-        inputSystem = new InputSystem(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat());
+        inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat(), nettverk);
     }
 
     public RomSystem getRomSystem() {

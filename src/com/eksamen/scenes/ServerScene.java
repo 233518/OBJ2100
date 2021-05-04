@@ -5,6 +5,7 @@ import com.eksamen.components.Rom;
 import com.eksamen.networking.ServerNetworking;
 import com.eksamen.systems.InputSystem;
 import com.eksamen.systems.MessageSystem;
+import com.eksamen.systems.ServerInput;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ServerUi;
 import com.eksamen.uis.layouts.RomChat;
@@ -34,7 +35,7 @@ public class ServerScene extends Scene {
         bruker = new Bruker("Admin");
         romSystem = new RomSystem(serverUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
-        inputSystem = new InputSystem(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat());
+        inputSystem = new ServerInput(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat(), nettverk);
 
         serverUi.getHovedLayout().getRomListe().getButtonNyttRom().setOnAction(new EventHandler<ActionEvent>() {
             @Override
