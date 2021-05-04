@@ -66,4 +66,12 @@ public class ServerNetworking extends Thread {
             client.newRoom(roomName, brukernavn);
         }
     }
+    public void updateClientsWithNewMessage(String roomName, String brukernavn, String message, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.newMessage(roomName, brukernavn, message);
+        }
+    }
 }

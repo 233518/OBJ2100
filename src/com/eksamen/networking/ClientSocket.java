@@ -34,7 +34,6 @@ public class ClientSocket extends Thread {
         try {
             while (true) {
                 String msgFromClient = bufferedReader.readLine();
-                System.out.println("Starter du=?!");
                 syncServer.syncServer(msgFromClient, this);
                 System.out.println(msgFromClient);
             }
@@ -72,6 +71,15 @@ public class ClientSocket extends Thread {
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void newMessage(String roomName, String brukerNavn, String message) {
+        try {
+            bufferedWriter.write("newMessage" + ":" + roomName + ":" + brukerNavn + ":" + message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

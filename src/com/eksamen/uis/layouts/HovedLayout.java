@@ -1,5 +1,8 @@
 package com.eksamen.uis.layouts;
 
+import com.eksamen.components.Bruker;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -7,9 +10,9 @@ public class HovedLayout {
     private RomChat romChat;
     private RomListeUI romListe;
     private TabPane tabPane;
+    private Tab tab;
     public HovedLayout(){
         romChat = new RomChat();
-        //romListe = new RomListeUI();
         romListe = new RomListeUI();
         lagLayout();
     }
@@ -30,14 +33,19 @@ public class HovedLayout {
         return romChat;
     }
 
+    public Tab getTab() {
+        return tab;
+    }
+
     public TabPane getTabPane() {
         return tabPane;
     }
 
     public void lagNyTab(String navn){
-        Tab tab = new Tab();
+        tab = new Tab();
         tabPane.getTabs().add(tab);
         tab.setText(navn);
         tab.setContent(romChat.getBorderpane());
     }
+
 }

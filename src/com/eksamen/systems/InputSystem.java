@@ -20,12 +20,13 @@ public abstract class InputSystem {
     protected Rom rom;
     protected DeltakerTabell deltakerTabell;
 
-    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat){
+    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem){
         this.romListeUI = romListeUI;
         this.bruker = bruker;
         this.hovedLayout = hovedLayout;
         this.message = message;
         this.romChat = romChat;
+        this.romSystem = romSystem;
         rom = bruker.getRom();
         sendMelding();
         bliMedRom();
