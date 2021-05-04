@@ -32,7 +32,7 @@ public class ServerNetworking extends Thread {
             while (true) {
                 socket = serverSocket.accept(); //"Lytter" etter klient koblinger
                 System.out.println("Client connected");
-                ClientSocket client = new ClientSocket(socket, scene);
+                ClientSocket client = new ClientSocket(socket, scene, this);
                 clients.add(client);
                 client.start();
                 sendRoomsToClient(client);
@@ -57,5 +57,13 @@ public class ServerNetworking extends Thread {
     }
     private void sendRoomsToClient(ClientSocket client) {
         client.sendRomListe(scene.getRooms());
+    }
+    public void updateClientsWithNewRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.newRoom(roomName, brukernavn);
+        }
     }
 }
