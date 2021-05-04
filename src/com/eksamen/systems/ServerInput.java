@@ -9,6 +9,7 @@ import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
+import com.eksamen.utils.Feilmelding;
 
 import java.util.ArrayList;
 
@@ -34,22 +35,29 @@ public class ServerInput extends InputSystem {
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
-            Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
-            bruker.setRom(rom);
-            setRom();
-
-            mainRoomList.add(rom);
-            romSystem.opprettRom(rom);
-            hovedLayout.lagNyTab(romListeUI.getTextField().getText());
-            deltakerTabell = new DeltakerTabell(bruker.getName());
-            rom.leggTilDeltaker(deltakerTabell);
-            romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
-            romListeUI.skjulOpprettRom();
-
-            serverNetworking.sendNewRoom(rom.getRomNavn(), bruker.getName());
-            serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
-            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
-            forlatRom(deltakerTabell, rom, mainRoomList);
+            try{
+                Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+                if(romListeUI.getTextField().getText() != ""){
+                    bruker.setRom(rom);
+                    setRom();
+                    mainRoomList.add(rom);
+                    romSystem.opprettRom(rom);
+                    hovedLayout.lagNyTab(romListeUI.getTextField().getText());
+                    deltakerTabell = new DeltakerTabell(bruker.getName());
+                    rom.leggTilDeltaker(deltakerTabell);
+                    romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
+                    romListeUI.skjulOpprettRom();
+                    serverNetworking.sendNewRoom(rom.getRomNavn(), bruker.getName());
+                    serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
+                    romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+                    forlatRom(deltakerTabell, rom, mainRoomList);
+                } else{
+                    Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
+                }
+            } catch(Exception e){
+                System.out.println(e);
+                Feilmelding.visFeilmelding("Noe gikk galt" + e);
+            }
         });
     }
 
