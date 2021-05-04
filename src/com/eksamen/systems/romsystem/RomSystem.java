@@ -1,5 +1,6 @@
 package com.eksamen.systems.romsystem;
 
+import com.eksamen.Main;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
@@ -26,6 +27,7 @@ public class RomSystem {
         this.romListeUi = romListeUi;
         this.bruker = bruker;
         romArrayList = new ArrayList<Rom>();
+
     }
 
     /**
@@ -46,6 +48,9 @@ public class RomSystem {
     public void opprettRom(Rom rom) {
         romArrayList.add(rom);
         romListeUi.getRomTableView().oppdaterTableView(getRom());
+
+        //Fiks dette, den logger to ganger buggen
+        Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
     }
 
     /**
