@@ -1,7 +1,10 @@
 package com.eksamen.networking;
 
+import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ServerScene;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
+import com.eksamen.systems.chatsystem.InndataTabell;
 
 import java.io.*;
 import java.net.Socket;
@@ -42,17 +45,27 @@ public class ClientSocket extends Thread {
         }
     }
     /**
-     * Sender liste med alle rom til klient
+     * Sender informasjon til klient
      * @param scene scene
      */
-    public void sendRomListe(ArrayList<Rom> rooms) {
+    public void sendInformation(ArrayList<Rom> rooms) {
         try {
             if(bufferedWriter != null) {
                 if(rooms.size() > 0) {
                     for(Rom room : rooms) {
-                        bufferedWriter.write(room.getRomNavn() + ":" + room.getBrukerNavn());
+                        bufferedWriter.write("romInfo:" + room.getRomNavn() + ":" + room.getBrukerNavn());
                         bufferedWriter.newLine();
                         bufferedWriter.flush();
+                        for(DeltakerTabell bruker : room.getBrukere()) {
+                            bufferedWriter.write("brukerInfo:" + bruker.getBrukernavn());
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                        }
+                        for(InndataTabell inndata : room.getMeldinger()) {
+                            bufferedWriter.write("meldingInfo:" + inndata.getBrukernavn() + ":" + inndata.getMelding() + ":" + inndata.getTidspunkt());
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
+                        }
                     }
                 }
                 bufferedWriter.write("Ferdig");

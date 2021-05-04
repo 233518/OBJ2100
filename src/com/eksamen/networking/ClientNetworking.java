@@ -3,6 +3,8 @@ package com.eksamen.networking;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
+import com.eksamen.systems.chatsystem.InndataTabell;
 
 import java.io.*;
 import java.net.Socket;
@@ -36,7 +38,7 @@ public class ClientNetworking extends Thread {
 
             syncClient = new SyncClient(bufferedWriter, clientScene, this, bruker);
 
-            getRoomListe();
+            getInformation();
         } catch (IOException e) {
             System.out.println("Connection refused");
         }
@@ -62,13 +64,26 @@ public class ClientNetworking extends Thread {
         }
     }
 
-    public void getRoomListe() {
+    public void getInformation() {
         try {
-            do {
+            Rom rom = null;
+            looper: do {
                 String message = bufferedReader.readLine();
-                if(message.equals("Ferdig")) break;
-                String[] string = message.split(":");
-                rooms.add(new Rom(string[0], string[1]));
+                String[] messageArray = message.split(":");
+                switch(messageArray[0]) {
+                    case "romInfo":
+                        rom = new Rom(messageArray[1], messageArray[2]);
+                        rooms.add(rom);
+                        break;
+                    case "meldingInfo":
+                        rom.leggTilMld(new InndataTabell(messageArray[1], messageArray[2], messageArray[3]));
+                        break;
+                    case "brukerInfo":
+                        rom.leggTilDeltaker(new DeltakerTabell(messageArray[1]));
+                        break;
+                    case "Ferdig":
+                        break looper;
+                }
             } while(true);
         } catch (IOException e) {
             e.printStackTrace();
