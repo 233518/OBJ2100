@@ -62,6 +62,7 @@ public class ClientInput extends InputSystem{
                     Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
                 }
             } catch(Exception e){
+                System.out.println(e);
                 Feilmelding.visFeilmelding("Noe gikk galt");
             }
 
