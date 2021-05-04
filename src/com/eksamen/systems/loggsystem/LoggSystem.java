@@ -25,6 +25,11 @@ public class LoggSystem {
         loggTableView.oppdaterTableView(getLog());
     }
 
+    public void refreshLoggSystem() {
+        this.loggArrayList = getArrayListFromDb();
+        oppdaterTableView();
+    }
+
     private ObservableList<Logg> getLog() {
         ObservableList<Logg> liste = FXCollections.observableArrayList();
         for (Logg logg : loggArrayList) {
