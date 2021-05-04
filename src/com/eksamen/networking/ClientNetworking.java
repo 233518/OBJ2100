@@ -57,10 +57,9 @@ public class ClientNetworking extends Thread {
                 String message = bufferedReader.readLine();
                 System.out.println("Melding fra server: " + message);
                 syncClient.syncClient(message);
-
             }
         }catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Kobling avsluttet");
         } finally {
             //avslutter kobling
             new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);

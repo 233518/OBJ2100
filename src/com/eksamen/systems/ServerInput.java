@@ -55,7 +55,7 @@ public class ServerInput extends InputSystem {
                     Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
                 }
             } catch(Exception e){
-                System.out.println(e);
+                e.printStackTrace();
                 Feilmelding.visFeilmelding("Noe gikk galt" + e);
             }
         });
