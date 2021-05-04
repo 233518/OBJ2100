@@ -48,19 +48,16 @@ public class SyncServer {
     }
 
     private void removeRoom(String message, ClientSocket clientSocket) {
-        System.out.println("Fjerner rom fra server liste");
         String[] messageArray = message.split(":");
         Rom rom = null;
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                System.out.println("Fant rom som er tomt");
                 rom = room;
             }
         }
         serverScene.getRooms().remove(rom);
         serverScene.getRomSystem().removeRom(rom);
-        //serverScene.getServerUi().getHovedLayout().getRomListe().getRomTableView().oppdaterTableView(serverScene.getRomSystem().getRom());
         serverNetworking.updateClientsWithRemoveRoom(messageArray[1], clientSocket);
     }
 
@@ -70,14 +67,12 @@ public class SyncServer {
      * @param clientSocket
      */
     private void removeBrukerServer(String message, ClientSocket clientSocket) {
-        System.out.println("Fjern deltaker starter");
         String[] messageArray = message.split(":");
         Rom rom = null;
         DeltakerTabell deltakerFunnet = null;
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                System.out.println("Fant rom");
                 rom = room;
                 break;
             }
@@ -86,19 +81,16 @@ public class SyncServer {
             for(DeltakerTabell deltaker : rom.getBrukere()) {
                 String deltakerNavn = deltaker.getBrukernavn();
                 if(deltakerNavn.equals(messageArray[2])) {
-                    System.out.println("Fant deltaker");
                     deltakerFunnet = deltaker;
                     break;
                 }
             }
         }
         if(deltakerFunnet != null) {
-            System.out.println("Fjerner deltaker fra rom");
             rom.slettDeltaker(deltakerFunnet);
         }
         if(serverScene.getBruker().getRom() != null) {
             if(rom.getRomNavn().equals(serverScene.getBruker().getRom().getRomNavn())) {
-                System.out.println("Oppdaterer liste klient siden");
                 serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(rom));
             }
         }

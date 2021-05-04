@@ -43,6 +43,22 @@ public class SyncClient {
             case "removeBruker":
                 removeBrukerServer(message);
                 break;
+            case "removeRoom":
+                removeRoomServer(message);
+                break;
+        }
+    }
+
+    private void removeRoomServer(String message) {
+        String[] messageArray = message.split(":");
+        Rom rom = null;
+        for(Rom room : clientScene.getRooms()) {
+            if(room.getRomNavn().equals(messageArray[1])) {
+                rom = room;
+            }
+        }
+        if(rom != null) {
+            clientScene.getRomSystem().slettRom(rom, clientScene.getRooms());
         }
     }
 
