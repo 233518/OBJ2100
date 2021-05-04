@@ -115,24 +115,20 @@ public class RomChat {
     }
 
     public void oppdaterDeltakerListe(ObservableList<DeltakerTabell> liste) {
+        ObservableList<DeltakerTabell> deltakerListe = liste;
+        deltakere.setItems(deltakerListe);
+
+        /*
         ObservableList<DeltakerTabell> tableViewItems = deltakere.getItems();
         ObservableList<DeltakerTabell> deltakerArrayList = FXCollections.observableArrayList();
         //deltakerArrayList.addAll(tableViewItems);
         deltakerArrayList.addAll(liste);
         deltakere.setItems(deltakerArrayList);
+         */
     }
 
     public void oppdaterMeldingListe(ObservableList<InndataTabell> liste) {
         ObservableList<InndataTabell> meldingListe = liste;
         inndata.setItems(meldingListe);
-        /*
-        ObservableList<InndataTabell> tableViewItems = inndata.getItems();
-        ObservableList<InndataTabell> inndataArrayList = FXCollections.observableArrayList();
-
-        inndataArrayList.addAll(tableViewItems);
-        inndataArrayList.addAll(liste);
-        inndata.setItems(inndataArrayList);
-
-         */
     }
 }

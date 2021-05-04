@@ -82,4 +82,14 @@ public class ClientSocket extends Thread {
             e.printStackTrace();
         }
     }
+
+    public void newBruker(String roomName, String brukernavn) {
+        try {
+            bufferedWriter.write("newBruker" + ":" + roomName + ":" + brukernavn);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

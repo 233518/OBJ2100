@@ -3,6 +3,7 @@ package com.eksamen.networking;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
+import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 
 import java.io.BufferedReader;
@@ -35,6 +36,9 @@ public class SyncClient {
             case "newMessage":
                 newMessageServer(message);
                 break;
+            case "newBruker":
+                newBrukerServer(message);
+                break;
         }
     }
     /**
@@ -66,6 +70,23 @@ public class SyncClient {
     }
 
     /**
+     * Får kommando fra server at ny bruker logget på rom
+     * @param message
+     */
+    private void newBrukerServer(String message) {
+        String[] messageArray = message.split(":");
+        for(Rom room : clientScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                System.out.println("Fant rom");
+                room.leggTilDeltaker(new DeltakerTabell(messageArray[2]));
+                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
+                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(room));
+                }
+            }
+        }
+    }
+    /**
      * Synker server med info fra klient
      * @param message
      */
@@ -77,6 +98,23 @@ public class SyncClient {
             case "newMessage":
                 newMessageClient("newMessage:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
                 break;
+            case "newBruker":
+                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
+                break;
+        }
+    }
+
+    /**
+     * Sender kommando til server at klient logget på rom
+     * @param message
+     */
+    private void newBrukerClient(String message) {
+        try {
+            bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
