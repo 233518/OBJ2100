@@ -82,12 +82,14 @@ public class SyncServer {
                 break;
             }
         }
-        for(DeltakerTabell deltaker : rom.getBrukere()) {
-            String deltakerNavn = deltaker.getBrukernavn();
-            if(deltakerNavn.equals(messageArray[2])) {
-                System.out.println("Fant deltaker");
-                deltakerFunnet = deltaker;
-                break;
+        if(rom != null) {
+            for(DeltakerTabell deltaker : rom.getBrukere()) {
+                String deltakerNavn = deltaker.getBrukernavn();
+                if(deltakerNavn.equals(messageArray[2])) {
+                    System.out.println("Fant deltaker");
+                    deltakerFunnet = deltaker;
+                    break;
+                }
             }
         }
         if(deltakerFunnet != null) {
