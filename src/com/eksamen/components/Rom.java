@@ -45,14 +45,6 @@ public class Rom {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rom rom = (Rom) o;
-        return Objects.equals(romNavn, rom.romNavn);
-    }
-
-    @Override
     public int hashCode() {
         return Objects.hash(romNavn);
     }

@@ -50,4 +50,8 @@ public class ClientScene extends Scene {
     public MessageSystem getMessage() {
         return message;
     }
+
+    public ClientUi getClientUi() {
+        return clientUi;
+    }
 }
