@@ -49,25 +49,33 @@ public class SyncServer {
      * @param clientSocket
      */
     private void removeBrukerServer(String message, ClientSocket clientSocket) {
+        System.out.println("Fjern deltaker starter");
         String[] messageArray = message.split(":");
-        System.out.println("Fjerner bruker fra server rom");
+        Rom rom = null;
+        DeltakerTabell deltakerFunnet = null;
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 System.out.println("Fant rom");
-                for(DeltakerTabell deltaker : room.getBrukere()) {
-                    String deltakerNavn = deltaker.getBrukernavn();
-                    if(deltakerNavn.equals(messageArray[2])) {
-                        System.out.println("Fant deltaker");
-                        room.slettDeltaker(deltaker);
-                        break;
-                    }
-                }
-                if(romNavn.equals(serverScene.getBruker().getRom().getRomNavn())) {
-                    serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(room));
-                }
-
+                rom = room;
+                break;
             }
+        }
+        for(DeltakerTabell deltaker : rom.getBrukere()) {
+            String deltakerNavn = deltaker.getBrukernavn();
+            if(deltakerNavn.equals(messageArray[2])) {
+                System.out.println("Fant deltaker");
+                deltakerFunnet = deltaker;
+                break;
+            }
+        }
+        if(deltakerFunnet != null) {
+            System.out.println("Fjerner deltaker fra rom");
+            rom.slettDeltaker(deltakerFunnet);
+        }
+        if(rom.getRomNavn().equals(serverScene.getBruker().getRom().getRomNavn())) {
+            System.out.println("Oppdaterer liste klient siden");
+            serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(serverScene.getRomSystem().getDeltakere(rom));
         }
         serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
     }

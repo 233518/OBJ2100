@@ -98,9 +98,9 @@ public class ServerNetworking extends Thread {
         }
     }
 
-    public void removeBruker(String roomName, String brukernavn, String message) {
+    public void removeBruker(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
-            client.newMessage(roomName, brukernavn, message);
+            client.removeBruker(roomName, brukernavn);
         }
     }
 }

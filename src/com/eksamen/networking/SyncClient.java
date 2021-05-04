@@ -51,21 +51,33 @@ public class SyncClient {
      * @param message
      */
     private void removeBrukerServer(String message) {
+        System.out.println("Fjern deltaker starter");
         String[] messageArray = message.split(":");
-        loopOverRoom: for(Rom room : clientScene.getRooms()) {
+        Rom rom = null;
+        DeltakerTabell deltakerFunnet = null;
+        for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                for(DeltakerTabell deltaker : room.getBrukere()) {
-                    String deltakerNavn = deltaker.getBrukernavn();
-                    if(deltakerNavn.equals(messageArray[2])) {
-                        room.slettDeltaker(deltaker);
-                        break;
-                    }
-                }
-                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
-                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(room));
-                }
+                System.out.println("Fant rom");
+                rom = room;
+                break;
             }
+        }
+        for(DeltakerTabell deltaker : rom.getBrukere()) {
+            String deltakerNavn = deltaker.getBrukernavn();
+            if(deltakerNavn.equals(messageArray[2])) {
+                System.out.println("Fant deltaker");
+                deltakerFunnet = deltaker;
+                break;
+            }
+        }
+        if(deltakerFunnet != null) {
+            System.out.println("Fjerner deltaker fra rom");
+            rom.slettDeltaker(deltakerFunnet);
+        }
+        if(rom.getRomNavn().equals(clientScene.getBruker().getRom().getRomNavn())) {
+            System.out.println("Oppdaterer liste klient siden");
+            clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(rom));
         }
     }
 
@@ -106,7 +118,6 @@ public class SyncClient {
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                System.out.println("Fant rom");
                 room.leggTilDeltaker(new DeltakerTabell(messageArray[2]));
                 if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
                     clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(room));
