@@ -27,7 +27,7 @@ public class ServerScene extends Scene {
     private MessageSystem message;
     private RomChat romChat;
     public ServerScene(Stage stage, ServerUi serverUi) {
-        super(serverUi.getHovedPane());
+        super(serverUi.getHovedPane(), 750, 550);
         this.serverUi = serverUi;
         nettverk = new ServerNetworking(this);
         nettverk.start();
