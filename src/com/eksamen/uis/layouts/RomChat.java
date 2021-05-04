@@ -1,9 +1,7 @@
 package com.eksamen.uis.layouts;
 
-import com.eksamen.components.Bruker;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
-import com.eksamen.systems.romsystem.RomTabell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

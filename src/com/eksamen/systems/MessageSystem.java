@@ -1,16 +1,11 @@
 package com.eksamen.systems;
 
-import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.systems.chatsystem.InndataTabell;
-import com.eksamen.systems.romsystem.RomTabell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import com.eksamen.networking.ClientNetworking;
 
 public class MessageSystem {
 

@@ -5,7 +5,6 @@ import com.eksamen.components.Rom;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 import com.eksamen.systems.romsystem.RomSystem;
-import com.eksamen.systems.romsystem.RomTabell;
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
