@@ -105,7 +105,6 @@ public class ClientInput extends InputSystem{
             } catch(Exception e){
                 System.out.println(e);
             }
-
         });
     }
 
