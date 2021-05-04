@@ -1,5 +1,6 @@
 package com.eksamen.networking;
 
+import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 
@@ -21,7 +22,7 @@ public class ClientNetworking extends Thread {
     private SyncClient syncClient;
 
     //Kobler opp klient til serveren og initialiserer streams/buffers
-    public ClientNetworking(ClientScene clientScene) {
+    public ClientNetworking(ClientScene clientScene, Bruker bruker) {
         try {
             socket = new Socket("localhost", 1234);
 
@@ -33,7 +34,7 @@ public class ClientNetworking extends Thread {
 
             rooms = new ArrayList<>();
 
-            syncClient = new SyncClient(bufferedWriter, clientScene);
+            syncClient = new SyncClient(bufferedWriter, clientScene, this, bruker);
 
             getRoomListe();
         } catch (IOException e) {
@@ -75,10 +76,8 @@ public class ClientNetworking extends Thread {
             do {
                 String message = bufferedReader.readLine();
                 if(message.equals("Ferdig")) break;
-                System.out.println(message);
                 String[] string = message.split(":");
                 rooms.add(new Rom(string[0], string[1]));
-
             } while(true);
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,10 +85,10 @@ public class ClientNetworking extends Thread {
     }
 
     public void newRoom(String message, Rom rom) {
-        syncClient.syncServer(message, rom);
+        syncClient.syncServer(message, rom, "");
     }
-    public void newMessage(String message, Rom rom) {
-        syncClient.syncServer(message, rom);
+    public void newMessage(String message, Rom rom, String messageUser) {
+        syncClient.syncServer(message, rom, messageUser);
     }
 
     public ArrayList<Rom> getRooms() {

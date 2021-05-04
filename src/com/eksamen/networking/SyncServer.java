@@ -3,6 +3,7 @@ package com.eksamen.networking;
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.scenes.ServerScene;
+import com.eksamen.systems.chatsystem.InndataTabell;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -29,13 +30,38 @@ public class SyncServer {
             case "newRoom":
                 newRoomServer(message, clientSocket);
                 break;
+            case "newMessage":
+                newMessageServer(message, clientSocket);
+                break;
         }
     }
+
+    /**
+     * Får kommando fra klient at nytt rom har blitt lagd
+     * @param message
+     * @param clientSocket
+     */
     public void newRoomServer(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");
-        Rom rom = new Rom(messageArray[0], messageArray[1]);
+        Rom rom = new Rom(messageArray[1], messageArray[2]);
         serverScene.getRooms().add(rom);
         serverScene.getRomSystem().opprettRom(rom);
-        serverNetworking.updateClientsWithNewRoom(messageArray[0],  messageArray[1], clientSocket);
+        serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
+    }
+
+    /**
+     * Får kommando fra klient at ny melding har blitt sendt
+     * @param message
+     * @param clientSocket
+     */
+    public void newMessageServer(String message, ClientSocket clientSocket) {
+        String[] messageArray = message.split(":");
+        for(Rom rom : serverScene.getRooms()) {
+            if(rom.getRomNavn() == messageArray[1]) {
+                System.out.println("Fant rom");
+                rom.leggTilMld(new InndataTabell(messageArray[2], messageArray[3]));
+            }
+        }
+        serverNetworking.updateClientsWithNewMessage(messageArray[1],messageArray[2],messageArray[3],clientSocket);
     }
 }
