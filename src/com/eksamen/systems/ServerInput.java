@@ -45,6 +45,7 @@ public class ServerInput extends InputSystem {
             bruker.setRom(rom);
             setRom();
             serverNetworking.sendNewRoom(rom.getRomNavn(), bruker.getName());
+            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
 
@@ -59,12 +60,14 @@ public class ServerInput extends InputSystem {
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
+            mainRoomList.add(rom);
             hovedLayout.lagNyTab(rom.getRomNavn());
             deltakerTabell = new DeltakerTabell(bruker.getName());
             rom.leggTilDeltaker(deltakerTabell);
             romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
             bruker.setRom(rom);
             setRom();
+            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
 }

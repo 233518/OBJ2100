@@ -54,4 +54,8 @@ public class ClientScene extends Scene {
     public ClientUi getClientUi() {
         return clientUi;
     }
+
+    public Bruker getBruker() {
+        return bruker;
+    }
 }

@@ -44,8 +44,7 @@ public class SyncClient {
     public void newRoomServer(String message) {
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1],messageArray[2]);
-        ArrayList<Rom> rooms = clientScene.getRooms();
-        rooms.add(rom);
+        clientScene.getRooms().add(rom);
         clientScene.getRomSystem().opprettRom(rom);
     }
 
@@ -54,14 +53,14 @@ public class SyncClient {
      * @param message
      */
     public void newMessageServer(String message) {
-        System.out.println("Klient: Melding fra server");
         String[] messageArray = message.split(":");
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                System.out.println("Klient: Fant rom: " + room.getRomNavn());
                 clientScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
-                clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessage().getMeldinger(room));
+                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
+                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessage().getMeldinger(room));
+                }
             }
         }
     }
@@ -70,13 +69,13 @@ public class SyncClient {
      * Synker server med info fra klient
      * @param message
      */
-    public void syncServer(String message, Rom rom, String ekstra) {
+    public void syncServer(String message, Rom rom, String args1, String args2) {
         switch(message) {
             case "newRoom":
                 newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn());
                 break;
             case "newMessage":
-                newMessageClient("newMessage:" + rom.getRomNavn() + ":" + rom.getBrukerNavn() + ":" + ekstra);
+                newMessageClient("newMessage:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
                 break;
         }
     }

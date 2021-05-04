@@ -35,12 +35,8 @@ public class RomTableView {
      * @param liste ObservableList med nye rom som skal bli lagt til og oppdatert i TableViewen.
      */
     public void oppdaterTableView(ObservableList<Rom> liste) {
-        ObservableList<Rom> tableViewItems = romTableView.getItems();
-        ObservableList<Rom> romArrayList = FXCollections.observableArrayList();
-
-        romArrayList.addAll(tableViewItems);
-        romArrayList.addAll(liste);
-        romTableView.setItems(romArrayList);
+        ObservableList<Rom> romListe = liste;
+        romTableView.setItems(romListe);
     }
 
     /**

@@ -24,7 +24,7 @@ public class ClientNetworking extends Thread {
     //Kobler opp klient til serveren og initialiserer streams/buffers
     public ClientNetworking(ClientScene clientScene, Bruker bruker) {
         try {
-            socket = new Socket("localhost", 1234);
+            socket = new Socket("192.168.10.191", 1234);
 
             input = new InputStreamReader(socket.getInputStream());
             output = new OutputStreamWriter(socket.getOutputStream());
@@ -76,10 +76,10 @@ public class ClientNetworking extends Thread {
     }
 
     public void newRoom(String message, Rom rom) {
-        syncClient.syncServer(message, rom, "");
+        syncClient.syncServer(message, rom, "", "");
     }
-    public void newMessage(String message, Rom rom, String messageUser) {
-        syncClient.syncServer(message, rom, messageUser);
+    public void newMessage(String message, Rom rom, String senderUsername, String messageUser) {
+        syncClient.syncServer(message, rom, senderUsername, messageUser);
     }
 
     public ArrayList<Rom> getRooms() {
