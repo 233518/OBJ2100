@@ -16,6 +16,7 @@ public class MainClient extends Application {
         scene = new StartScene(stage, startLayout);
         stage.setScene(scene);
         stage.show();
+        logger.print();
     }
     public static void main(String[] args) {
         launch();
