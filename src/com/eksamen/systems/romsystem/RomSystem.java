@@ -51,10 +51,10 @@ public class RomSystem {
      * Metode for å gjøre om arraylist med rom til ObservarbleList med rom og returnere det.
      * @return Returnerer observablelist med rom fra romArrayList.
      */
-     public ObservableList<RomTabell> getRom() {
-        ObservableList<RomTabell> liste = FXCollections.observableArrayList();
+     public ObservableList<Rom> getRom() {
+        ObservableList<Rom> liste = FXCollections.observableArrayList();
          for (Rom rom : romArrayList) {
-             liste.add(new RomTabell(rom.getRomNavn(), rom.getBrukerNavn()));
+             liste.add(new Rom(rom.getRomNavn(), rom.getBrukerNavn()));
          }
         return liste;
     }

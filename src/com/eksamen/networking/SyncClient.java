@@ -26,6 +26,9 @@ public class SyncClient {
             case "newRoom":
                 newRoomServer(message);
                 break;
+            case "newMessage":
+                newMessageServer(message);
+
         }
     }
     /**
@@ -41,16 +44,28 @@ public class SyncClient {
     }
 
     /**
+     * Får kommando fra server at ny melding har blitt lagd
+     * @param message
+     */
+    public void newMessageServer(String message) {
+        String[] messageArray = message.split(":");
+        Rom rom = new Rom(messageArray[0],messageArray[1]);
+        clientScene.getRomSystem().opprettRom(rom);
+        clientScene.getRooms().add(new Rom(messageArray[0], messageArray[1]));
+    }
+
+    /**
      * Synker server med info fra klient
      * @param message
      * @param rom
      */
     public void syncServer(String message, Rom rom) {
-        System.out.println(message);
         switch(message) {
             case "newRoom":
                 newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn());
                 break;
+            case "newMessage":
+                newMessageClient("newMessage:"+rom.getRomNavn() + ":" + rom.getBrukerNavn());
         }
     }
 
@@ -61,11 +76,24 @@ public class SyncClient {
      */
     public void newRoomClient(String message) {
         try {
-            System.out.println("Sender info til server");
             bufferedWriter.write(message);
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Sender kommando til server at klient sendte ny melding
+     * @param message
+     */
+    public void newMessageClient(String message) {
+        try{
+            bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
