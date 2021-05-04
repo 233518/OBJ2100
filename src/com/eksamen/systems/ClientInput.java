@@ -63,6 +63,7 @@ public class ClientInput extends InputSystem{
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
+            mainRoomList.add(rom);
             hovedLayout.lagNyTab(rom.getRomNavn());
             deltakerTabell = new DeltakerTabell(bruker.getName());
             rom.leggTilDeltaker(deltakerTabell);
