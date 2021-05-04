@@ -1,5 +1,8 @@
 package com.eksamen.components;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class Bruker {
     private String name;
     private String ipAdress;
@@ -36,8 +39,16 @@ public class Bruker {
      * @return ipadressen til brukeren
      */
     public String getIpAdress() {
+        try{
+            InetAddress ip = InetAddress.getLocalHost();
+            ipAdress = String.valueOf(ip);
+            System.out.println(ipAdress);
+        } catch(UnknownHostException e){
+            System.out.println("Kunne ikke skaffe ip");
+        }
         return ipAdress;
     }
+
 
     /**
      * Metode for å sette ip adresse til bruker
