@@ -28,22 +28,24 @@ public class SyncServer {
      * @param rom
      */
     public void syncServer(String message, ClientSocket clientSocket)  {
-        switch(message.split(":")[0]) {
-            case "newRoom":
-                newRoomServer(message, clientSocket);
-                break;
-            case "newMessage":
-                newMessageServer(message, clientSocket);
-                break;
-            case "newBruker":
-                newBrukerServer(message, clientSocket);
-                break;
-            case "removeBruker":
-                removeBrukerServer(message, clientSocket);
-                break;
-            case "removeRoom":
-                removeRoom(message, clientSocket);
-                break;
+        if(message != null) {
+            switch(message.split(":")[0]) {
+                case "newRoom":
+                    newRoomServer(message, clientSocket);
+                    break;
+                case "newMessage":
+                    newMessageServer(message, clientSocket);
+                    break;
+                case "newBruker":
+                    newBrukerServer(message, clientSocket);
+                    break;
+                case "removeBruker":
+                    removeBrukerServer(message, clientSocket);
+                    break;
+                case "removeRoom":
+                    removeRoom(message, clientSocket);
+                    break;
+            }
         }
     }
 

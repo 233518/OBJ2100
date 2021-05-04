@@ -1,5 +1,6 @@
 package com.eksamen.uis;
 
+import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.TestLayout;
 import javafx.scene.layout.GridPane;
@@ -8,9 +9,9 @@ public class ServerUi {
     private GridPane hovedPane;
     private HovedLayout hovedLayout;
 
-    public ServerUi() {
+    public ServerUi(LoggSystem loggSystem) {
         hovedPane = new GridPane();
-        hovedLayout = new HovedLayout();
+        hovedLayout = new HovedLayout(loggSystem);
         hovedPane.getChildren().add(hovedLayout.getTabPane());
         hovedLayout.lagLoggingTab();
     }

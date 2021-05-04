@@ -11,9 +11,12 @@ import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ClientUi;
 import com.eksamen.uis.layouts.RomChat;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,15 @@ public class ClientScene extends Scene {
         romSystem.fyllInnTableview(rooms);
         message = new MessageSystem();
         inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat(), romSystem, rooms, nettverk);
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                nettverk.stopNetwork();
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     public RomSystem getRomSystem() {

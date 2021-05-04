@@ -1,6 +1,7 @@
 package com.eksamen.systems;
 
 import com.eksamen.components.Logg;
+import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.utils.Logging;
 
 import java.sql.*;
@@ -10,6 +11,9 @@ import java.util.ArrayList;
 public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
 
+    public DatabaseSystem(LoggSystem loggSystem) {
+        lagTabell();
+    }
     public DatabaseSystem() {
         lagTabell();
     }

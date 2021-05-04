@@ -1,5 +1,6 @@
 package com.eksamen.uis.layouts;
 
+import com.eksamen.systems.loggsystem.LoggSystem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
@@ -9,10 +10,15 @@ public class HovedLayout {
     private TabPane tabPane;
     private Tab tab;
     private LoggLayout loggLayout;
-    public HovedLayout(){
+    public HovedLayout(LoggSystem loggSystem){
         romChat = new RomChat();
         romListe = new RomListeUI();
-        loggLayout = new LoggLayout();
+        loggLayout = new LoggLayout(loggSystem);
+        lagLayout();
+    }
+    public HovedLayout() {
+        romChat = new RomChat();
+        romListe = new RomListeUI();
         lagLayout();
     }
 

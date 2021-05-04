@@ -6,6 +6,7 @@ import com.eksamen.networking.ServerNetworking;
 import com.eksamen.systems.InputSystem;
 import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.ServerInput;
+import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ServerUi;
 import com.eksamen.uis.layouts.RomChat;
@@ -26,7 +27,7 @@ public class ServerScene extends Scene {
     private InputSystem inputSystem;
     private MessageSystem message;
     private RomChat romChat;
-    public ServerScene(Stage stage, ServerUi serverUi) {
+    public ServerScene(Stage stage, ServerUi serverUi, LoggSystem loggSystem) {
         super(serverUi.getHovedPane());
         this.serverUi = serverUi;
         nettverk = new ServerNetworking(this);

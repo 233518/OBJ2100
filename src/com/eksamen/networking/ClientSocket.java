@@ -41,7 +41,7 @@ public class ClientSocket extends Thread {
                 syncServer.syncServer(msgFromClient, this);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Client disconnected");
         }
     }
     /**

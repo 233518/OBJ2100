@@ -7,9 +7,8 @@ import javafx.scene.layout.HBox;
 public class LoggLayout {
     private HBox hbox;
     //private final LoggTableView loggTableView = new LoggTableView();
-    private LoggSystem loggSystem = new LoggSystem();
 
-    public LoggLayout() {
+    public LoggLayout(LoggSystem loggSystem) {
         this.hbox = new HBox();
         hbox.getChildren().add(loggSystem.getLoggTableView().getLoggTableView());
     }

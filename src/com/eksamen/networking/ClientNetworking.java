@@ -22,6 +22,7 @@ public class ClientNetworking extends Thread {
     private BufferedWriter bufferedWriter;
     private ArrayList<Rom> rooms;
     private SyncClient syncClient;
+    private CloseConnection closeConnection;
 
     //Kobler opp klient til serveren og initialiserer streams/buffers
     public ClientNetworking(ClientScene clientScene, Bruker bruker) {
@@ -33,6 +34,8 @@ public class ClientNetworking extends Thread {
 
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
+
+            closeConnection = new CloseConnection();
 
             rooms = new ArrayList<>();
 
@@ -109,5 +112,8 @@ public class ClientNetworking extends Thread {
 
     public void removeRoom(String message, Rom rom) {
         syncClient.syncServer(message, rom, "", "");
+    }
+    public void stopNetwork() {
+        closeConnection.closeConnection(socket,input,output,bufferedReader,bufferedWriter);
     }
 }

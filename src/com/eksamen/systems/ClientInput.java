@@ -24,6 +24,7 @@ public class ClientInput extends InputSystem{
         this.clientNetworking = clientNetworking;
     }
 
+
     @Override
     public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
