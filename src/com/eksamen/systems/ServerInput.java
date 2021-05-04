@@ -82,6 +82,9 @@ public class ServerInput extends InputSystem {
         hovedLayout.getTab().setOnCloseRequest(event -> {
             serverNetworking.removeBruker(rom.getRomNavn(), bruker.getName());
             romChat.getDeltakere().getItems().remove(deltakerTabell);
+            rom.slettDeltaker(deltakerTabell);
+            bruker.setRom(null);
+            setRom();
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
                 mainRoomList.remove(rom);
