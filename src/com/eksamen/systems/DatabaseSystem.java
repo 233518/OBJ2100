@@ -53,7 +53,9 @@ public class DatabaseSystem implements Logging {
             Statement statement = sqlConnection.createStatement();
             statement.executeUpdate("insert into logg(bruker, melding, ip, rom, dato) values('"+bruker+"','"+melding+"','"+ip+"','"+rom+"','"+ LocalDateTime.now().toString()+"')");
             //Denne gir feilmelding
-            loggSystem.oppdaterTableView();
+            if(loggSystem != null) {
+                loggSystem.oppdaterTableView();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
