@@ -50,24 +50,15 @@ public class ClientNetworking extends Thread {
                 return;
             while(true) {
                 String message = bufferedReader.readLine();
+                System.out.println("Melding fra server: " + message);
                 syncClient.syncClient(message);
-                System.out.println(message);
+
             }
         }catch (IOException e) {
             e.printStackTrace();
         } finally {
             //avslutter kobling
             new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
-        }
-    }
-
-    public void sendMelding() {
-        try {
-            bufferedWriter.write("Halla");
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

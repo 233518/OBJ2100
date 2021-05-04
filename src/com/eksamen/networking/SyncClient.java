@@ -8,6 +8,7 @@ import com.eksamen.systems.chatsystem.InndataTabell;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SyncClient {
     private BufferedWriter bufferedWriter;
@@ -33,7 +34,7 @@ public class SyncClient {
                 break;
             case "newMessage":
                 newMessageServer(message);
-
+                break;
         }
     }
     /**
@@ -41,14 +42,11 @@ public class SyncClient {
      * @param message
      */
     public void newRoomServer(String message) {
-        System.out.println(message);
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1],messageArray[2]);
+        ArrayList<Rom> rooms = clientScene.getRooms();
+        rooms.add(rom);
         clientScene.getRomSystem().opprettRom(rom);
-        clientScene.getRooms().add(new Rom(messageArray[1], messageArray[2]));
-        for(Rom romtest : clientScene.getRooms()) {
-            System.out.println(romtest);
-        }
     }
 
     /**
@@ -56,20 +54,16 @@ public class SyncClient {
      * @param message
      */
     public void newMessageServer(String message) {
-        System.out.println("Kommando fra server at ny melding har blitt lagd");
-        System.out.println(message);
+        System.out.println("Klient: Melding fra server");
         String[] messageArray = message.split(":");
         for(Rom room : clientScene.getRooms()) {
-            System.out.println("Romnavn: " + room.getRomNavn());
-            System.out.println("Romnavn fra server: " + messageArray[1]);
-            if(room.getRomNavn() == messageArray[1]) {
-                System.out.println("Fant rom");
-                clientScene.getMessage().nyMelding(room, new InndataTabell(messageArray[1], messageArray[2]));
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                System.out.println("Klient: Fant rom: " + room.getRomNavn());
+                clientScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
+                clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessage().getMeldinger(room));
             }
         }
-
-        //clientScene.getRomSystem().opprettRom(rom);
-        //lientScene.getRooms().add(new Rom(messageArray[0], messageArray[1]));
     }
 
     /**
@@ -82,7 +76,8 @@ public class SyncClient {
                 newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn());
                 break;
             case "newMessage":
-                newMessageClient("newMessage:"+rom.getRomNavn() + ":" + rom.getBrukerNavn() + ":" + ekstra);
+                newMessageClient("newMessage:" + rom.getRomNavn() + ":" + rom.getBrukerNavn() + ":" + ekstra);
+                break;
         }
     }
 

@@ -8,6 +8,7 @@ import com.eksamen.systems.chatsystem.InndataTabell;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SyncServer {
     private BufferedWriter bufferedWriter;
@@ -28,6 +29,7 @@ public class SyncServer {
     public void syncServer(String message, ClientSocket clientSocket)  {
         switch(message.split(":")[0]) {
             case "newRoom":
+                System.out.println("Nytt rom");
                 newRoomServer(message, clientSocket);
                 break;
             case "newMessage":
@@ -44,7 +46,8 @@ public class SyncServer {
     public void newRoomServer(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1], messageArray[2]);
-        serverScene.getRooms().add(rom);
+        ArrayList<Rom> rooms = serverScene.getRooms();
+        rooms.add(rom);
         serverScene.getRomSystem().opprettRom(rom);
         serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
     }
@@ -55,11 +58,14 @@ public class SyncServer {
      * @param clientSocket
      */
     public void newMessageServer(String message, ClientSocket clientSocket) {
+        System.out.println("Server: Starter melding synk med andre klienter");
         String[] messageArray = message.split(":");
-        for(Rom rom : serverScene.getRooms()) {
-            if(rom.getRomNavn() == messageArray[1]) {
-                System.out.println("Fant rom");
-                rom.leggTilMld(new InndataTabell(messageArray[2], messageArray[3]));
+        for(Rom room : serverScene.getRooms()) {
+            String romNavn = room.getRomNavn();
+            if(romNavn.equals(messageArray[1])) {
+                System.out.println("Server: Fant rom: " + room.getRomNavn());
+                serverScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
+                serverScene.getServerUi().getHovedLayout().getRomChat().oppdaterMeldingListe(serverScene.getMessage().getMeldinger(room));
             }
         }
         serverNetworking.updateClientsWithNewMessage(messageArray[1],messageArray[2],messageArray[3],clientSocket);

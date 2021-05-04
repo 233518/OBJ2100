@@ -9,6 +9,8 @@ import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
 
+import java.util.ArrayList;
+
 public abstract class InputSystem {
     protected RomChat romChat;
     protected MessageSystem message;
@@ -19,14 +21,16 @@ public abstract class InputSystem {
     protected RomSystem romSystem;
     protected Rom rom;
     protected DeltakerTabell deltakerTabell;
+    protected ArrayList<Rom> mainRoomList;
 
-    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem){
+    public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem, ArrayList<Rom> mainRoomList){
         this.romListeUI = romListeUI;
         this.bruker = bruker;
         this.hovedLayout = hovedLayout;
         this.message = message;
         this.romChat = romChat;
         this.romSystem = romSystem;
+        this.mainRoomList = mainRoomList;
         rom = bruker.getRom();
         sendMelding();
         bliMedRom();

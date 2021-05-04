@@ -36,7 +36,7 @@ public class ClientScene extends Scene {
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
         message = new MessageSystem();
-        inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat(), romSystem, nettverk);
+        inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), message, clientUi.getHovedLayout().getRomChat(), romSystem, rooms, nettverk);
     }
 
     public RomSystem getRomSystem() {

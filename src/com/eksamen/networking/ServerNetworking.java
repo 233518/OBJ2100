@@ -41,12 +41,6 @@ public class ServerNetworking extends Thread {
             e.printStackTrace();
         }
     }
-
-    public void sendMessagesToClients() {
-        for(ClientSocket client : clients) {
-            //client.sendMessage("HelloClients");
-        }
-    }
     public void sendNewRoom(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
             client.newRoom(roomName, brukernavn);
@@ -71,6 +65,11 @@ public class ServerNetworking extends Thread {
             if(client.equals(clientSocket)) {
                 continue;
             }
+            client.newMessage(roomName, brukernavn, message);
+        }
+    }
+    public void sendNewMessage(String roomName, String brukernavn, String message) {
+        for(ClientSocket client : clients) {
             client.newMessage(roomName, brukernavn, message);
         }
     }

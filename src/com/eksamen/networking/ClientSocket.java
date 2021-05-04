@@ -34,8 +34,8 @@ public class ClientSocket extends Thread {
         try {
             while (true) {
                 String msgFromClient = bufferedReader.readLine();
+                System.out.println("Melding fra klient: " + msgFromClient);
                 syncServer.syncServer(msgFromClient, this);
-                System.out.println(msgFromClient);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,7 +50,6 @@ public class ClientSocket extends Thread {
             if(bufferedWriter != null) {
                 if(rooms.size() > 0) {
                     for(Rom room : rooms) {
-                        System.out.println("Wtf");
                         bufferedWriter.write(room.getRomNavn() + ":" + room.getBrukerNavn());
                         bufferedWriter.newLine();
                         bufferedWriter.flush();

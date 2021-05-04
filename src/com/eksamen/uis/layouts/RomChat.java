@@ -127,7 +127,7 @@ public class RomChat {
         ObservableList<InndataTabell> tableViewItems = inndata.getItems();
         ObservableList<InndataTabell> inndataArrayList = FXCollections.observableArrayList();
 
-        //inndataArrayList.addAll(tableViewItems);
+        inndataArrayList.addAll(tableViewItems);
         inndataArrayList.addAll(liste);
         inndata.setItems(inndataArrayList);
     }

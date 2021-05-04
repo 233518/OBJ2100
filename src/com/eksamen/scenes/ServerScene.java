@@ -35,14 +35,9 @@ public class ServerScene extends Scene {
         bruker = new Bruker("Admin");
         romSystem = new RomSystem(serverUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
-        inputSystem = new ServerInput(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat(), romSystem,nettverk);
+        message = new MessageSystem();
+        inputSystem = new ServerInput(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat(), romSystem,rooms,nettverk);
 
-        serverUi.getHovedLayout().getRomListe().getButtonNyttRom().setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                nettverk.sendNewRoom("Halla123", "Admin");
-            }
-        });
     }
 
     public RomSystem getRomSystem() {
@@ -51,5 +46,13 @@ public class ServerScene extends Scene {
 
     public ArrayList<Rom> getRooms() {
         return rooms;
+    }
+
+    public MessageSystem getMessage() {
+        return message;
+    }
+
+    public ServerUi getServerUi() {
+        return serverUi;
     }
 }

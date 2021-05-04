@@ -13,11 +13,13 @@ import com.eksamen.uis.layouts.RomListeUI;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
+import java.util.ArrayList;
+
 public class ClientInput extends InputSystem{
     private ClientNetworking clientNetworking;
 
-    public ClientInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat,RomSystem romSystem, ClientNetworking clientNetworking) {
-        super(romListeUI, bruker, hovedLayout, message, romChat, romSystem);
+    public ClientInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat,RomSystem romSystem,ArrayList<Rom> mainRoomList, ClientNetworking clientNetworking) {
+        super(romListeUI, bruker, hovedLayout, message, romChat, romSystem, mainRoomList);
         this.clientNetworking = clientNetworking;
     }
 
@@ -36,6 +38,7 @@ public class ClientInput extends InputSystem{
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+            mainRoomList.add(rom);
             romSystem.opprettRom(rom);
             hovedLayout.lagNyTab(romListeUI.getTextField().getText());
             deltakerTabell = new DeltakerTabell(bruker.getName());
