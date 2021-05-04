@@ -37,6 +37,7 @@ public class ClientInput extends InputSystem{
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
+            hovedLayout.slettTab();
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
             mainRoomList.add(rom);
             romSystem.opprettRom(rom);
@@ -48,6 +49,7 @@ public class ClientInput extends InputSystem{
             bruker.setRom(rom);
             setRom();
             clientNetworking.newRoom("newRoom", rom);
+            forlatRom(deltakerTabell, rom, mainRoomList);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
         });
     }
@@ -62,6 +64,7 @@ public class ClientInput extends InputSystem{
     @Override
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
+            hovedLayout.slettTab();
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
             mainRoomList.add(rom);
             hovedLayout.lagNyTab(rom.getRomNavn());
@@ -71,14 +74,16 @@ public class ClientInput extends InputSystem{
             bruker.setRom(rom);
             setRom();
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            forlatRom(deltakerTabell, rom, mainRoomList);
         });
     }
 
-    public void forlatRom(String name) {
-        hovedLayout.getTab().setOnCloseRequest(new EventHandler<Event>() {
-            @Override
-            public void handle(Event event) {
-                romChat.getDeltakere().getItems().remove(name);
+    public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
+        hovedLayout.getTab().setOnCloseRequest(event -> {
+            romChat.getDeltakere().getItems().remove(deltakerTabell);
+            mainRoomList.remove(rom);
+            if(romChat.getDeltakere().getItems().size() == 0){
+                romSystem.slettRom(rom, romarray);
             }
         });
     }
