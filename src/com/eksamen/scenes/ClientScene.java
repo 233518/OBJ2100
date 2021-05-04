@@ -31,7 +31,7 @@ public class ClientScene extends Scene {
     private RomChat romChat;
 
     public ClientScene(Stage stage, ClientUi clientUi, String username) {
-        super(clientUi.getHovedPane(), 800, 600);
+        super(clientUi.getHovedPane(), 750, 550);
         this.clientUi = clientUi;
         rooms = new ArrayList<>();
         nettverk = new ClientNetworking(this, bruker);
