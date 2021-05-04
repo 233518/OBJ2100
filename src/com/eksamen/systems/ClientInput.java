@@ -25,6 +25,7 @@ public class ClientInput extends InputSystem{
             System.out.println(inndataTabell);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+            clientNetworking.newMessage("newMessage", rom);
         });
     }
 
@@ -38,6 +39,7 @@ public class ClientInput extends InputSystem{
             romListeUI.skjulOpprettRom();
             bruker.setRom(rom);
             setRom();
+            clientNetworking.newRoom("newRoom", rom);
         });
     }
 
