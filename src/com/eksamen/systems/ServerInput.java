@@ -71,18 +71,32 @@ public class ServerInput extends InputSystem {
     @Override
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
-            Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
-            bruker.setRom(rom);
-            setRom();
-
-            //mainRoomList.add(rom);
-            hovedLayout.lagNyTab(rom.getRomNavn());
-            deltakerTabell = new DeltakerTabell(bruker.getName());
-            rom.leggTilDeltaker(deltakerTabell);
-            romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
-            romChat.oppdaterMeldingListe(message.getMeldinger(rom));
-            serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
-            forlatRom(deltakerTabell, rom, mainRoomList);
+            try {
+                for (Object o : romChat.getDeltakere().getItems()) {
+                    if (bruker.getName() == romChat.getDeltakerKolonne1().getCellData(o)) {
+                        Feilmelding.visFeilmelding("Du må forlate det andre rommet din nisse");
+                        return;
+                    }
+                }
+                Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
+                if (rom == null) {
+                    Feilmelding.visFeilmelding("Du må velge ett rom");
+                    return;
+                }
+                bruker.setRom(rom);
+                setRom();
+                //mainRoomList.add(rom);
+                hovedLayout.lagNyTab(rom.getRomNavn());
+                deltakerTabell = new DeltakerTabell(bruker.getName());
+                rom.leggTilDeltaker(deltakerTabell);
+                romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
+                romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+                serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
+                forlatRom(deltakerTabell, rom, mainRoomList);
+            }catch (Exception e){
+                System.out.println(e);
+                Feilmelding.visFeilmelding("Noe gikk galt");
+            }
         });
     }
 
