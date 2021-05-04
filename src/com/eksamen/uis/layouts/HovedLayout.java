@@ -48,4 +48,10 @@ public class HovedLayout {
         tab.setContent(romChat.getBorderpane());
     }
 
+    public void slettTab(){
+        if(getTabPane().getTabs().size() == 2){
+            getTabPane().getTabs().remove(1);
+        }
+    }
+
 }

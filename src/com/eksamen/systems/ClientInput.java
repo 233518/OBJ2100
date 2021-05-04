@@ -37,6 +37,7 @@ public class ClientInput extends InputSystem{
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
+            hovedLayout.slettTab();
             Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
             mainRoomList.add(rom);
             romSystem.opprettRom(rom);
@@ -63,6 +64,7 @@ public class ClientInput extends InputSystem{
     @Override
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
+            hovedLayout.slettTab();
             Rom rom = romListeUI.getRomTableView().getRomTableView().getSelectionModel().getSelectedItem();
             mainRoomList.add(rom);
             hovedLayout.lagNyTab(rom.getRomNavn());
@@ -79,6 +81,7 @@ public class ClientInput extends InputSystem{
     public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
         hovedLayout.getTab().setOnCloseRequest(event -> {
             romChat.getDeltakere().getItems().remove(deltakerTabell);
+            mainRoomList.remove(rom);
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
             }
