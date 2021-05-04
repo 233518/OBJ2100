@@ -31,7 +31,6 @@ public class DatabaseSystem implements Logging {
             }
         }
     }
-
     /**
      * Metode for å logge ting i databasen.
      * @param bruker Brukernavnet i String.
