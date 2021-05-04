@@ -57,7 +57,7 @@ public class DatabaseSystem implements Logging {
     }
 
     //Midlertidig metode for å printe innholdet i databasen.
-    public void print() {
+    public static void print() {
         try {
             Connection con = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
             System.out.println("Koblet til Databasen!");
