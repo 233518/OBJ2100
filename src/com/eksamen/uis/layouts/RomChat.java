@@ -131,4 +131,8 @@ public class RomChat {
         ObservableList<InndataTabell> meldingListe = liste;
         inndata.setItems(meldingListe);
     }
+
+    public TableColumn getDeltakerKolonne1() {
+        return deltakerKolonne1;
+    }
 }
