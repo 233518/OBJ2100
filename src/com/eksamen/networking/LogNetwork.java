@@ -7,6 +7,7 @@ import com.eksamen.Main;
  * Blir brukt i nettverks klassene
  */
 public class LogNetwork {
+
     /**
      * Logger til database
      * @param bruker brukernavnet

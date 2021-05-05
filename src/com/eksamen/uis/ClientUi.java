@@ -7,7 +7,6 @@ import javafx.scene.layout.GridPane;
 /**
  * Klasse for å sette opp ClientUI
  */
-
 public class ClientUi {
     private GridPane hovedPane;
     private HovedLayout hovedLayout;

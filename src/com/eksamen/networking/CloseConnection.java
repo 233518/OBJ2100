@@ -8,6 +8,7 @@ import java.net.Socket;
  * CloseConnection håndterer avslutting av kobling
  */
 public class CloseConnection {
+
     /**
      * Funksjon som lukker kobling
      * @param socket kobling

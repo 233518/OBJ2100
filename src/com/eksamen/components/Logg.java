@@ -44,14 +44,26 @@ public class Logg {
         return ip;
     }
 
+    /**
+     * Metode for å få tak i brukernavn
+     * @return brukernavn
+     */
     public String getBruker() {
         return bruker;
     }
 
+    /**
+     * Metode for å få tak i nomnavnet
+     * @return romnavnet
+     */
     public String getRom() {
         return rom;
     }
 
+    /**
+     * Metode for å få tak i meldingen
+     * @return meldingen.
+     */
     public String getMelding() {
         return melding;
     }
