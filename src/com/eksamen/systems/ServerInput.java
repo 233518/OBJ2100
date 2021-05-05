@@ -67,7 +67,15 @@ public class ServerInput extends InputSystem {
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             try{
-                Rom rom = new Rom(romListeUI.getTextField().getText().replace(":", ""), bruker.getName());
+
+                String brukerInput = romListeUI.getTextField().getText().replace(":", "");
+                for(Rom romSjekk : mainRoomList) {
+                    if(brukerInput.equals(romSjekk.getRomNavn())) {
+                        Feilmelding.visFeilmelding("Navnet eksisterer allerede! Velg et annet!");
+                        return;
+                    }
+                }
+                Rom rom = new Rom(brukerInput, bruker.getName());
                 if(romListeUI.getTextField().getText() != ""){
                     bruker.setRom(rom);
                     setRom();

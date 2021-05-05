@@ -69,7 +69,14 @@ public class ClientInput extends InputSystem{
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             try{
                 hovedLayout.slettTab();
-                Rom rom = new Rom(romListeUI.getTextField().getText().replace(":", ""), bruker.getName());
+                String brukerInput = romListeUI.getTextField().getText().replace(":", "");
+                for(Rom romSjekk : mainRoomList) {
+                    if(brukerInput.equals(romSjekk.getRomNavn())) {
+                        Feilmelding.visFeilmelding("Navnet eksisterer allerede! Velg et annet!");
+                        return;
+                    }
+                }
+                Rom rom = new Rom(brukerInput, bruker.getName());
                 if(romListeUI.getTextField().getText() != ""){
                     mainRoomList.add(rom);
                     romSystem.opprettRom(rom);
