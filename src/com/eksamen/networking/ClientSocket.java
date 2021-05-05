@@ -16,12 +16,9 @@ public class ClientSocket extends Thread {
     private Socket socket;
     private InputStreamReader input;
     private OutputStreamWriter output;
-
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-
     private SyncServer syncServer;
-
     private LogNetwork logNetwork;
 
     /**

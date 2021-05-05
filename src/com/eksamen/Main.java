@@ -11,12 +11,13 @@ public class Main extends Application {
     private ServerScene scene;
     private ServerUi serverUi;
     private LoggSystem loggSystem;
-    public static DatabaseSystem logger = new DatabaseSystem();
+    public static DatabaseSystem logger;
 
     @Override
     public void start(Stage stage) {
         loggSystem = new LoggSystem();
         logger = new DatabaseSystem(loggSystem);
+        loggSystem.startup();
         serverUi = new ServerUi(loggSystem);
         scene = new ServerScene(stage, serverUi, loggSystem);
         stage.setScene(scene);

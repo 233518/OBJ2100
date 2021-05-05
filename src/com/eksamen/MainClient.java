@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 public class MainClient extends Application {
     private StartScene scene;
     private StartLayout startLayout;
-    public static DatabaseSystem logger = new DatabaseSystem();
 
     @Override
     public void start(Stage stage) {

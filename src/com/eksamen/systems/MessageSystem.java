@@ -10,13 +10,6 @@ import java.util.Collections;
 
 public class MessageSystem {
     /**
-     * Constructor for meldingssystemet
-     */
-    public MessageSystem(){
-
-    }
-
-    /**
      *  Metode for å sende ny melding, den tar inn hvilket rom og innholdet i meldingen
      * @param rom Chatterommet
      * @param melding Melding fra bruker

@@ -6,7 +6,6 @@ import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.uis.layouts.RomListeUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 
 /**
@@ -16,7 +15,6 @@ public class RomSystem {
     private Bruker bruker;
     public ArrayList<Rom> romArrayList;
     private RomListeUI romListeUi;
-
     /**
      * Constructor for å opprette RomSystemet.
      * @param romListeUi Brukergrensesnittet (UI) til romlisten/velgeren.
@@ -28,7 +26,6 @@ public class RomSystem {
         romArrayList = new ArrayList<Rom>();
 
     }
-
     /**
      * Metode for å fylle inn Arraylisten med rom ved hjelp av opprettRom, så oppdatere Tableviewen.
      * @param roomsListe Arraylist<Rom> Med rom.
@@ -39,7 +36,6 @@ public class RomSystem {
         }
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
-
     /**
      * Metode for å legge til ett nytt rom og legger det til i tableView.
      * @param rom Rommet som skal bli lagt til.
@@ -48,12 +44,10 @@ public class RomSystem {
         romArrayList.add(rom);
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
-
     public void removeRom(Rom rom) {
         romArrayList.remove(rom);
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
-
     /**
      * Metode for å gjøre om arraylist med rom til ObservarbleList med rom og returnere det.
      * @return Returnerer observablelist med rom fra romArrayList.
@@ -66,6 +60,11 @@ public class RomSystem {
         return liste;
     }
 
+    /**
+     * Skaffer deltakere som er i et rom
+     * @param rom rom som skal hentes fra
+     * @return ObservableList med DeltakerTabell
+     */
     public ObservableList<DeltakerTabell> getDeltakere(Rom rom) {
         ObservableList<DeltakerTabell> liste = FXCollections.observableArrayList();
         for(DeltakerTabell deltaker : rom.getBrukere()){
@@ -74,6 +73,11 @@ public class RomSystem {
         return liste;
     }
 
+    /**
+     * Sletter rom
+     * @param rom Rom som skal slettes
+     * @param array liste som skal slettes fra
+     */
     public void slettRom(Rom rom, ArrayList array) {
          romArrayList.remove(rom);
          array.remove(rom);

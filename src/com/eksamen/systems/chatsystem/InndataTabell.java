@@ -5,12 +5,10 @@ import java.time.LocalDateTime;
 /**
  * Klasse for meldinger som blir sendt
  */
-
 public class InndataTabell {
     private String brukernavn;
     private String tidspunkt;
     private String melding;
-
     /**
      * Constructor for inndatatabell
      * @param brukernavn
@@ -21,7 +19,6 @@ public class InndataTabell {
         this.tidspunkt = hentTidspunkt(LocalDateTime.now());
         this.melding = melding;
     }
-
     /**
      * Constructor for inndatatabell
      * @param brukernavn
@@ -33,7 +30,6 @@ public class InndataTabell {
         this.tidspunkt = tidspunkt;
         this.melding = melding;
     }
-
     /**
      * Getter for å få tak i brukernavn
      * @return brukernavn
@@ -41,7 +37,6 @@ public class InndataTabell {
     public String getBrukernavn() {
         return brukernavn;
     }
-
     /**
      * Getter for å få tak i tidspunkt
      * @return tidspunkt
@@ -49,7 +44,6 @@ public class InndataTabell {
     public String getTidspunkt() {
         return tidspunkt;
     }
-
     /**
      * Getter for å få tak i melding
      * @return melding
@@ -57,7 +51,6 @@ public class InndataTabell {
     public String getMelding() {
         return melding;
     }
-
     /**
      * Metode for å hente ut klokkeslettet i datoen
      * @param dato

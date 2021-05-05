@@ -5,7 +5,6 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 
@@ -18,7 +17,6 @@ public class SyncClient {
     private ClientScene clientScene;
     private ClientNetworking clientNetworking;
     private Bruker bruker;
-
     /**
      * Konstruerer en ny SyncClient
      * @param bufferedWriter buffered skriver som skal brukes
@@ -32,7 +30,6 @@ public class SyncClient {
         this.clientNetworking = clientNetworking;
         this.bruker = bruker;
     }
-
     /**
      * Synker klient med info fra server
      * @param message melding fra server
@@ -62,14 +59,12 @@ public class SyncClient {
                 break;
         }
     }
-
     /**
      * Viser melding at serveren har blitt avsluttet
      */
     private void closeServer() {
         clientScene.visInformasjonsMelding("Server har blitt slått av! Restart programmet for å prøve å koble til på nytt!");
     }
-
     /**
      * Viser melding at ny bruker har koblet til server
      * @param message
@@ -78,7 +73,6 @@ public class SyncClient {
         String[] messageArray = message.split(":");
         clientScene.visInformasjonsMelding(messageArray[1] + " har koblet til chatteprogrammet");
     }
-
     /**
      * Får kommando fra server at rom har blitt slettet
      * Sletter rom
@@ -98,7 +92,6 @@ public class SyncClient {
             clientScene.getRomSystem().slettRom(rom, clientScene.getRooms());
         }
     }
-
     /**
      * Får kommando fra server at bruker har forlatt rom
      * Fjerner bruker fra rom
@@ -136,7 +129,6 @@ public class SyncClient {
             }
         }
     }
-
     /**
      * Får kommando fra server at nytt rom har blitt lagd
      * Legger til nytt rom
@@ -152,7 +144,6 @@ public class SyncClient {
         clientScene.getRomSystem().opprettRom(rom);
         clientScene.visInformasjonsMelding("Det har blitt opprettet et nytt rom med navn: " + messageArray[1]);
     }
-
     /**
      * Får kommando fra server at ny melding har blitt lagd
      * Lager ny melding
@@ -174,7 +165,6 @@ public class SyncClient {
             }
         }
     }
-
     /**
      * Får kommando fra server at ny bruker logget på rom
      * Legger til bruker i rom
@@ -223,7 +213,6 @@ public class SyncClient {
                 break;
         }
     }
-
     private void newKoblingClient(String message) {
         try {
             bufferedWriter.write(message);
@@ -233,7 +222,6 @@ public class SyncClient {
             e.printStackTrace();
         }
     }
-
     /**
      * Sender kommando til server at rom blir sletta for inaktiv
      * @param message melding som skal sendes
@@ -247,7 +235,6 @@ public class SyncClient {
             e.printStackTrace();
         }
     }
-
     /**
      * Sender kommando til server at klient gikk ut av rom
      * @param message melding som skal sendes
@@ -261,7 +248,6 @@ public class SyncClient {
             e.printStackTrace();
         }
     }
-
     /**
      * Sender kommando til server at klient logget på rom
      * @param message melding som skal sendes
@@ -275,7 +261,6 @@ public class SyncClient {
             e.printStackTrace();
         }
     }
-
     /**
      * Sender kommando til server at klient lagde nytt rom
      * @param message melding som skal sendes
@@ -289,7 +274,6 @@ public class SyncClient {
             e.printStackTrace();
         }
     }
-
     /**
      * Sender kommando til server at klient sendte ny melding
      * @param message melding som skal sendes

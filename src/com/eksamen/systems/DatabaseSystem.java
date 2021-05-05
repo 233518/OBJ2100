@@ -3,7 +3,6 @@ package com.eksamen.systems;
 import com.eksamen.components.Logg;
 import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.utils.Logging;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,10 +20,6 @@ public class DatabaseSystem implements Logging {
         lagTabell();
         this.loggSystem = loggSystem;
     }
-    public DatabaseSystem() {
-        lagTabell();
-    }
-
     /**
      * Metode for å lage logg tabell i databasen.
      */
@@ -71,7 +66,6 @@ public class DatabaseSystem implements Logging {
             }
         }
     }
-
     /**
      * Metode for å få tak i de siste 15 loggene fra databasen.
      * @return Returnerer loggene i form av Logg objekt i en ArrayList.
@@ -102,7 +96,6 @@ public class DatabaseSystem implements Logging {
         }
         return logg;
     }
-
     //Midlertidig metode for å printe innholdet i databasen.
     public static void print() {
         try {

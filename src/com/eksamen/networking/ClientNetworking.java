@@ -34,7 +34,7 @@ public class ClientNetworking extends Thread implements StopNettverk {
     public ClientNetworking(ClientScene clientScene, Bruker bruker) {
         try {
             socket = new Socket("localhost", 1234);
-            this.getClass().getResource("").toString();
+
             input = new InputStreamReader(socket.getInputStream());
             output = new OutputStreamWriter(socket.getOutputStream());
 
