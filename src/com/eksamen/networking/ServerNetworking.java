@@ -182,12 +182,12 @@ public class ServerNetworking extends Thread {
      * @param roomName navnet på rommet som ble fjernet
      * @param clientSocket klienten som fjernet rommet
      */
-    public void updateClientsWithRemoveRoom(String roomName, ClientSocket clientSocket) {
+    public void updateClientsWithRemoveRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
             if(client.equals(clientSocket)) {
                 continue;
             }
-            client.removeRoom(roomName);
+            client.removeRoom(roomName, brukernavn);
         }
     }
 
@@ -198,7 +198,7 @@ public class ServerNetworking extends Thread {
      */
     public void removeRoom(String roomName, Rom rom, String brukernavn) {
         for(ClientSocket client : clients) {
-            client.removeRoom(roomName);
+            client.removeRoom(roomName, brukernavn);
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.FJERNA_ROM.getHandling(), "IPHER", roomName);
     }
