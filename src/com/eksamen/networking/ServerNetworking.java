@@ -196,7 +196,7 @@ public class ServerNetworking extends Thread {
      * @param roomName navnet på rommet som ble fjernet
      * @param rom rom informasjon
      */
-    public void removeRoom(String roomName, Rom rom, String brukernavn) {
+    public void removeRoom(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
             client.removeRoom(roomName, brukernavn);
         }
