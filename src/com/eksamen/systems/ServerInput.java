@@ -17,11 +17,27 @@ import java.util.ArrayList;
 public class ServerInput extends InputSystem {
     private ServerNetworking serverNetworking;
 
+    /**
+     * Constructor for buttons
+     * @param romListeUI
+     * @param bruker
+     * @param hovedLayout
+     * @param message
+     * @param romChat
+     * @param romSystem
+     * @param roomsMainList
+     * @param serverNetworking
+     */
     public ServerInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem, ArrayList<Rom> roomsMainList, ServerNetworking serverNetworking) {
         super(romListeUI, bruker, hovedLayout, message, romChat,romSystem, roomsMainList);
         this.serverNetworking = serverNetworking;
     }
 
+    /**
+     * Lager ActionEvent på knappen "sendKnapp" i RomChat
+     * Den henter tekst fra textfield "meldingsBoks" og lager et nytt InndataTabell
+     * og oppdaterer selve meldingslisten.
+     */
     @Override
     public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
@@ -33,6 +49,11 @@ public class ServerInput extends InputSystem {
         });
     }
 
+    /**
+     * Lager ActionEvent på "opprettRom" knappen i RomListeUI
+     * Denne henter teksten som brukeren kaller rommet, og lager ett nytt romobjekt og sender dette romobjektet videre,
+     * den "joiner" også brukeren i chatterommet.
+     */
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
@@ -63,6 +84,9 @@ public class ServerInput extends InputSystem {
         });
     }
 
+    /**
+     *  Lager ActionEvent for å skjule meldingen som kommer opp om du allerede har opprettet et rom
+     */
     @Override
     public void OkKnappAlleredeOpprettetRom() {
         romListeUI.getAlleredeRomButton().setOnAction(actionEvent -> {
@@ -70,13 +94,18 @@ public class ServerInput extends InputSystem {
         });
     }
 
+    /**
+     * Lager ActionEvent for å bli med i ett chatterom.
+     * Den setter brukeren til det rommet som er valgt listen, og "joiner" brukeren i rommet.
+     * Den henter også tidligere meldinger og aktive brukere i rommet.
+     */
     @Override
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
             try {
                 for (Object o : romChat.getDeltakere().getItems()) {
                     if (bruker.getName() == romChat.getDeltakerKolonne1().getCellData(o)) {
-                        Feilmelding.visFeilmelding("Du må forlate det andre rommet din nisse");
+                        Feilmelding.visFeilmelding("Du må forlate det andre rommet");
                         return;
                     }
                 }
@@ -102,6 +131,17 @@ public class ServerInput extends InputSystem {
         });
     }
 
+    /**
+     * Metode for når en bruker forlater et rom
+     * Andre brukere som er i samme rom vil få en oppdatert deltakerliste og
+     * brukeren vil slettes fra rommets deltakerliste
+     *
+     * Den sjekker også om rommet har deltakere, om rommet når 0 deltakere vil
+     * rommet slettes
+     * @param deltakerTabell Deltakeren
+     * @param rom Rommet
+     * @param romarray Array med rom
+     */
     public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
         hovedLayout.getTab().setOnCloseRequest(event -> {
             serverNetworking.removeBruker(rom.getRomNavn(), bruker.getName());
