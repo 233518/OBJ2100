@@ -9,6 +9,7 @@ import com.eksamen.systems.MessageSystem;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ClientUi;
 import com.eksamen.uis.layouts.RomChat;
+import com.eksamen.utils.Infomelding;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -46,6 +47,8 @@ public class ClientScene extends Scene {
         nettverk.start();
 
         rooms = nettverk.getRooms();
+
+        nettverk.newKobling(username);
 
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
         romSystem.fyllInnTableview(rooms);
@@ -102,5 +105,18 @@ public class ClientScene extends Scene {
      */
     public Bruker getBruker() {
         return bruker;
+    }
+
+    /**
+     * Viser en melding når ny bruker kobler til chatteprogrammet
+     * @param brukernavn
+     */
+    public void nyBrukerKobletTil(String brukernavn) {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                Infomelding.visInfoMelding(brukernavn + " har koblet til chatteprogrammet");
+            }
+        });
     }
 }

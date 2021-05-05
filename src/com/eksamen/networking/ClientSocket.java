@@ -169,4 +169,18 @@ public class ClientSocket extends Thread {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sender melding til klient at ny klient har koblet til chatteprogrammet
+     * @param brukernavn navnet på brukeren som koblet til
+     */
+    public void newKobling(String brukernavn) {
+        try {
+            bufferedWriter.write("newKobling" + ":" + brukernavn);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

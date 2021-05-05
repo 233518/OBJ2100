@@ -102,6 +102,10 @@ public class ClientNetworking extends Thread {
         }
     }
 
+    public void newKobling(String brukernavn) {
+        syncClient.syncServer("newKobling",new Rom("",""),"","");
+    }
+
     /**
      * Sender melding til server at nytt rom har blitt lagd
      * @param message hendelses type
