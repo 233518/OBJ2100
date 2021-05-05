@@ -128,7 +128,7 @@ public class ServerInput extends InputSystem {
                 deltakerTabell = new DeltakerTabell(bruker.getName());
                 rom.leggTilDeltaker(deltakerTabell);
                 romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
-                romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+                romChat.oppdaterMeldingListe(message.getMeldingerBliMed(rom));
                 serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
                 forlatRom(deltakerTabell, rom, mainRoomList);
             }catch (Exception e){

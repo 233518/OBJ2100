@@ -129,7 +129,7 @@ public class ClientInput extends InputSystem{
                 romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
                 bruker.setRom(rom);
                 setRom();
-                romChat.oppdaterMeldingListe(message.getMeldinger(rom));
+                romChat.oppdaterMeldingListe(message.getMeldingerBliMed(rom));
                 clientNetworking.newBruker("newBruker", rom, bruker.getName());
                 forlatRom(deltakerTabell, rom, mainRoomList);
             } catch(Exception e){

@@ -84,6 +84,14 @@ public class Rom {
         brukere.remove(deltaker);
     }
 
+    /**
+     * Setter meldingsliste
+     * @param meldinger ArrayList av InndataTabell
+     */
+    public void setMeldinger(ArrayList<InndataTabell> meldinger) {
+        this.meldinger = meldinger;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(romNavn);

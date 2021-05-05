@@ -25,7 +25,6 @@ public class RomListeUI {
     private Button buttonLeggTilRom;
     private Button buttonNyttRom;
     private Button buttonBliMed;
-    private Button buttonForlat;
 
     /**
      * Metode for å opprette alle elementene og sette de sammen i vBox som holder på alle elementene.
@@ -34,7 +33,6 @@ public class RomListeUI {
     public VBox getRomUI() {
         buttonLeggTilRom = new Button("Legg til");
         buttonBliMed = new Button("Bli med i rom");
-        buttonForlat = new Button("Forlat rom");
         alleredeRomButton = new Button("OK");
 
         alleredeRomLabel = new Label("Du har allerede opprettet et rom!");
@@ -48,7 +46,7 @@ public class RomListeUI {
 
         nyttRomHBox.getChildren().addAll(textField, buttonLeggTilRom);
 
-        hBoxButtons.getChildren().addAll(buttonNyttRom, buttonBliMed, buttonForlat);
+        hBoxButtons.getChildren().addAll(buttonNyttRom, buttonBliMed);
         vBox.getChildren().addAll(hBoxButtons, romTableView.getRomTableView());
         return vBox;
     }
@@ -120,11 +118,4 @@ public class RomListeUI {
         return buttonBliMed;
     }
 
-    /**
-     * Metode for å returnere knappen som lar deg forlate ett rom.
-     * @return Returnerer knappen som lar forlate ett rom.
-     */
-    public Button getButtonForlat() {
-        return buttonForlat;
-    }
 }

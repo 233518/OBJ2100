@@ -89,7 +89,7 @@ public class ClientNetworking extends Thread implements StopNettverk {
                         rooms.add(rom);
                         break;
                     case "meldingInfo":
-                        rom.leggTilMld(new InndataTabell(messageArray[1], messageArray[2], messageArray[3]));
+                        rom.leggTilMld(new InndataTabell(messageArray[1], messageArray[2], messageArray[3].replace("/", ":")));
                         break;
                     case "brukerInfo":
                         rom.leggTilDeltaker(new DeltakerTabell(messageArray[1]));

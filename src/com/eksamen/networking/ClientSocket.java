@@ -80,7 +80,7 @@ public class ClientSocket extends Thread {
                             bufferedWriter.flush();
                         }
                         for(InndataTabell inndata : room.getMeldinger()) {
-                            bufferedWriter.write("meldingInfo:" + inndata.getBrukernavn() + ":" + inndata.getMelding() + ":" + inndata.getTidspunkt());
+                            bufferedWriter.write("meldingInfo:" + inndata.getBrukernavn() + ":" + inndata.getMelding() + ":" + inndata.getTidspunkt().replace(":", "/"));
                             bufferedWriter.newLine();
                             bufferedWriter.flush();
                         }
