@@ -1,6 +1,7 @@
 package com.eksamen.networking;
 
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
@@ -16,7 +17,7 @@ public class CloseConnection {
      * @param bufferedReader buffered leser
      * @param bufferedWriter buffered skriver
      */
-    public void closeConnection(Socket socket, InputStreamReader input, OutputStreamWriter output, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public void closeConnectionClient(Socket socket, InputStreamReader input, OutputStreamWriter output, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {
             if(socket != null)
                 socket.close();
@@ -29,6 +30,20 @@ public class CloseConnection {
             if(bufferedReader != null)
                 bufferedReader.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Lukker kobling med
+     * @param serverSocket
+     */
+    public void closeConnectionServer(ServerSocket serverSocket) {
+        try{
+            if(serverSocket != null) {
+                serverSocket.close();
+            }
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }

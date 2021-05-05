@@ -57,9 +57,23 @@ public class SyncClient {
             case "newKobling":
                 newKoblingServer(message);
                 break;
+            case "closeServer":
+                closeServer();
+                break;
         }
     }
 
+    /**
+     * Viser melding at serveren har blitt avsluttet
+     */
+    private void closeServer() {
+        clientScene.visInformasjonsMelding("Server har blitt slått av! Restart programmet for å prøve å koble til på nytt!");
+    }
+
+    /**
+     * Viser melding at ny bruker har koblet til server
+     * @param message
+     */
     private void newKoblingServer(String message) {
         String[] messageArray = message.split(":");
         clientScene.visInformasjonsMelding(messageArray[1] + " har koblet til chatteprogrammet");
