@@ -19,14 +19,14 @@ public class ServerInput extends InputSystem {
 
     /**
      * Constructor for buttons
-     * @param romListeUI
-     * @param bruker
-     * @param hovedLayout
-     * @param message
-     * @param romChat
-     * @param romSystem
-     * @param roomsMainList
-     * @param serverNetworking
+     * @param romListeUI UI for listen over rom
+     * @param bruker Brukeren
+     * @param hovedLayout Layout som holder på alle andre UI
+     * @param message Meldingssystem
+     * @param romChat Chatterom UI
+     * @param romSystem RomSystem
+     * @param roomsMainList Romliste
+     * @param serverNetworking Nettverksdelen for serveren
      */
     public ServerInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem, ArrayList<Rom> roomsMainList, ServerNetworking serverNetworking) {
         super(romListeUI, bruker, hovedLayout, message, romChat,romSystem, roomsMainList);

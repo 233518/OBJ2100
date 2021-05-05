@@ -5,7 +5,7 @@ public class DeltakerTabell {
 
     /**
      * Constructor for DeltakerTabell
-     * @param brukernavn
+     * @param brukernavn brukernavnet til brukeren
      */
     public DeltakerTabell(String brukernavn){
         this.brukernavn = brukernavn;

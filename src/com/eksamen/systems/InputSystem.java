@@ -26,13 +26,13 @@ public abstract class InputSystem {
 
     /**
      * Constructor for Inputsystem
-     * @param romListeUI
-     * @param bruker
-     * @param hovedLayout
-     * @param message
-     * @param romChat
-     * @param romSystem
-     * @param mainRoomList
+     * @param romListeUI UI til romliste
+     * @param bruker Brukeren
+     * @param hovedLayout   Layouten som inneholder all UI
+     * @param message Meldingssystemet
+     * @param romChat Chatterommets UI
+     * @param romSystem Romsystem
+     * @param mainRoomList Romliste
      */
     public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem, ArrayList<Rom> mainRoomList){
         this.romListeUI = romListeUI;
