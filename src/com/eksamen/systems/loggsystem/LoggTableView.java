@@ -6,13 +6,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Klasse for å opprette tableView og returnere den, samt oppdatere den.
+ */
 public class LoggTableView {
     private TableView<Logg> loggTableView;
     private TableColumn logKolonne1, logKolonne2, logKolonne3, logKolonne4, logKolonne5;
+
+    /**
+     * Constructor for å opprette TableView.
+     */
     public LoggTableView(){
         lagLoggTableView();
     }
 
+    /**
+     * Metode for å opprette TableView for Logging samt å konstruere kolonnene til den.
+     */
     public void lagLoggTableView(){
         loggTableView = new TableView();
         logKolonne1 = new TableColumn<Logg, String>("Dato");
@@ -33,13 +43,20 @@ public class LoggTableView {
         loggTableView.getColumns().addAll(logKolonne1,logKolonne2,logKolonne3,logKolonne4,logKolonne5);
     }
 
+    /**
+     * Metode for å returnere TableView'en som skal ta vare på de siste Loggene..
+     * @return Returnerer TableViewen med logger.
+     */
     public TableView<Logg> getLoggTableView() {
         return loggTableView;
     }
 
+    /**
+     * Metode for å oppdatere tableviewen med rader.
+     * @param liste Listen med logger tableviewen skal inneholde.
+     */
     public void oppdaterTableView(ObservableList<Logg> liste) {
         ObservableList<Logg> loggListe = liste;
         loggTableView.setItems(loggListe);
     }
-
 }
