@@ -21,14 +21,14 @@ public class ClientInput extends InputSystem{
     private ClientNetworking clientNetworking;
     /**
      * Constructor for ClientInput
-     * @param romListeUI
-     * @param bruker
-     * @param hovedLayout
-     * @param message
-     * @param romChat
-     * @param romSystem
-     * @param mainRoomList
-     * @param clientNetworking
+     * @param romListeUI UI for listen over rom
+     * @param bruker Brukeren
+     * @param hovedLayout Layout som holder på alle andre UI
+     * @param message Meldingssystem
+     * @param romChat Chatterom UI
+     * @param romSystem RomSystem
+     * @param mainRoomList Romliste
+     * @param clientNetworking Nettverksdelen for serveren
      */
     public ClientInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat,RomSystem romSystem,ArrayList<Rom> mainRoomList, ClientNetworking clientNetworking) {
         super(romListeUI, bruker, hovedLayout, message, romChat, romSystem, mainRoomList);
