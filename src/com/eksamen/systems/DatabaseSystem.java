@@ -20,6 +20,7 @@ public class DatabaseSystem implements Logging {
         lagTabell();
         this.loggSystem = loggSystem;
     }
+
     /**
      * Metode for å lage logg tabell i databasen.
      */
@@ -39,6 +40,7 @@ public class DatabaseSystem implements Logging {
             }
         }
     }
+
     /**
      * Metode for å logge ting i databasen.
      * @param bruker Brukernavnet i String.
@@ -66,6 +68,7 @@ public class DatabaseSystem implements Logging {
             }
         }
     }
+
     /**
      * Metode for å få tak i de siste 15 loggene fra databasen.
      * @return Returnerer loggene i form av Logg objekt i en ArrayList.
@@ -96,27 +99,4 @@ public class DatabaseSystem implements Logging {
         }
         return logg;
     }
-    //Midlertidig metode for å printe innholdet i databasen.
-    public static void print() {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery("select * from logg");
-            while (rs.next()) {
-                // Skriver ut innholdet i konsollvinduet
-                System.out.print(" | " + "ID = " + rs.getInt("id"));
-                System.out.print(" | " + "Bruker = " + rs.getString("bruker"));
-                System.out.print(" | " + "Melding = " + rs.getString("melding"));
-                System.out.print(" | " + "IP = " + rs.getString("ip"));
-                System.out.print(" | " + "Rom: = " + rs.getString("rom"));
-                System.out.print(" | " + "Dato = " + rs.getString("dato"));
-                System.out.println();
-                System.out.println(" -------------------------------------------");
-            }
-            con.close();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-
 }
