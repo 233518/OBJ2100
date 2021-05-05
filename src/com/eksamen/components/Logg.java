@@ -35,4 +35,24 @@ public class Logg {
     public String getDato() {
         return dato;
     }
+
+    /**
+     * Skaffer ipadressen til logg
+     * @return String
+     */
+    public String getIp() {
+        return ip;
+    }
+
+    public String getBruker() {
+        return bruker;
+    }
+
+    public String getRom() {
+        return rom;
+    }
+
+    public String getMelding() {
+        return melding;
+    }
 }
