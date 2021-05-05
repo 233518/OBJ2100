@@ -8,18 +8,27 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class MessageSystem {
-
-    public ArrayList<InndataTabell> meldingArrayList;
-
-    //MessageSystem msg = new MessageSystem("Brukernavn", "Melding");
+    /**
+     * Constructor for meldingssystemet
+     */
     public MessageSystem(){
 
     }
 
+    /**
+     *  Metode for å sende ny melding, den tar inn hvilket rom og innholdet i meldingen
+     * @param rom Chatterommet
+     * @param melding Melding fra bruker
+     */
     public void nyMelding(Rom rom, InndataTabell melding){
         rom.leggTilMld(melding);
     }
 
+    /**
+     *  Metode for å hente alle meldinger i ett spesifikt rom
+     * @param rom Rom
+     * @return ObservableList med meldinger som er sendt i ett rom
+     */
     public ObservableList<InndataTabell> getMeldinger(Rom rom) {
         ObservableList<InndataTabell> liste = FXCollections.observableArrayList();
         for(InndataTabell melding : rom.getMeldinger()){
