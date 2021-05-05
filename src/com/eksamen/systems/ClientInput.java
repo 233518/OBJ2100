@@ -44,6 +44,11 @@ public class ClientInput extends InputSystem{
     public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
+            melding = melding.replace(":", "");
+            if(melding.equals("")) {
+                Feilmelding.visFeilmelding("Du kan ikke sende en tom melding");
+                return;
+            };
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
