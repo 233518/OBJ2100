@@ -105,7 +105,7 @@ public class ClientInput extends InputSystem{
             try{
                 for(Object o : romChat.getDeltakere().getItems()){
                     if(bruker.getName() == romChat.getDeltakerKolonne1().getCellData(o)){
-                        Feilmelding.visFeilmelding("Du må forlate det andre rommet din nisse");
+                        Feilmelding.visFeilmelding("Du må forlate det andre rommet");
                         return;
                     }
                 }

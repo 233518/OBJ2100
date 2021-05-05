@@ -4,7 +4,6 @@ import com.eksamen.scenes.ServerScene;
 import com.eksamen.systems.DatabaseSystem;
 import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.uis.ServerUi;
-import com.eksamen.uis.layouts.TestLayout;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

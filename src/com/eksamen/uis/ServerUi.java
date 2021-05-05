@@ -2,7 +2,6 @@ package com.eksamen.uis;
 
 import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.uis.layouts.HovedLayout;
-import com.eksamen.uis.layouts.TestLayout;
 import javafx.scene.layout.GridPane;
 
 public class ServerUi {
