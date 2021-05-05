@@ -65,6 +65,7 @@ public class SyncServer {
         //0 - kommando
         //1 - romnavn
         //2 - brukernavn
+        //3 - ipadresse
         String[] messageArray = message.split(":");
         Rom rom = null;
         for(Rom room : serverScene.getRooms()) {
@@ -76,7 +77,7 @@ public class SyncServer {
         serverScene.getRooms().remove(rom);
         serverScene.getRomSystem().removeRom(rom);
         serverNetworking.updateClientsWithRemoveRoom(messageArray[1], messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM.getHandling(), "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM.getHandling(), messageArray[3], messageArray[1]);
     }
 
     /**
@@ -89,6 +90,7 @@ public class SyncServer {
         //0 - kommando
         //1 - romnavn
         //2 - brukernavn
+        //3 - ipadresse
         String[] messageArray = message.split(":");
         Rom rom = null;
         DeltakerTabell deltakerFunnet = null;
@@ -117,7 +119,7 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM_BRUKER.getHandling(), "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM_BRUKER.getHandling(), messageArray[3], messageArray[1]);
     }
 
     /**
@@ -130,6 +132,7 @@ public class SyncServer {
         //0 - kommando
         //1 - romnavn
         //2 - brukernavn
+        //3 - ipadresse
         String[] messageArray = message.split(":");
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
@@ -144,7 +147,7 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithNewUserInRoom(messageArray[1], messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_BRUKER_ROM.getHandling(), "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_BRUKER_ROM.getHandling(), messageArray[3], messageArray[1]);
     }
 
     /**
@@ -157,12 +160,13 @@ public class SyncServer {
         //0 - kommando
         //1 - romnavn
         //2 - brukernavn
+        //3 - ipadresse
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1], messageArray[2]);
         serverScene.getRooms().add(rom);
         serverScene.getRomSystem().opprettRom(rom);
         serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_ROM.getHandling(), "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_ROM.getHandling(), messageArray[3], messageArray[1]);
     }
 
     /**
@@ -176,6 +180,7 @@ public class SyncServer {
         //1 - romnavn
         //2 - brukernavn
         //3 - melding
+        //4 - ipadresse
         String[] messageArray = message.split(":");
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
@@ -189,6 +194,6 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithNewMessage(messageArray[1],messageArray[2],messageArray[3],clientSocket);
-        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_MELDING_ROM.getHandling() + messageArray[3], "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_MELDING_ROM.getHandling() + messageArray[3], messageArray[4], messageArray[1]);
     }
 }
