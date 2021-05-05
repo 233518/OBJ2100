@@ -9,10 +9,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class LoggTableView {
     private TableView<Logg> loggTableView;
     private TableColumn logKolonne1, logKolonne2, logKolonne3, logKolonne4, logKolonne5;
+
+    /**
+     * Constructor for å lage Table for serverlogg
+     */
     public LoggTableView(){
         lagLoggTableView();
     }
 
+    /**
+     * Metode for å lage ny table og setter hvilke kolonner og navn på de
+     */
     public void lagLoggTableView(){
         loggTableView = new TableView();
         logKolonne1 = new TableColumn<Logg, String>("Dato");
@@ -33,10 +40,18 @@ public class LoggTableView {
         loggTableView.getColumns().addAll(logKolonne1,logKolonne2,logKolonne3,logKolonne4,logKolonne5);
     }
 
+    /**
+     * Getter for å hente loggTableView
+     * @return TableView
+     */
     public TableView<Logg> getLoggTableView() {
         return loggTableView;
     }
 
+    /**
+     * Oppdaterer logg tableviewen
+     * @param liste
+     */
     public void oppdaterTableView(ObservableList<Logg> liste) {
         ObservableList<Logg> loggListe = liste;
         loggTableView.setItems(loggListe);
