@@ -37,13 +37,10 @@ public class StartScene extends Scene {
                 if (brukerNavn != "" && brukerNavn.matches("[A-Za-z0-9æøå]+")) {
                     return true;
                 }else{
-                    Feilmelding.visFeilmelding(
-                            "Brukernavnet ditt er ikke riktig formatert!"
-                                    +"\n" + "(A-Å, a-å, 0-9)");
+                    Feilmelding.visFeilmelding("Brukernavnet ditt er ikke riktig formatert!" +"\n" + "(A-Å, a-å, 0-9)");
                     return false;
                 }
             }
         });
     }
-
 }
