@@ -5,6 +5,7 @@ import com.eksamen.scenes.ClientScene;
 import com.eksamen.scenes.ServerScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.utils.LogOperations;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -75,7 +76,7 @@ public class SyncServer {
         serverScene.getRooms().remove(rom);
         serverScene.getRomSystem().removeRom(rom);
         serverNetworking.updateClientsWithRemoveRoom(messageArray[1], messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], "Rom ble slettet", "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM.getHandling(), "IPHER", messageArray[1]);
     }
 
     /**
@@ -116,7 +117,7 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], "Bruker forlot rom", "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM_BRUKER.getHandling(), "IPHER", messageArray[1]);
     }
 
     /**
@@ -143,7 +144,7 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithNewUserInRoom(messageArray[1], messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], "Bruker ble med i rom", "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_BRUKER_ROM.getHandling(), "IPHER", messageArray[1]);
     }
 
     /**
@@ -161,7 +162,7 @@ public class SyncServer {
         serverScene.getRooms().add(rom);
         serverScene.getRomSystem().opprettRom(rom);
         serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
-        logNetwork.logToDatabase(messageArray[2], "Bruker opprettet nytt rom", "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_ROM.getHandling(), "IPHER", messageArray[1]);
     }
 
     /**
@@ -188,6 +189,6 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithNewMessage(messageArray[1],messageArray[2],messageArray[3],clientSocket);
-        logNetwork.logToDatabase(messageArray[2], "Bruker sendte melding i rom", "IPHER", messageArray[1]);
+        logNetwork.logToDatabase(messageArray[2], LogOperations.NY_MELDING_ROM.getHandling() + messageArray[3], "IPHER", messageArray[1]);
     }
 }
