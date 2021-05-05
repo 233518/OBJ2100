@@ -10,9 +10,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * StartScene skaffer brukernavn til klienten
+ */
 public class StartScene extends Scene {
     private StartLayout start;
 
+    /**
+     * Konstruerer en ny StartScene
+     * @param stage stage som scene skal tilhøre
+     * @param start start er ui som skal vises
+     */
     public StartScene(Stage stage, StartLayout start) {
         super(start.getStartPane(), 500, 500);
         this.start = start;
@@ -23,5 +31,4 @@ public class StartScene extends Scene {
             }
         });
     }
-
 }

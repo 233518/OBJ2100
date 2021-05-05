@@ -5,12 +5,9 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
-import com.eksamen.utils.Disposable;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * SyncClient håndterer hva som skal gjøres under input fra nettverk
@@ -140,9 +137,9 @@ public class SyncClient {
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                clientScene.getMessage().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
+                clientScene.getMessageSystem().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
                 if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
-                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessage().getMeldinger(room));
+                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessageSystem().getMeldinger(room));
                 }
             }
         }

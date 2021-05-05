@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * ServerScene kobler sammen alt og er hoved vinduet til serveren
+ */
 public class ServerScene extends Scene {
     private ServerUi serverUi;
     private ServerNetworking nettverk;
@@ -27,6 +30,13 @@ public class ServerScene extends Scene {
     private InputSystem inputSystem;
     private MessageSystem message;
     private RomChat romChat;
+
+    /**
+     * Konstruerer en ny ServerScene
+     * @param stage stage som scene skal tilhøre
+     * @param serverUi serveren sin ui
+     * @param loggSystem loggsystemet som skal brukes
+     */
     public ServerScene(Stage stage, ServerUi serverUi, LoggSystem loggSystem) {
         super(serverUi.getHovedPane(), 750, 550);
         this.serverUi = serverUi;
@@ -41,22 +51,42 @@ public class ServerScene extends Scene {
 
     }
 
+    /**
+     * Skaffer rom systemet
+     * @return RomSystem
+     */
     public RomSystem getRomSystem() {
         return romSystem;
     }
 
+    /**
+     * Skaffer rom
+     * @return ArrayList av Rom
+     */
     public ArrayList<Rom> getRooms() {
         return rooms;
     }
 
+    /**
+     * Skaffer meldings systemet
+     * @return MessageSystem
+     */
     public MessageSystem getMessage() {
         return message;
     }
 
+    /**
+     * Skaffer serveren sin ui
+     * @return ServerUi
+     */
     public ServerUi getServerUi() {
         return serverUi;
     }
 
+    /**
+     * Skaffer brukeren til serveren
+     * @return Bruker
+     */
     public Bruker getBruker() {
         return bruker;
     }
