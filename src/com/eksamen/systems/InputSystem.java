@@ -23,6 +23,17 @@ public abstract class InputSystem {
     protected DeltakerTabell deltakerTabell;
     protected ArrayList<Rom> mainRoomList;
 
+
+    /**
+     * Constructor for Inputsystem
+     * @param romListeUI
+     * @param bruker
+     * @param hovedLayout
+     * @param message
+     * @param romChat
+     * @param romSystem
+     * @param mainRoomList
+     */
     public InputSystem(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat, RomSystem romSystem, ArrayList<Rom> mainRoomList){
         this.romListeUI = romListeUI;
         this.bruker = bruker;

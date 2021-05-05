@@ -1,6 +1,5 @@
 package com.eksamen.systems.romsystem;
 
-import com.eksamen.Main;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
