@@ -2,6 +2,9 @@ package com.eksamen.components;
 
 import java.util.ArrayList;
 
+/**
+ * Klassen logg inneholder informasjon om en logg
+ */
 public class Logg {
     private String dato;
     private String ip;
@@ -9,6 +12,14 @@ public class Logg {
     private String rom;
     private String melding;
 
+    /**
+     * Konstruerer en ny Logg
+     * @param dato dato loggen ble laget
+     * @param ip ipaddressen der handlingen ble utført
+     * @param bruker brukeren det gjelder
+     * @param rom rom handlingen ble utført i
+     * @param melding hva handlingen var
+     */
     public Logg(String dato, String ip, String bruker, String rom, String melding) {
         this.dato = dato;
         this.ip = ip;
@@ -17,23 +28,11 @@ public class Logg {
         this.melding = melding;
     }
 
+    /**
+     * Skaffer dato til logg
+     * @return String
+     */
     public String getDato() {
         return dato;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public String getBruker() {
-        return bruker;
-    }
-
-    public String getRom() {
-        return rom;
-    }
-
-    public String getMelding() {
-        return melding;
     }
 }

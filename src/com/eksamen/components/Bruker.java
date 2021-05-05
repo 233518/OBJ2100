@@ -3,6 +3,9 @@ package com.eksamen.components;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * Klassen Bruker inneholder informasjon om brukeren som bruker programmet
+ */
 public class Bruker {
     private String name;
     private String ipAdress;
@@ -19,7 +22,7 @@ public class Bruker {
 
     /**
      * Metode for å få kallenavnet til brukeren
-     * @return Returnerer kallenavnet til brukeren
+     * @return kallenavnet til brukeren
      */
     public String getName() {
         return name;
@@ -60,7 +63,7 @@ public class Bruker {
 
     /**
      * Metode for å skaffe rom brukeren er i
-     * @return
+     * @return Rom
      */
     public Rom getRom() {
         return rom;
@@ -68,7 +71,7 @@ public class Bruker {
 
     /**
      * Metode for å sette rom brukere er i
-     * @param rom rom bruker er i
+     * @param rom Rom bruker er i
      */
     public void setRom(Rom rom) {
         this.rom = rom;
