@@ -10,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 /**
  * Klasse for å opprette chatterommet
@@ -57,10 +59,10 @@ public class RomChat {
         borderpane.setRight(rightBorderPane);
 
         //Setter størrelser
-        borderpane.setMinSize(700, 500);
+        borderpane.setMinSize(750, 600);
         bottomBorderPane.setMinSize(400,50);
-        deltakere.setMinSize(100,450);
-        inndata.setMinSize(350,450);
+        deltakere.setMaxSize(100,450);
+        inndata.setMaxSize(600,450);
         meldingsBoks.setMinSize(500, 35);
         sendKnapp.setPrefSize(50,35);
 
@@ -73,20 +75,39 @@ public class RomChat {
 
         //Spacing mellom komponenter
         bottomBorderPane.setSpacing(20);
-        bottomBorderPane.setMargin(meldingsBoks, new Insets(0, 0, 0, 20));
+        bottomBorderPane.setMargin(sendKnapp, new Insets(0, 0, 100 ,0));
+        bottomBorderPane.setMargin(meldingsBoks, new Insets(0, 0, 100, 20));
         centerBorderPane.setMargin(inndata, new Insets(0, 20,20,0));
+        rightBorderPane.setPadding(new Insets(0, 10, 0 ,0));
+
 
         //Adder kolonner i tabeller
         deltakerKolonne1 = new TableColumn<>("Brukernavn");
         deltakerKolonne1.setCellValueFactory(new PropertyValueFactory<DeltakerTabell, String>("brukernavn"));
+        deltakerKolonne1.setMinWidth(100);
         inndataKolonne1 = new TableColumn<>("Tid");
         inndataKolonne1.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("tidspunkt"));
+        inndataKolonne1.setMinWidth(75);
         inndataKolonne2 = new TableColumn<>("Brukernavn");
         inndataKolonne2.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("brukernavn"));
+        inndataKolonne2.setMinWidth(100);
         inndataKolonne3 = new TableColumn<>("Melding");
         inndataKolonne3.setCellValueFactory(new PropertyValueFactory<InndataTabell, String>("melding"));
+        inndataKolonne3.setMinWidth(425);
         inndata.getColumns().addAll(inndataKolonne1, inndataKolonne2, inndataKolonne3);
         deltakere.getColumns().add(deltakerKolonne1);
+
+        //Styling
+        inndata.setStyle("-fx-background-color: #a1eaf7");
+        borderpane.setStyle("-fx-background-color: #757780");
+        inndataKolonne1.setStyle("-fx-background-color: #E9F7CA");
+        inndataKolonne2.setStyle("-fx-background-color: #EAEFB1");
+        inndataKolonne3.setStyle("-fx-background-color: #F7D488");
+        deltakerKolonne1.setStyle("-fx-background-color: #a1eaf7");
+        deltakereLabel.setFont(Font.font("Verdana", 16));
+        deltakereLabel.setTextFill(Color.WHITE);
+        inndataLabel.setFont(Font.font("Verdana", 16));
+        inndataLabel.setTextFill(Color.WHITE);
 
         //Legger til komponenter i panes
         centerBorderPane.getChildren().addAll(inndataLabel, inndata);
