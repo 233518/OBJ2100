@@ -16,6 +16,7 @@ import javafx.stage.Stage;
  */
 public class StartScene extends Scene {
     private StartLayout start;
+
     /**
      * Konstruerer en ny StartScene
      * @param stage stage som scene skal tilhøre
@@ -31,6 +32,7 @@ public class StartScene extends Scene {
                     stage.setScene(new ClientScene(stage, new ClientUi(), start.getSkrivBrukernavn().getText()));
                 }
             }
+
             private boolean godkjent(String brukerNavn) {
                 if (brukerNavn.matches("[A-Za-z0-9æøåØÆÅ_-]+")) {
                     return true;
