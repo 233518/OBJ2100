@@ -88,14 +88,24 @@ public class RomListeUI {
         vBox.getChildren().addAll(nyttRomHBox);
     }
 
+    /**
+     * Metode for å vise vinduet som forteller deg at du allerede har opprettet et rom.
+     */
     public void visAlleredeOpprettetRom() {
         vBox.getChildren().addAll(alleredeRomHBox);
     }
 
+    /**
+     * Metode for å skjule vinduet som forteller deg at du allerede har opprettet et rom.
+     */
     public void skjulAlleredeOpprettetRom() {
         vBox.getChildren().remove(alleredeRomHBox);
     }
 
+    /**
+     * Metode for å få tak i knappen som man kan trykke på for å skjule vinduet som forteller deg at du har opprettet ett nytt rom.
+     * @return OK Knappen.
+     */
     public Button getAlleredeRomButton() {
         return alleredeRomButton;
     }
@@ -138,5 +148,4 @@ public class RomListeUI {
     public Button getButtonBliMed() {
         return buttonBliMed;
     }
-
 }
