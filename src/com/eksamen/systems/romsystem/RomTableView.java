@@ -11,6 +11,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class RomTableView {
     private final TableView<Rom> romTableView = new TableView<>();
 
+    /**
+     * Lager tableview med navn og kolonner
+     * @return TableView
+     */
     private TableView tableView() {
         try {
             TableColumn<Rom, String> romKolonne = new TableColumn<>("Rom");
