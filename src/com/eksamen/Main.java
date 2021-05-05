@@ -23,6 +23,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
+        stage.resizableProperty().set(false);
         loggSystem = new LoggSystem();
         logger = new DatabaseSystem(loggSystem);
         loggSystem.startup();

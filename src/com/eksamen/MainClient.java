@@ -19,6 +19,7 @@ public class MainClient extends Application {
      */
     @Override
     public void start(Stage stage) {
+        stage.resizableProperty().set(false);
         startLayout = new StartLayout();
         scene = new StartScene(stage, startLayout);
         stage.setScene(scene);
