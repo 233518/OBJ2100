@@ -14,6 +14,9 @@ import com.eksamen.utils.Feilmelding;
 
 import java.util.ArrayList;
 
+/**
+ * Klasse for å håndtere ActionEvents, når brukeren trykker en knapp
+ */
 public class ServerInput extends InputSystem {
     private ServerNetworking serverNetworking;
 

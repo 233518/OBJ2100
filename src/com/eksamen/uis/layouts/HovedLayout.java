@@ -4,6 +4,9 @@ import com.eksamen.systems.loggsystem.LoggSystem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
+/**
+ * Klasse for å kombinere de forskjellige layouts
+ */
 public class HovedLayout {
     private RomChat romChat;
     private RomListeUI romListe;

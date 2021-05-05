@@ -1,7 +1,10 @@
 package com.eksamen.systems.chatsystem;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
+/**
+ * Klasse for meldinger som blir sendt
+ */
 
 public class InndataTabell {
     private String brukernavn;

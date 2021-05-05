@@ -1,5 +1,8 @@
 package com.eksamen.systems.chatsystem;
 
+/**
+ * Klasse for deltakere i ett rom
+ */
 public class DeltakerTabell {
     private String brukernavn;
 
