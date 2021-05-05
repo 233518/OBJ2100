@@ -94,7 +94,6 @@ public class ServerInput extends InputSystem {
                     Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
                 }
             } catch(Exception e){
-                System.out.println(e);
                 Feilmelding.visFeilmelding("Noe gikk galt");
             }
         });
@@ -140,7 +139,6 @@ public class ServerInput extends InputSystem {
                 serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
                 forlatRom(deltakerTabell, rom, mainRoomList);
             }catch (Exception e){
-                System.out.println(e);
                 Feilmelding.visFeilmelding("Noe gikk galt");
             }
         });

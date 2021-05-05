@@ -45,7 +45,6 @@ public class Bruker {
         try{
             InetAddress ip = InetAddress.getLocalHost();
             ipAdress = String.valueOf(ip);
-            System.out.println(ipAdress);
         } catch(UnknownHostException e){
             System.out.println("Kunne ikke skaffe ip");
         }

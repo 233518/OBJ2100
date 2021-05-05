@@ -107,10 +107,8 @@ public class DatabaseSystem implements Logging {
     public static void print() {
         try {
             Connection con = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
-            System.out.println("Koblet til Databasen!");
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery("select * from logg");
-            System.out.println("Innhold i databasen:");
             while (rs.next()) {
                 // Skriver ut innholdet i konsollvinduet
                 System.out.print(" | " + "ID = " + rs.getInt("id"));

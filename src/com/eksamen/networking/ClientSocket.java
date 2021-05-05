@@ -54,7 +54,6 @@ public class ClientSocket extends Thread {
             while (true) {
                 String msgFromClient = bufferedReader.readLine();
                 if(msgFromClient == null) break;
-                System.out.println("Melding fra klient: " + msgFromClient);
                 syncServer.syncServer(msgFromClient, this);
             }
         } catch (IOException e) {

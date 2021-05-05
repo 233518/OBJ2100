@@ -48,7 +48,6 @@ public class ServerNetworking extends Thread implements StopNettverk {
                 return;
             while (true) {
                 socket = serverSocket.accept(); //"Lytter" etter klient koblinger
-                System.out.println("Client connected");
                 ClientSocket client = new ClientSocket(socket, scene, this, logNetwork);
                 clients.add(client);
                 client.start();

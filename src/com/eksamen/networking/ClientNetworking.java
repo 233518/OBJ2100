@@ -63,7 +63,6 @@ public class ClientNetworking extends Thread implements StopNettverk {
                 return;
             while(true) {
                 String message = bufferedReader.readLine();
-                System.out.println("Melding fra server: " + message);
                 syncClient.syncClient(message);
             }
         }catch (IOException e) {

@@ -105,7 +105,6 @@ public class SyncClient {
      * @param message melding fra server
      */
     private void removeBrukerServer(String message) {
-        System.out.println("Fjern deltaker starter");
         //0 - kommando
         //1 - romnavn
         //2 - brukernavn
@@ -115,7 +114,6 @@ public class SyncClient {
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
-                System.out.println("Fant rom");
                 rom = room;
                 break;
             }
@@ -124,19 +122,16 @@ public class SyncClient {
             for(DeltakerTabell deltaker : rom.getBrukere()) {
                 String deltakerNavn = deltaker.getBrukernavn();
                 if(deltakerNavn.equals(messageArray[2])) {
-                    System.out.println("Fant deltaker");
                     deltakerFunnet = deltaker;
                     break;
                 }
             }
         }
         if(deltakerFunnet != null) {
-            System.out.println("Fjerner deltaker fra rom");
             rom.slettDeltaker(deltakerFunnet);
         }
         if(clientScene.getBruker().getRom() != null) {
             if(rom.getRomNavn().equals(clientScene.getBruker().getRom().getRomNavn())) {
-                System.out.println("Oppdaterer liste klient siden");
                 clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterDeltakerListe(clientScene.getRomSystem().getDeltakere(rom));
             }
         }

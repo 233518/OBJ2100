@@ -55,9 +55,6 @@ public class ClientScene extends Scene {
         //romSystem.fyllInnTableview(rooms);
 
         messageSystem = new MessageSystem();
-        clientUi.getHovedLayout().getRomListe().getRomTableView().getRomTableView().getColumns().forEach(data -> {
-            System.out.println("Sjekk når ting starter: " + data.getText());
-        });
         inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), messageSystem, clientUi.getHovedLayout().getRomChat(), romSystem, rooms, nettverk);
 
 

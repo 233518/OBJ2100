@@ -46,7 +46,6 @@ public class RomSystem {
      */
     public void opprettRom(Rom rom) {
         romArrayList.add(rom);
-        System.out.println("Denne kjører");
         romListeUi.getRomTableView().oppdaterTableView(getRom());
     }
 

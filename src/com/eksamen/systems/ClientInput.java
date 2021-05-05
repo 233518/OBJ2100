@@ -95,7 +95,6 @@ public class ClientInput extends InputSystem{
                     Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
                 }
             } catch(Exception e){
-                System.out.println(e);
                 Feilmelding.visFeilmelding("Noe gikk galt");
             }
 
@@ -141,11 +140,7 @@ public class ClientInput extends InputSystem{
                 romChat.oppdaterMeldingListe(message.getMeldingerBliMed(rom));
                 clientNetworking.newBruker("newBruker", rom, bruker.getName());
                 forlatRom(deltakerTabell, rom, mainRoomList);
-                romListeUI.getRomTableView().getRomTableView().getColumns().forEach(data -> {
-                    System.out.println("Etter bli med: " + data.getText());
-                });
             } catch(Exception e){
-                System.out.println(e);
                 Feilmelding.visFeilmelding("Noe gikk galt");
             }
         });
