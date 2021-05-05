@@ -7,6 +7,8 @@ import com.eksamen.utils.Logging;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
@@ -54,7 +56,8 @@ public class DatabaseSystem implements Logging {
             statement.executeUpdate("insert into logg(bruker, melding, ip, rom, dato) values('"+bruker+"','"+melding+"','"+ip+"','"+rom+"','"+ LocalDateTime.now().toString()+"')");
             //Denne gir feilmelding
             if(loggSystem != null) {
-                loggSystem.oppdaterTableView();
+                System.out.println("Jeg kjører jeg");
+                loggSystem.refreshLoggSystem();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,6 +78,12 @@ public class DatabaseSystem implements Logging {
             ResultSet rs = statement.executeQuery("select * from logg ORDER BY id DESC LIMIT 10");
             while (rs.next()) {
                 logg.add(new Logg(rs.getString("dato"),rs.getString("ip"),rs.getString("bruker"),rs.getString("rom"),rs.getString("melding")));
+                Collections.sort(logg, new Comparator<Logg>() {
+                    @Override
+                    public int compare(Logg o1, Logg o2) {
+                        return o1.getDato().compareTo(o2.getDato());
+                    }
+                });
             }
         }catch (SQLException e){
             e.printStackTrace();

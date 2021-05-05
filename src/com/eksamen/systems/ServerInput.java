@@ -1,5 +1,6 @@
 package com.eksamen.systems;
 
+import com.eksamen.Main;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ServerNetworking;
@@ -51,6 +52,7 @@ public class ServerInput extends InputSystem {
                     serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
                     romChat.oppdaterMeldingListe(message.getMeldinger(rom));
                     forlatRom(deltakerTabell, rom, mainRoomList);
+                    Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
                 } else{
                     Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
                 }

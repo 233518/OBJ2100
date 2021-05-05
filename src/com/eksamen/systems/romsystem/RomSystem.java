@@ -50,7 +50,7 @@ public class RomSystem {
         romListeUi.getRomTableView().oppdaterTableView(getRom());
 
         //Fiks dette, den logger to ganger buggen
-        Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
+        //Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
     }
 
     public void removeRom(Rom rom) {
