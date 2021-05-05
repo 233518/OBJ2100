@@ -35,7 +35,7 @@ public class LoggSystem {
     /**
      * Metode for å oppdatere TableViewen med logger.
      */
-    private void oppdaterTableView() {
+    public void oppdaterTableView() {
         loggTableView.oppdaterTableView(getLog());
     }
 
