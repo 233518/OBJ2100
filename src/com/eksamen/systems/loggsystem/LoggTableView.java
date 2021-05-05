@@ -12,12 +12,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class LoggTableView {
     private TableView<Logg> loggTableView;
     private TableColumn logKolonne1, logKolonne2, logKolonne3, logKolonne4, logKolonne5;
+
     /**
      * Constructor for å opprette TableView.
      */
     public LoggTableView(){
         lagLoggTableView();
     }
+
     /**
      * Metode for å opprette TableView for Logging samt å konstruere kolonnene til den.
      */
@@ -40,6 +42,7 @@ public class LoggTableView {
         logKolonne5.setMinWidth(200);
         loggTableView.getColumns().addAll(logKolonne1,logKolonne2,logKolonne3,logKolonne4,logKolonne5);
     }
+
     /**
      * Metode for å returnere TableView'en som skal ta vare på de siste Loggene..
      * @return Returnerer TableViewen med logger.
@@ -47,6 +50,7 @@ public class LoggTableView {
     public TableView<Logg> getLoggTableView() {
         return loggTableView;
     }
+
     /**
      * Metode for å oppdatere tableviewen med rader.
      * @param liste Listen med logger tableviewen skal inneholde.

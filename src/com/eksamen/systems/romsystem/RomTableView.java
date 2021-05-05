@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class RomTableView {
     private TableView<Rom> romTableView = new TableView<>();
+
     /**
      * Lager tableview med navn og kolonner
      * @return TableView
@@ -33,6 +34,7 @@ public class RomTableView {
             System.out.println("Kunne ikke konfigurere tableview: " +e);
         }
     }
+
     /**
      * Metode for å oppdatere TableViewen med rom som blir lagt til ved å lese de rommene som alle eksisterer, så legge til nye rom.
      * Denne metoden har støtte for å få inn en liste med flere nye rom.
@@ -42,6 +44,7 @@ public class RomTableView {
         ObservableList<Rom> romListe = liste;
         romTableView.setItems(romListe);
     }
+
     /**
      * Skaffer tabellen
      * @return TableView av Rom

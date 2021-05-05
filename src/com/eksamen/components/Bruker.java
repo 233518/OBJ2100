@@ -10,6 +10,7 @@ public class Bruker {
     private String name;
     private String ipAdress;
     private Rom rom;
+
     /**
      * Default constructor for å opprette en bruker.
      * @param name brukerens navn
@@ -18,6 +19,7 @@ public class Bruker {
         this.name = name;
         this.rom = null;
     }
+
     /**
      * Metode for å få kallenavnet til brukeren
      * @return kallenavnet til brukeren
@@ -25,6 +27,7 @@ public class Bruker {
     public String getName() {
         return name;
     }
+
     /**
      * Metode for å sette kallenavnet til brukeren.
      * @param name kallenavnet til brukeren.
@@ -32,6 +35,7 @@ public class Bruker {
     public void setName(String name) {
         this.name = name;
     }
+
     /**
      * Metode for å hente ipadresse til bruker
      * @return ipadressen til brukeren
@@ -45,6 +49,7 @@ public class Bruker {
         }
         return ipAdress;
     }
+
     /**
      * Metode for å sette ip adresse til bruker
      * @param ipAdress ipadresse til brukeren
@@ -52,6 +57,7 @@ public class Bruker {
     public void setIpAdress(String ipAdress) {
         this.ipAdress = ipAdress;
     }
+
     /**
      * Metode for å skaffe rom brukeren er i
      * @return Rom
@@ -59,6 +65,7 @@ public class Bruker {
     public Rom getRom() {
         return rom;
     }
+
     /**
      * Metode for å sette rom brukere er i
      * @param rom Rom bruker er i

@@ -73,7 +73,6 @@ public class RomListeUI {
         return vBox;
     }
 
-
     /**
      * Getter for TextField som brukes til å opprette rom.
      * @return Returnerer textField

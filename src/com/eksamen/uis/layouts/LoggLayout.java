@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
  */
 public class LoggLayout {
     private HBox hbox;
-    //private final LoggTableView loggTableView = new LoggTableView();
 
     /**
      * Constructor for å lage nytt UI/Layout til loggsystemet.

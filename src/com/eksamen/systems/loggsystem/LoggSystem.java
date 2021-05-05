@@ -13,12 +13,14 @@ import java.util.ArrayList;
 public class LoggSystem {
     private ArrayList<Logg> loggArrayList;
     private LoggTableView loggTableView;
+
     /**
      * Constructor for loggSystem
      */
     public LoggSystem() {
         this.loggTableView = new LoggTableView();
     }
+
     /**
      * Kjøres når database systemet har blitt initialisert
      * Fyller inn listen første gang
@@ -27,6 +29,7 @@ public class LoggSystem {
         this.loggArrayList = getArrayListFromDb();
         oppdaterTableView();
     }
+
     /**
      * Metode for å få tak i logger fra Databasen.
      * @return returnerer ArrayList<Logg> fra databasen.
@@ -34,12 +37,14 @@ public class LoggSystem {
     private ArrayList<Logg> getArrayListFromDb() {
         return Main.logger.getLogs();
     }
+
     /**
      * Metode for å oppdatere TableViewen med logger.
      */
     public void oppdaterTableView() {
         loggTableView.oppdaterTableView(getLog());
     }
+
     /**
      * Metode for å oppdatere LoggSystemet og TabelViewen med evt nye logger.
      */
@@ -47,6 +52,7 @@ public class LoggSystem {
         this.loggArrayList = getArrayListFromDb();
         oppdaterTableView();
     }
+
     /**
      * Metode for å hente logger fra loggArrayList og sette den inn i en ObservableArrayList for TableViewen.
      * @return returnerer ObservableList<Logg> som kan puttes inn i TableView.
@@ -58,6 +64,7 @@ public class LoggSystem {
         }
         return liste;
     }
+
     /**
      * Metode for å få tak i TableViewen til Logg.
      * @return returnerer loggTableView objektet.

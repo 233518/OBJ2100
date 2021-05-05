@@ -21,6 +21,7 @@ public class SyncServer {
     private ServerScene serverScene;
     private ServerNetworking serverNetworking;
     private LogNetwork logNetwork;
+
     /**
      * Konstruerer en ny SyncServer
      * @param bufferedWriter buffered skriver
@@ -34,6 +35,7 @@ public class SyncServer {
         this.serverNetworking = serverNetworking;
         this.logNetwork = logNetwork;
     }
+
     /**
      * Synker server med info fra klient
      * @param message melding fra klient
@@ -62,6 +64,7 @@ public class SyncServer {
             }
         }
     }
+
     /**
      * Får kommando fra klient at ny bruker har koblet til chatteprogrammet og er klar
      * Sender samme kommando til alle andre klienter
@@ -76,6 +79,7 @@ public class SyncServer {
         serverNetworking.updateClientsWithNewKobling(messageArray[1], clientSocket);
         logNetwork.logToDatabase(messageArray[1], LogOperations.NY_BRUKER_KOBLING.getHandling(), messageArray[2], "");
     }
+
     /**
      * Får kommando fra klient at bruker har forlatt rom
      * Sletter rom hos server og sender samme kommando til alle andre klienter
@@ -100,6 +104,7 @@ public class SyncServer {
         serverNetworking.updateClientsWithRemoveRoom(messageArray[1], messageArray[2], clientSocket);
         logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM.getHandling(), messageArray[3], messageArray[1]);
     }
+
     /**
      * Får kommando fra klient at bruker har forlatt rom
      * Fjerner bruker fra rom og sender samme kommando til alle andre klienter
@@ -141,6 +146,7 @@ public class SyncServer {
         serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
         logNetwork.logToDatabase(messageArray[2], LogOperations.FJERNA_ROM_BRUKER.getHandling(), messageArray[3], messageArray[1]);
     }
+
     /**
      * Får kommando fra klient at ny bruker har logget på rom
      * Legger til ny bruker og sender samme kommando til alle andre klienter
@@ -168,6 +174,7 @@ public class SyncServer {
         serverNetworking.updateClientsWithNewUserInRoom(messageArray[1], messageArray[2], clientSocket);
         logNetwork.logToDatabase(messageArray[2], LogOperations.NY_BRUKER_ROM.getHandling(), messageArray[3], messageArray[1]);
     }
+
     /**
      * Får kommando fra klient at nytt rom har blitt lagd
      * Lager nytt rom og sender samme kommando til alle andre klienter
@@ -186,6 +193,7 @@ public class SyncServer {
         serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
         logNetwork.logToDatabase(messageArray[2], LogOperations.NY_ROM.getHandling(), messageArray[3], messageArray[1]);
     }
+
     /**
      * Får kommando fra klient at ny melding har blitt sendt
      * Lager ny melding og sender samme kommando til alle andre klienter

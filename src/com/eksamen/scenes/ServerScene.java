@@ -61,6 +61,7 @@ public class ServerScene extends Scene {
             }
         });
     }
+
     /**
      * Skaffer rom systemet
      * @return RomSystem
@@ -68,6 +69,7 @@ public class ServerScene extends Scene {
     public RomSystem getRomSystem() {
         return romSystem;
     }
+
     /**
      * Skaffer rom
      * @return ArrayList av Rom
@@ -75,6 +77,7 @@ public class ServerScene extends Scene {
     public ArrayList<Rom> getRooms() {
         return rooms;
     }
+
     /**
      * Skaffer meldings systemet
      * @return MessageSystem
@@ -82,6 +85,7 @@ public class ServerScene extends Scene {
     public MessageSystem getMessage() {
         return message;
     }
+
     /**
      * Skaffer serveren sin ui
      * @return ServerUi
@@ -89,6 +93,7 @@ public class ServerScene extends Scene {
     public ServerUi getServerUi() {
         return serverUi;
     }
+
     /**
      * Skaffer brukeren til serveren
      * @return Bruker
@@ -96,4 +101,5 @@ public class ServerScene extends Scene {
     public Bruker getBruker() {
         return bruker;
     }
+
 }

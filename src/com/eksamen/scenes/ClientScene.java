@@ -30,6 +30,7 @@ public class ClientScene extends Scene {
     private InputSystem inputSystem;
     private MessageSystem messageSystem;
     private RomChat romChat;
+
     /**
      * Konstruerer en ny ClientScene
      * @param stage stage som scene skal tilhøre
@@ -68,6 +69,7 @@ public class ClientScene extends Scene {
             }
         });
     }
+
     /**
      * Skaffer romsystemet
      * @return RomSystem
@@ -75,6 +77,7 @@ public class ClientScene extends Scene {
     public RomSystem getRomSystem() {
         return romSystem;
     }
+
     /**
      * Skaffer liste med rom
      * @return ArrayList av Rom
@@ -82,6 +85,7 @@ public class ClientScene extends Scene {
     public ArrayList<Rom> getRooms() {
         return rooms;
     }
+
     /**
      * Skaffer meldings systemet
      * @return MessageSystem
@@ -89,6 +93,7 @@ public class ClientScene extends Scene {
     public MessageSystem getMessageSystem() {
         return messageSystem;
     }
+
     /**
      * Skaffer klienten sin ui
      * @return ClientUi
@@ -96,6 +101,7 @@ public class ClientScene extends Scene {
     public ClientUi getClientUi() {
         return clientUi;
     }
+
     /**
      * Skaffer brukeren til klienten
      * @return Bruker
@@ -103,6 +109,7 @@ public class ClientScene extends Scene {
     public Bruker getBruker() {
         return bruker;
     }
+
     /**
      * Viser en melding når ny bruker kobler til chatteprogrammet
      * @param melding melding som skal vises

@@ -24,6 +24,7 @@ public abstract class InputSystem {
     protected Rom rom;
     protected DeltakerTabell deltakerTabell;
     protected ArrayList<Rom> mainRoomList;
+
     /**
      * Constructor for Inputsystem
      * @param romListeUI UI til romliste
@@ -49,18 +50,21 @@ public abstract class InputSystem {
         visOpprettRom();
         OkKnappAlleredeOpprettetRom();
     }
+
     /**
      * Lager ActionEvent på knappen "sendKnapp" i RomChat
      * Den henter tekst fra textfield "meldingsBoks" og lager et nytt InndataTabell
      * og oppdaterer selve meldingslisten.
      */
     public abstract void sendMelding();
+
     /**
      * Lager ActionEvent på "opprettRom" knappen i RomListeUI
      * Denne henter teksten som brukeren kaller rommet, og lager ett nytt romobjekt og sender dette romobjektet videre,
      * den "joiner" også brukeren i chatterommet.
      */
     public abstract void opprettRom();
+
     /**
      * ActionEvent for å vise romnavn textfield
      */
@@ -73,22 +77,26 @@ public abstract class InputSystem {
             }
         });
     }
+
     /**
      *  Lager ActionEvent for å skjule meldingen som kommer opp om du allerede har opprettet et rom
      */
     public abstract void OkKnappAlleredeOpprettetRom();
+
     /**
      * Lager ActionEvent for å bli med i ett chatterom.
      * Den setter brukeren til det rommet som er valgt listen, og "joiner" brukeren i rommet.
      * Den henter også tidligere meldinger og aktive brukere i rommet.
      */
     public abstract void bliMedRom();
+
     /**
      * Setter rom til brukerens sitt rom
      */
     public void setRom(){
         rom = bruker.getRom();
     }
+
     /**
      * Metode for når en bruker forlater et rom
      * Andre brukere som er i samme rom vil få en oppdatert deltakerliste og

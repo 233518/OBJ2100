@@ -20,6 +20,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
     private ServerScene scene;
     private LogNetwork logNetwork;
     private CloseConnection closeConnection;
+
     /**
      * Konstruerer en ny ServerNetworking
      * @param scene server scenen den tilhører
@@ -35,6 +36,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             e.printStackTrace();
         }
     }
+
     /**
      * Run kjøres av Thread klassen
      * Er ansvarlig for å lytte til nye koblinger til serveren
@@ -55,6 +57,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             System.out.println("Server avsluttet");
         }
     }
+
     /**
      * Sender melding til klientene at serveren har blitt avsluttet
      */
@@ -63,6 +66,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.closeServer();
         }
     }
+
     /**
      * Sender melding til klientene at nytt rom har blitt opprettet
      * @param roomName navnet på rommet som har blitt opprettet
@@ -74,6 +78,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.NY_ROM.getHandling(), scene.getBruker().getIpAdress(), roomName);
     }
+
     /**
      * Sender start informasjon til klient
      * @param client klient
@@ -97,6 +102,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.newRoom(roomName, brukernavn);
         }
     }
+
     /**
      * Sender melding om at ny melding har blitt sendt i rom
      * @param roomName navnet på rommet som meldingen tilhører
@@ -112,6 +118,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.newMessage(roomName, brukernavn, message);
         }
     }
+
     /**
      * Sender melding om at ny melding har blitt sendt i rom
      * @param roomName navnet på rommet som meldingen tilhører
@@ -124,6 +131,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.NY_MELDING_ROM.getHandling(), scene.getBruker().getIpAdress(), roomName);
     }
+
     /**
      * Sender melding om at ny bruker har blitt med i rom
      * @param roomName navnet på rommet brukeren ble med i
@@ -135,6 +143,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.NY_BRUKER_ROM.getHandling(), scene.getBruker().getIpAdress(), roomName);
     }
+
     /**
      * Sender melding om at bruker ble med i rom til alle klienter
      * Hopper over klient som ble med i rommet
@@ -150,6 +159,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.newBruker(roomName, brukernavn);
         }
     }
+
     /**
      * Sender melding om at bruker forlot rom til alle klienter
      * Hopper over klient som opprettet rommet
@@ -165,6 +175,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.removeBruker(roomName, brukernavn);
         }
     }
+
     /**
      * Sender melding om at bruker forlot rom til alle klienter
      * @param roomName navnet på rommet som brukeren forlot
@@ -176,6 +187,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.FJERNA_ROM_BRUKER.getHandling(), scene.getBruker().getIpAdress(), roomName);
     }
+
     /**
      * Sender melding om at rom har blitt fjernet til alle klienter
      * Hopper over klient som opprettet rommet
@@ -191,6 +203,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.removeRoom(roomName, brukernavn);
         }
     }
+
     /**
      * Sender melding om at rom har blitt fjernet til alle klienter
      * @param roomName navnet på rommet som ble fjernet
@@ -202,6 +215,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.FJERNA_ROM.getHandling(), scene.getBruker().getIpAdress(), roomName);
     }
+
     /**
      * Sender melding om at ny bruker har koblet seg til chatteprogrammet
      * @param brukernavn brukernavn til brukeren
@@ -215,6 +229,7 @@ public class ServerNetworking extends Thread implements StopNettverk {
             client.newKobling(brukernavn);
         }
     }
+
     @Override
     public void stopNetwork() {
         closeServer();
