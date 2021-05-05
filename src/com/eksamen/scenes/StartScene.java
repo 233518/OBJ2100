@@ -34,7 +34,7 @@ public class StartScene extends Scene {
             }
 
             private boolean godkjent(String brukerNavn) {
-                if (brukerNavn != "" && brukerNavn.matches("[A-Za-z0-9æøå]+")) {
+                if (brukerNavn.matches("[A-Za-z0-9æøå]+")) {
                     return true;
                 }else{
                     Feilmelding.visFeilmelding("Brukernavnet ditt er ikke riktig formatert!" +"\n" + "(A-Å, a-å, 0-9)");
