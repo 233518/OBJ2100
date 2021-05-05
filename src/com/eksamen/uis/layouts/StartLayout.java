@@ -42,7 +42,7 @@ public class StartLayout {
 
             //Setter opp imageview med bilde
             imageView = new ImageView();
-            Image image1 = new Image(new FileInputStream("res/yyyy.png"));
+            Image image1 = new Image(new FileInputStream("res/chaticon.png"));
             imageView.setImage(image1);
             imageView.setFitHeight(200);
             imageView.setFitWidth(400);
