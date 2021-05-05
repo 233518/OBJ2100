@@ -171,19 +171,19 @@ public class SyncClient {
     public void syncServer(String message, Rom rom, String args1, String args2) {
         switch(message) {
             case "newRoom":
-                newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn());
+                newRoomClient("newRoom:" + rom.getRomNavn() + ":" + rom.getBrukerNavn() + ":" + bruker.getIpAdress());
                 break;
             case "newMessage":
-                newMessageClient("newMessage:" + rom.getRomNavn() + ":" + args1 + ":" + args2);
+                newMessageClient("newMessage:" + rom.getRomNavn() + ":" + args1 + ":" + args2 + ":" + bruker.getIpAdress());
                 break;
             case "newBruker":
-                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1);
+                newBrukerClient("newBruker:" + rom.getRomNavn() + ":" + args1 + ":" + bruker.getIpAdress());
                 break;
             case "removeBruker":
-                removeBrukerClient("removeBruker:" + rom.getRomNavn() + ":" + args1);
+                removeBrukerClient("removeBruker:" + rom.getRomNavn() + ":" + args1 + ":" + bruker.getIpAdress());
                 break;
             case "removeRoom":
-                removeRoomClient("removeRoom:" + rom.getRomNavn() + ":" + args1);
+                removeRoomClient("removeRoom:" + rom.getRomNavn() + ":" + args1 + ":" + bruker.getIpAdress());
                 break;
         }
     }
