@@ -5,8 +5,6 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
-import com.eksamen.utils.Feilmelding;
-import com.eksamen.utils.Infomelding;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -64,7 +62,7 @@ public class SyncClient {
 
     private void newKoblingServer(String message) {
         String[] messageArray = message.split(":");
-        clientScene.nyBrukerKobletTil(messageArray[1]);
+        clientScene.visInformasjonsMelding(messageArray[1] + " har koblet til chatteprogrammet");
     }
 
     /**
@@ -143,6 +141,7 @@ public class SyncClient {
         Rom rom = new Rom(messageArray[1],messageArray[2]);
         clientScene.getRooms().add(rom);
         clientScene.getRomSystem().opprettRom(rom);
+        clientScene.visInformasjonsMelding("Det har blitt opprettet et nytt rom med navn: " + messageArray[1]);
     }
 
     /**

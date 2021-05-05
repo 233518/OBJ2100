@@ -109,13 +109,13 @@ public class ClientScene extends Scene {
 
     /**
      * Viser en melding når ny bruker kobler til chatteprogrammet
-     * @param brukernavn
+     * @param melding melding som skal vises
      */
-    public void nyBrukerKobletTil(String brukernavn) {
+    public void visInformasjonsMelding(String melding) {
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
-                Infomelding.visInfoMelding(brukernavn + " har koblet til chatteprogrammet");
+                Infomelding.visInfoMelding(melding);
             }
         });
     }
