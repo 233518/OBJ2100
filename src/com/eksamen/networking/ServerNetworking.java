@@ -8,6 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * ServerNetworking håndterer nettverksdelen for serveren
+ */
 public class ServerNetworking extends Thread {
     private int port = 1234;
     private Socket socket;
@@ -15,6 +18,10 @@ public class ServerNetworking extends Thread {
     private ArrayList<ClientSocket> clients;
     private ServerScene scene;
 
+    /**
+     * Konstruerer en ny ServerNetworking
+     * @param scene servere scenen den tilhører
+     */
     public ServerNetworking(ServerScene scene) {
         try {
             this.scene = scene;
@@ -24,7 +31,12 @@ public class ServerNetworking extends Thread {
             e.printStackTrace();
         }
     }
-    //Kjøres av thread
+
+    /**
+     * Run kjøres av Thread klassen
+     * Er ansvarlig for å lytte til nye koblinger til serveren
+     * Opretter en ny tråd for hver kobling
+     */
     public void run(){
         try {
             while (true) {
@@ -39,17 +51,33 @@ public class ServerNetworking extends Thread {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sender melding til klientene at nytt rom har blitt opprettet
+     * @param roomName navnet på rommet som har blitt opprettet
+     * @param brukernavn brukernavnet til brukeren som opprettet rommet
+     */
     public void sendNewRoom(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
             client.newRoom(roomName, brukernavn);
         }
     }
-    public void leggTilRom(ServerScene scene, Rom rom) {
-        scene.getRooms().add(rom);
-    }
+
+    /**
+     * Sender start informasjon til klient
+     * @param client klient
+     */
     private void sendInformationToclient(ClientSocket client) {
         client.sendInformation(scene.getRooms());
     }
+
+    /**
+     * Sender melding om at nytt rom har blitt opprettet til alle klienter
+     * Hopper over klient som opprettet rommet
+     * @param roomName navnet på rommet som har blitt opprettet
+     * @param brukernavn brukernavnet til brukeren som opprettet rommet
+     * @param clientSocket klienten som opprettet rommet
+     */
     public void updateClientsWithNewRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
             if(client.equals(clientSocket)) {
@@ -58,6 +86,14 @@ public class ServerNetworking extends Thread {
             client.newRoom(roomName, brukernavn);
         }
     }
+
+    /**
+     * Sender melding om at ny melding har blitt sendt i rom
+     * @param roomName navnet på rommet som meldingen tilhører
+     * @param brukernavn navnet på brukeren som meldingen tilhører
+     * @param message meldingen som brukeren sendte
+     * @param clientSocket klienten som opprettet meldingen
+     */
     public void updateClientsWithNewMessage(String roomName, String brukernavn, String message, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
             if(client.equals(clientSocket)) {
@@ -66,18 +102,37 @@ public class ServerNetworking extends Thread {
             client.newMessage(roomName, brukernavn, message);
         }
     }
+
+    /**
+     * Sender melding om at ny melding har blitt sendt i rom
+     * @param roomName navnet på rommet som meldingen tilhører
+     * @param brukernavn navnet på brukeren som meldingen tilhører
+     * @param message meldingen som brukeren sendte
+     */
     public void sendNewMessage(String roomName, String brukernavn, String message) {
         for(ClientSocket client : clients) {
             client.newMessage(roomName, brukernavn, message);
         }
     }
 
+    /**
+     * Sender melding om at ny bruker har blitt med i rom
+     * @param roomName navnet på rommet brukeren ble med i
+     * @param brukernavn navnet på brukeren
+     */
     public void sendNewUser(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
             client.newBruker(roomName, brukernavn);
         }
     }
 
+    /**
+     * Sender melding om at bruker ble med i rom til alle klienter
+     * Hopper over klient som ble med i rommet
+     * @param roomName navnet på rommet som brukeren ble med i
+     * @param brukernavn navnet på brukeren
+     * @param clientSocket klienten som ble med i rommet
+     */
     public void updateClientsWithNewUserInRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
             if(client.equals(clientSocket)) {
@@ -87,6 +142,13 @@ public class ServerNetworking extends Thread {
         }
     }
 
+    /**
+     * Sender melding om at bruker forlot rom til alle klienter
+     * Hopper over klient som opprettet rommet
+     * @param roomName navnet på rommet som brukeren forlot
+     * @param brukernavn navnet på brukeren
+     * @param clientSocket klienten som forlot rommet
+     */
     public void updateClientsWithRemoveUserInRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
             if(client.equals(clientSocket)) {
@@ -96,12 +158,23 @@ public class ServerNetworking extends Thread {
         }
     }
 
+    /**
+     * Sender melding om at bruker forlot rom til alle klienter
+     * @param roomName navnet på rommet som brukeren forlot
+     * @param brukernavn navnet på brukeren
+     */
     public void removeBruker(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
             client.removeBruker(roomName, brukernavn);
         }
     }
 
+    /**
+     * Sender melding om at rom har blitt fjernet til alle klienter
+     * Hopper over klient som opprettet rommet
+     * @param roomName navnet på rommet som ble fjernet
+     * @param clientSocket klienten som fjernet rommet
+     */
     public void updateClientsWithRemoveRoom(String roomName, ClientSocket clientSocket) {
         for(ClientSocket client : clients) {
             if(client.equals(clientSocket)) {
@@ -111,6 +184,11 @@ public class ServerNetworking extends Thread {
         }
     }
 
+    /**
+     * Sender melding om at rom har blitt fjernet til alle klienter
+     * @param roomName navnet på rommet som ble fjernet
+     * @param rom rom informasjon
+     */
     public void removeRoom(String roomName, Rom rom) {
         for(ClientSocket client : clients) {
             client.removeRoom(roomName);

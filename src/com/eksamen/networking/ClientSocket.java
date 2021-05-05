@@ -9,7 +9,9 @@ import com.eksamen.systems.chatsystem.InndataTabell;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-
+/**
+ * ClientSocket er en kobling med en klient
+ */
 public class ClientSocket extends Thread {
     private Socket socket;
     private InputStreamReader input;
@@ -20,6 +22,12 @@ public class ClientSocket extends Thread {
 
     private SyncServer syncServer;
 
+    /**
+     * Konstruerer en ny ClientSocket
+     * @param socket kobling til klient
+     * @param serverScene servere scenen den tilhører
+     * @param serverNetworking server side nettverksdelen
+     */
     public ClientSocket(Socket socket, ServerScene serverScene, ServerNetworking serverNetworking) {
         this.socket = socket;
         try {
@@ -33,6 +41,10 @@ public class ClientSocket extends Thread {
         }
     }
 
+    /**
+     * Run kjøres av Thread klassen
+     * Er ansvarlig for å skaffe informasjon fra klient
+     */
     public void run() {
         try {
             while (true) {
@@ -45,9 +57,10 @@ public class ClientSocket extends Thread {
             System.out.println("Client disconnected");
         }
     }
+
     /**
-     * Sender informasjon til klient
-     * @param scene scene
+     * Sender start informasjon til klient
+     * @param rooms liste av rom
      */
     public void sendInformation(ArrayList<Rom> rooms) {
         try {
@@ -78,6 +91,11 @@ public class ClientSocket extends Thread {
         }
     }
 
+    /**
+     * Sender melding til klient at nytt rom har blitt opprettet
+     * @param roomName navnet på rommet som ble opprettet
+     * @param brukerNavn navnet til brukeren som opprettet rommet
+     */
     public void newRoom(String roomName, String brukerNavn) {
         try {
             bufferedWriter.write("newRoom" + ":" + roomName + ":" + brukerNavn);
@@ -87,6 +105,13 @@ public class ClientSocket extends Thread {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sender melding til klient at ny melding har blitt sendt
+     * @param roomName navnet på rommet som meldingen tilhører
+     * @param brukerNavn navnet til brukeren som opprettet meldingen
+     * @param message selve meldingen brukeren sendte
+     */
     public void newMessage(String roomName, String brukerNavn, String message) {
         try {
             bufferedWriter.write("newMessage" + ":" + roomName + ":" + brukerNavn + ":" + message);
@@ -97,6 +122,11 @@ public class ClientSocket extends Thread {
         }
     }
 
+    /**
+     * Sender melding til klient at ny bruker har blitt med i rom
+     * @param roomName romnavn brukeren har blitt med i
+     * @param brukernavn brukernavn til brukeren
+     */
     public void newBruker(String roomName, String brukernavn) {
         try {
             bufferedWriter.write("newBruker" + ":" + roomName + ":" + brukernavn);
@@ -107,6 +137,11 @@ public class ClientSocket extends Thread {
         }
     }
 
+    /**
+     * Sender melding til klient at bruker har forlatt rom
+     * @param roomName romnavn brukeren har forlatt
+     * @param brukernavn brukernavn til brukeren
+     */
     public void removeBruker(String roomName, String brukernavn) {
         try {
             bufferedWriter.write("removeBruker" + ":" + roomName + ":" + brukernavn);
@@ -117,6 +152,10 @@ public class ClientSocket extends Thread {
         }
     }
 
+    /**
+     * Sender melding til klient at rom har blitt fjernet
+     * @param roomName navnet på rommet som har blitt fjernet
+     */
     public void removeRoom(String roomName) {
         try {
             bufferedWriter.write("removeRoom" + ":" + roomName);

@@ -11,6 +11,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * SyncServer håndterer hva som skal gjøres under input fra nettverk
+ * Sender også informasjon til klienter
+ */
 public class SyncServer {
     private BufferedWriter bufferedWriter;
     private ServerScene serverScene;
@@ -24,8 +28,7 @@ public class SyncServer {
 
     /**
      * Synker server med info fra klient
-     * @param message
-     * @param rom
+     * @param message melding fra klient
      */
     public void syncServer(String message, ClientSocket clientSocket)  {
         if(message != null) {
@@ -49,6 +52,12 @@ public class SyncServer {
         }
     }
 
+    /**
+     * Får kommando fra klient at bruker har forlatt rom
+     * Sletter rom hos server og sender samme kommando til alle andre klienter
+     * @param message melding fra klient
+     * @param clientSocket klienten meldingen kom fra
+     */
     private void removeRoom(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");
         Rom rom = null;
@@ -65,8 +74,9 @@ public class SyncServer {
 
     /**
      * Får kommando fra klient at bruker har forlatt rom
-     * @param message
-     * @param clientSocket
+     * Fjerner bruker fra rom og sender samme kommando til alle andre klienter
+     * @param message melding fra klient
+     * @param clientSocket klienten meldingen kom fra
      */
     private void removeBrukerServer(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");
@@ -101,8 +111,9 @@ public class SyncServer {
 
     /**
      * Får kommando fra klient at ny bruker har logget på rom
-     * @param message
-     * @param clientSocket
+     * Legger til ny bruker og sender samme kommando til alle andre klienter
+     * @param message melding fra klient
+     * @param clientSocket klienten meldingen tilhører
      */
     private void newBrukerServer(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");
@@ -123,8 +134,9 @@ public class SyncServer {
 
     /**
      * Får kommando fra klient at nytt rom har blitt lagd
-     * @param message
-     * @param clientSocket
+     * Lager nytt rom og sender samme kommando til alle andre klienter
+     * @param message meldingen fra klient
+     * @param clientSocket klienten meldingen tilhører
      */
     private void newRoomServer(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");
@@ -136,8 +148,9 @@ public class SyncServer {
 
     /**
      * Får kommando fra klient at ny melding har blitt sendt
-     * @param message
-     * @param clientSocket
+     * Lager ny melding og sender samme kommando til alle andre klienter
+     * @param message melding
+     * @param clientSocket klienten meldingen tilhører
      */
     private void newMessageServer(String message, ClientSocket clientSocket) {
         String[] messageArray = message.split(":");

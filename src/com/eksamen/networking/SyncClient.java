@@ -12,12 +12,23 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * SyncClient håndterer hva som skal gjøres under input fra nettverk
+ * Sender også informasjon til server
+ */
 public class SyncClient {
     private BufferedWriter bufferedWriter;
     private ClientScene clientScene;
     private ClientNetworking clientNetworking;
     private Bruker bruker;
 
+    /**
+     * Konstruerer en ny SyncClient
+     * @param bufferedWriter buffered skriver som skal brukes
+     * @param clientScene scenen som den tilhører
+     * @param clientNetworking klienten sin nettverkskomponent
+     * @param bruker brukeren til klienten
+     */
     public SyncClient(BufferedWriter bufferedWriter, ClientScene clientScene, ClientNetworking clientNetworking, Bruker bruker) {
         this.bufferedWriter = bufferedWriter;
         this.clientScene = clientScene;
@@ -26,8 +37,8 @@ public class SyncClient {
     }
 
     /**
-     * Synker klienten med info fra server
-     * @param message
+     * Synker klient med info fra server
+     * @param message melding fra server
      */
     public void syncClient(String message)  {
         switch(message.split(":")[0]) {
@@ -49,6 +60,11 @@ public class SyncClient {
         }
     }
 
+    /**
+     * Får kommando fra server at rom har blitt slettet
+     * Sletter rom
+     * @param message melding fra server
+     */
     private void removeRoomServer(String message) {
         String[] messageArray = message.split(":");
         Rom rom = null;
@@ -64,7 +80,8 @@ public class SyncClient {
 
     /**
      * Får kommando fra server at bruker har forlatt rom
-     * @param message
+     * Fjerner bruker fra rom
+     * @param message melding fra server
      */
     private void removeBrukerServer(String message) {
         System.out.println("Fjern deltaker starter");
@@ -103,7 +120,8 @@ public class SyncClient {
 
     /**
      * Får kommando fra server at nytt rom har blitt lagd
-     * @param message
+     * Legger til nytt rom
+     * @param message melding fra server
      */
     public void newRoomServer(String message) {
         String[] messageArray = message.split(":");
@@ -114,7 +132,8 @@ public class SyncClient {
 
     /**
      * Får kommando fra server at ny melding har blitt lagd
-     * @param message
+     * Lager ny melding
+     * @param message melding ta server
      */
     public void newMessageServer(String message) {
         String[] messageArray = message.split(":");
@@ -131,7 +150,8 @@ public class SyncClient {
 
     /**
      * Får kommando fra server at ny bruker logget på rom
-     * @param message
+     * Legger til bruker i rom
+     * @param message melding fra server
      */
     private void newBrukerServer(String message) {
         String[] messageArray = message.split(":");
@@ -149,7 +169,7 @@ public class SyncClient {
     }
     /**
      * Synker server med info fra klient
-     * @param message
+     * @param message melding som skal sendes
      */
     public void syncServer(String message, Rom rom, String args1, String args2) {
         switch(message) {
@@ -173,7 +193,7 @@ public class SyncClient {
 
     /**
      * Sender kommando til server at rom blir sletta for inaktiv
-     * @param message
+     * @param message melding som skal sendes
      */
     private void removeRoomClient(String message) {
         try {
@@ -187,7 +207,7 @@ public class SyncClient {
 
     /**
      * Sender kommando til server at klient gikk ut av rom
-     * @param message
+     * @param message melding som skal sendes
      */
     private void removeBrukerClient(String message) {
         try {
@@ -201,7 +221,7 @@ public class SyncClient {
 
     /**
      * Sender kommando til server at klient logget på rom
-     * @param message
+     * @param message melding som skal sendes
      */
     private void newBrukerClient(String message) {
         try {
@@ -215,7 +235,7 @@ public class SyncClient {
 
     /**
      * Sender kommando til server at klient lagde nytt rom
-     * @param message
+     * @param message melding som skal sendes
      */
     public void newRoomClient(String message) {
         try {
@@ -229,7 +249,7 @@ public class SyncClient {
 
     /**
      * Sender kommando til server at klient sendte ny melding
-     * @param message
+     * @param message melding som skal sendes
      */
     public void newMessageClient(String message) {
         try{
