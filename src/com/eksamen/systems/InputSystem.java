@@ -11,6 +11,9 @@ import com.eksamen.uis.layouts.RomListeUI;
 
 import java.util.ArrayList;
 
+/**
+ * Klassen InputSystem initaliserer alle ActionEvents metodene som er laget i ServerInput og ClientInput.
+ */
 public abstract class InputSystem {
     protected RomChat romChat;
     protected MessageSystem message;
