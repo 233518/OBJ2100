@@ -125,6 +125,7 @@ public class ClientInput extends InputSystem{
             }
         });
     }
+
     @Override
     public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
         hovedLayout.getTab().setOnCloseRequest(event -> {
