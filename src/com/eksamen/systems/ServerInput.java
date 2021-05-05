@@ -73,7 +73,6 @@ public class ServerInput extends InputSystem {
                     serverNetworking.sendNewUser(rom.getRomNavn(), bruker.getName());
                     romChat.oppdaterMeldingListe(message.getMeldinger(rom));
                     forlatRom(deltakerTabell, rom, mainRoomList);
-                    Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
                 } else{
                     Feilmelding.visFeilmelding("Dette feltet kan ikke være tomt");
                 }
@@ -151,7 +150,7 @@ public class ServerInput extends InputSystem {
             setRom();
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
-                serverNetworking.removeRoom("removeRoom", rom);
+                serverNetworking.removeRoom("removeRoom", rom, bruker.getName());
             }
         });
     }

@@ -64,7 +64,7 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.newRoom(roomName, brukernavn);
         }
-        logNetwork.logToDatabase(brukernavn, "Rom ble opprettet", "IPHER", roomName);
+        logNetwork.logToDatabase(brukernavn, LogOperations.NY_ROM.getHandling(), "IPHER", roomName);
     }
 
     /**
@@ -129,7 +129,7 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.newBruker(roomName, brukernavn);
         }
-        logNetwork.logToDatabase(brukernavn, LogOperations.NY_MELDING_ROM.getHandling(), "IPHER", roomName);
+        logNetwork.logToDatabase(brukernavn, LogOperations.NY_BRUKER_ROM.getHandling(), "IPHER", roomName);
     }
 
     /**
@@ -173,6 +173,7 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.removeBruker(roomName, brukernavn);
         }
+        logNetwork.logToDatabase(brukernavn, LogOperations.FJERNA_ROM_BRUKER.getHandling(), "IPHER", roomName);
     }
 
     /**
@@ -195,9 +196,10 @@ public class ServerNetworking extends Thread {
      * @param roomName navnet på rommet som ble fjernet
      * @param rom rom informasjon
      */
-    public void removeRoom(String roomName, Rom rom) {
+    public void removeRoom(String roomName, Rom rom, String brukernavn) {
         for(ClientSocket client : clients) {
             client.removeRoom(roomName);
         }
+        logNetwork.logToDatabase(brukernavn, LogOperations.FJERNA_ROM.getHandling(), "IPHER", roomName);
     }
 }
