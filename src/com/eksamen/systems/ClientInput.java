@@ -10,8 +10,11 @@ import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
 import com.eksamen.utils.Feilmelding;
-
 import java.util.ArrayList;
+
+/**
+ * Klasse for å håndtere ActionEvents, når brukeren trykker en knapp
+ */
 
 public class ClientInput extends InputSystem{
     private ClientNetworking clientNetworking;
