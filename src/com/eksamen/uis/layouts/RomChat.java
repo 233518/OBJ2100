@@ -99,7 +99,7 @@ public class RomChat {
 
         //Styling
         inndata.setStyle("-fx-background-color: #a1eaf7");
-        borderpane.setStyle("-fx-background-color: #757780");
+        borderpane.setStyle("-fx-background-color: #3D5A6C");
         inndataKolonne1.setStyle("-fx-background-color: #E9F7CA");
         inndataKolonne2.setStyle("-fx-background-color: #EAEFB1");
         inndataKolonne3.setStyle("-fx-background-color: #F7D488");
