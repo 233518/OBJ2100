@@ -9,28 +9,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class RomTableView {
-    private final TableView<Rom> romTableView = new TableView<>();
-
+    private TableView<Rom> romTableView = new TableView<>();
     /**
      * Lager tableview med navn og kolonner
      * @return TableView
      */
-    private TableView tableView() {
+    public RomTableView() {
         try {
-            TableColumn<Rom, String> romKolonne = new TableColumn<>("Rom");
-            TableColumn<Rom, String> brukerKolonne = new TableColumn<>("Laget av");
-
+            TableColumn<Rom, String> romKolonne = new TableColumn<Rom, String>("Rom");
             romKolonne.setMinWidth(50);
             romKolonne.setCellValueFactory(new PropertyValueFactory<>("romNavn"));
 
+            TableColumn<Rom, String> brukerKolonne = new TableColumn<Rom, String>("Laget av");
             brukerKolonne.setMinWidth(50);
             brukerKolonne.setCellValueFactory(new PropertyValueFactory<>("brukerNavn"));
 
+            romTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             romTableView.getColumns().addAll(romKolonne, brukerKolonne);
         }catch (Exception e){
             System.out.println("Kunne ikke konfigurere tableview: " +e);
         }
-        return romTableView;
     }
 
     /**
@@ -43,11 +41,7 @@ public class RomTableView {
         romTableView.setItems(romListe);
     }
 
-    /**
-     * Metode for å returnere tablieView'en.
-     * @return Returnerer tableView'en.
-     */
     public TableView<Rom> getRomTableView() {
-        return tableView();
+        return romTableView;
     }
 }

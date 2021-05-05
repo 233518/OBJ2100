@@ -46,10 +46,8 @@ public class RomSystem {
      */
     public void opprettRom(Rom rom) {
         romArrayList.add(rom);
+        System.out.println("Denne kjører");
         romListeUi.getRomTableView().oppdaterTableView(getRom());
-
-        //Fiks dette, den logger to ganger buggen
-        //Main.logger.logg(bruker.getName(),"Opprettet nytt rom", bruker.getIpAdress(), rom.getRomNavn());
     }
 
     public void removeRom(Rom rom) {
@@ -62,7 +60,7 @@ public class RomSystem {
      * @return Returnerer observablelist med rom fra romArrayList.
      */
      public ObservableList<Rom> getRom() {
-        ObservableList<Rom> liste = FXCollections.observableArrayList();
+         ObservableList<Rom> liste = FXCollections.observableArrayList();
          for (Rom rom : romArrayList) {
              liste.add(rom);
          }

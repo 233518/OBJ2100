@@ -51,11 +51,15 @@ public class ClientScene extends Scene {
         nettverk.newKobling(username);
 
         romSystem = new RomSystem(clientUi.getHovedLayout().getRomListe(), bruker);
-        romSystem.fyllInnTableview(rooms);
+
+        //romSystem.fyllInnTableview(rooms);
 
         messageSystem = new MessageSystem();
-
+        clientUi.getHovedLayout().getRomListe().getRomTableView().getRomTableView().getColumns().forEach(data -> {
+            System.out.println("Sjekk når ting starter: " + data.getText());
+        });
         inputSystem = new ClientInput(clientUi.getHovedLayout().getRomListe(), bruker, clientUi.getHovedLayout(), messageSystem, clientUi.getHovedLayout().getRomChat(), romSystem, rooms, nettverk);
+
 
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override

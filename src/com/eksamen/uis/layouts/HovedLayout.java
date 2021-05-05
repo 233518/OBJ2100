@@ -83,9 +83,9 @@ public class HovedLayout {
      */
     public void lagNyTab(String navn){
         tab = new Tab();
-        tabPane.getTabs().add(tab);
         tab.setText(navn);
         tab.setContent(romChat.getBorderpane());
+        tabPane.getTabs().add(tab);
     }
 
     /**

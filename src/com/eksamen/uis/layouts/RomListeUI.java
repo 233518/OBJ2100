@@ -13,11 +13,11 @@ import javafx.scene.layout.VBox;
  * Klasse for å opprette UI til romlisten.
  */
 public class RomListeUI {
-    private final RomTableView romTableView = new RomTableView();
-    private final VBox vBox = new VBox();
-    private final HBox nyttRomHBox = new HBox();
-    private final HBox alleredeRomHBox = new HBox();
-    private final HBox hBoxButtons = new HBox();
+    private RomTableView romTableView;
+    private VBox vBox = new VBox();
+    private HBox nyttRomHBox = new HBox();
+    private HBox alleredeRomHBox = new HBox();
+    private HBox hBoxButtons = new HBox();
 
     private Label alleredeRomLabel;
     private TextField textField = new TextField();
@@ -31,6 +31,7 @@ public class RomListeUI {
      * @return Returnerer vBoxen som holder på hele UI'et til romlisten.
      */
     public VBox getRomUI() {
+        romTableView = new RomTableView();
         buttonLeggTilRom = new Button("Legg til");
         buttonBliMed = new Button("Bli med i rom");
         alleredeRomButton = new Button("OK");
