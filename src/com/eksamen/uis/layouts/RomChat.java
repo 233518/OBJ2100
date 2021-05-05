@@ -1,9 +1,7 @@
 package com.eksamen.uis.layouts;
 
-import com.eksamen.components.Rom;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,10 +24,17 @@ public class RomChat {
     private VBox rightBorderPane;
     private TableColumn deltakerKolonne1, inndataKolonne1, inndataKolonne2, inndataKolonne3;
 
+    /**
+     * Constructor for RomChat
+     * Lager layouten til chatterommet
+     */
     public RomChat(){
         lagRomChat();
     }
 
+    /**
+     * Metode for å lage chatterom
+     */
     public void lagRomChat(){
         //Setter variabler
         borderpane = new BorderPane();
@@ -86,52 +91,60 @@ public class RomChat {
         rightBorderPane.getChildren().addAll(deltakereLabel, deltakere);
     }
 
+    /**
+     * Getter for å få tak i hoved pane
+     * @return BorderPane
+     */
     public BorderPane getBorderpane() {
         return borderpane;
     }
 
-    public TableView getInndata() {
-        return inndata;
-    }
-
-    public void setInndata(TableView inndata) {
-        this.inndata = inndata;
-    }
-
+    /**
+     * Getter for å få tak i sende knappen
+     * @return Button
+     */
     public Button getSendKnapp() {
         return sendKnapp;
     }
 
+    /**
+     * Getter for å få tak i der brukeren skriver meldingen han vil sende
+     * @return TextField
+     */
     public TextField getMeldingsBoks() {
         return meldingsBoks;
     }
 
+    /**
+     * Getter for å få tak i tabellen med deltakere
+     * @return TableView
+     */
     public TableView getDeltakere() {
         return deltakere;
     }
 
-    public void setDeltakere(TableView deltakere) {
-        this.deltakere = deltakere;
-    }
-
+    /**
+     * Oppdaterer tabellen med deltakere
+     * @param liste
+     */
     public void oppdaterDeltakerListe(ObservableList<DeltakerTabell> liste) {
         ObservableList<DeltakerTabell> deltakerListe = liste;
         deltakere.setItems(deltakerListe);
-
-        /*
-        ObservableList<DeltakerTabell> tableViewItems = deltakere.getItems();
-        ObservableList<DeltakerTabell> deltakerArrayList = FXCollections.observableArrayList();
-        //deltakerArrayList.addAll(tableViewItems);
-        deltakerArrayList.addAll(liste);
-        deltakere.setItems(deltakerArrayList);
-         */
     }
 
+    /**
+     * Oppdaterer tabellen med meldinger
+     * @param liste
+     */
     public void oppdaterMeldingListe(ObservableList<InndataTabell> liste) {
         ObservableList<InndataTabell> meldingListe = liste;
         inndata.setItems(meldingListe);
     }
 
+    /**
+     * Getter for kolonne nummer 1 i deltaker tabellen
+     * @return TableColumn
+     */
     public TableColumn getDeltakerKolonne1() {
         return deltakerKolonne1;
     }
