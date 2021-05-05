@@ -26,6 +26,7 @@ public class RomTableView {
             brukerKolonne.setMinWidth(50);
             brukerKolonne.setCellValueFactory(new PropertyValueFactory<>("brukerNavn"));
 
+            romTableView.setStyle("-fx-background-color: #a1eaf7; -fx-selection-bar: #E9F7CA");
             romTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             romTableView.getColumns().addAll(romKolonne, brukerKolonne);
         }catch (Exception e){
