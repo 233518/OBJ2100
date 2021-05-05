@@ -4,6 +4,7 @@ import com.eksamen.MainClient;
 import com.eksamen.networking.ClientNetworking;
 import com.eksamen.uis.ClientUi;
 import com.eksamen.uis.layouts.StartLayout;
+import com.eksamen.utils.Feilmelding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
@@ -27,7 +28,18 @@ public class StartScene extends Scene {
         start.getEnter().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                stage.setScene(new ClientScene(stage, new ClientUi(), start.getSkrivBrukernavn().getText()));
+                if (godkjent(start.getSkrivBrukernavn().getText())) {
+                    stage.setScene(new ClientScene(stage, new ClientUi(), start.getSkrivBrukernavn().getText()));
+                }
+            }
+
+            private boolean godkjent(String brukerNavn) {
+                if (brukerNavn.matches("[A-Za-z0-9æøå]+")) {
+                    return true;
+                }else{
+                    Feilmelding.visFeilmelding("Brukernavnet ditt er ikke riktig formatert!" +"\n" + "(A-Å, a-å, 0-9)");
+                    return false;
+                }
             }
         });
     }

@@ -45,10 +45,16 @@ public class ServerInput extends InputSystem {
     public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
+            melding = melding.replace(":", "");
+            if(melding.equals("")) {
+                Feilmelding.visFeilmelding("Du kan ikke sende en tom melding");
+                return;
+            };
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
             serverNetworking.sendNewMessage(rom.getRomNavn(), bruker.getName(), melding);
+            romChat.getMeldingsBoks().setText("");
         });
     }
 
@@ -61,13 +67,13 @@ public class ServerInput extends InputSystem {
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             try{
-                Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+                Rom rom = new Rom(romListeUI.getTextField().getText().replace(":", ""), bruker.getName());
                 if(romListeUI.getTextField().getText() != ""){
                     bruker.setRom(rom);
                     setRom();
                     mainRoomList.add(rom);
                     romSystem.opprettRom(rom);
-                    hovedLayout.lagNyTab(romListeUI.getTextField().getText());
+                    hovedLayout.lagNyTab(romListeUI.getTextField().getText().replace(":", ""));
                     deltakerTabell = new DeltakerTabell(bruker.getName());
                     rom.leggTilDeltaker(deltakerTabell);
                     romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
@@ -118,7 +124,6 @@ public class ServerInput extends InputSystem {
                 }
                 bruker.setRom(rom);
                 setRom();
-                //mainRoomList.add(rom);
                 hovedLayout.lagNyTab(rom.getRomNavn());
                 deltakerTabell = new DeltakerTabell(bruker.getName());
                 rom.leggTilDeltaker(deltakerTabell);

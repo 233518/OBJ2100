@@ -1,8 +1,8 @@
 package com.eksamen.networking;
 
-import com.eksamen.components.Rom;
 import com.eksamen.scenes.ServerScene;
 import com.eksamen.utils.LogOperations;
+import com.eksamen.utils.StopNettverk;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -12,13 +12,14 @@ import java.util.ArrayList;
 /**
  * ServerNetworking håndterer nettverksdelen for serveren
  */
-public class ServerNetworking extends Thread {
+public class ServerNetworking extends Thread implements StopNettverk {
     private int port = 1234;
     private Socket socket;
     private ServerSocket serverSocket;
     private ArrayList<ClientSocket> clients;
     private ServerScene scene;
     private LogNetwork logNetwork;
+    private CloseConnection closeConnection;
 
     /**
      * Konstruerer en ny ServerNetworking
@@ -30,6 +31,7 @@ public class ServerNetworking extends Thread {
             this.logNetwork = new LogNetwork();
             serverSocket = new ServerSocket(port);
             clients = new ArrayList<>();
+            closeConnection = new CloseConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,6 +44,8 @@ public class ServerNetworking extends Thread {
      */
     public void run(){
         try {
+            if(serverSocket == null)
+                return;
             while (true) {
                 socket = serverSocket.accept(); //"Lytter" etter klient koblinger
                 System.out.println("Client connected");
@@ -51,10 +55,18 @@ public class ServerNetworking extends Thread {
                 sendInformationToclient(client);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Server avsluttet");
         }
     }
 
+    /**
+     * Sender melding til klientene at serveren har blitt avsluttet
+     */
+    public void closeServer() {
+        for(ClientSocket client : clients) {
+            client.closeServer();
+        }
+    }
     /**
      * Sender melding til klientene at nytt rom har blitt opprettet
      * @param roomName navnet på rommet som har blitt opprettet
@@ -180,6 +192,7 @@ public class ServerNetworking extends Thread {
      * Sender melding om at rom har blitt fjernet til alle klienter
      * Hopper over klient som opprettet rommet
      * @param roomName navnet på rommet som ble fjernet
+     * @param brukernavn navnet på brukeren
      * @param clientSocket klienten som fjernet rommet
      */
     public void updateClientsWithRemoveRoom(String roomName, String brukernavn, ClientSocket clientSocket) {
@@ -194,12 +207,31 @@ public class ServerNetworking extends Thread {
     /**
      * Sender melding om at rom har blitt fjernet til alle klienter
      * @param roomName navnet på rommet som ble fjernet
-     * @param rom rom informasjon
+     * @param brukernavn navnet på brukeren som fjernet rommet
      */
     public void removeRoom(String roomName, String brukernavn) {
         for(ClientSocket client : clients) {
             client.removeRoom(roomName, brukernavn);
         }
         logNetwork.logToDatabase(brukernavn, LogOperations.FJERNA_ROM.getHandling(), "IPHER", roomName);
+    }
+
+    /**
+     * Sender melding om at ny bruker har koblet seg til chatteprogrammet
+     * @param brukernavn brukernavn til brukeren
+     * @param clientSocket klienten som koblet til
+     */
+    public void updateClientsWithNewKobling(String brukernavn, ClientSocket clientSocket) {
+        for(ClientSocket client : clients) {
+            if(client.equals(clientSocket)) {
+                continue;
+            }
+            client.newKobling(brukernavn);
+        }
+    }
+    @Override
+    public void stopNetwork() {
+        closeServer();
+        closeConnection.closeConnectionServer(serverSocket);
     }
 }

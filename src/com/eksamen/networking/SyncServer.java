@@ -22,6 +22,13 @@ public class SyncServer {
     private ServerNetworking serverNetworking;
     private LogNetwork logNetwork;
 
+    /**
+     * Konstruerer en ny SyncServer
+     * @param bufferedWriter buffered skriver
+     * @param serverScene scene som den tilhører
+     * @param serverNetworking server side nettverksdel
+     * @param logNetwork logger for nettverks operasjoner
+     */
     public SyncServer(BufferedWriter bufferedWriter, ServerScene serverScene, ServerNetworking serverNetworking, LogNetwork logNetwork) {
         this.bufferedWriter = bufferedWriter;
         this.serverScene = serverScene;
@@ -51,8 +58,26 @@ public class SyncServer {
                 case "removeRoom":
                     removeRoom(message, clientSocket);
                     break;
+                case "newKobling":
+                    newKobling(message, clientSocket);
+                    break;
             }
         }
+    }
+
+    /**
+     * Får kommando fra klient at ny bruker har koblet til chatteprogrammet og er klar
+     * Sender samme kommando til alle andre klienter
+     * @param message melding fra klient
+     * @param clientSocket klienten meldingen kom fra
+     */
+    private void newKobling(String message, ClientSocket clientSocket) {
+        //0 - kommando
+        //1 - brukernavn
+        //2 - ipadresse
+        String[] messageArray = message.split(":");
+        serverNetworking.updateClientsWithNewKobling(messageArray[1], clientSocket);
+        logNetwork.logToDatabase(messageArray[1], LogOperations.NY_BRUKER_KOBLING.getHandling(), messageArray[2], "");
     }
 
     /**

@@ -54,7 +54,29 @@ public class SyncClient {
             case "removeRoom":
                 removeRoomServer(message);
                 break;
+            case "newKobling":
+                newKoblingServer(message);
+                break;
+            case "closeServer":
+                closeServer();
+                break;
         }
+    }
+
+    /**
+     * Viser melding at serveren har blitt avsluttet
+     */
+    private void closeServer() {
+        clientScene.visInformasjonsMelding("Server har blitt slått av! Restart programmet for å prøve å koble til på nytt!");
+    }
+
+    /**
+     * Viser melding at ny bruker har koblet til server
+     * @param message
+     */
+    private void newKoblingServer(String message) {
+        String[] messageArray = message.split(":");
+        clientScene.visInformasjonsMelding(messageArray[1] + " har koblet til chatteprogrammet");
     }
 
     /**
@@ -63,6 +85,8 @@ public class SyncClient {
      * @param message melding fra server
      */
     private void removeRoomServer(String message) {
+        //0 - kommando
+        //1 - romnavn
         String[] messageArray = message.split(":");
         Rom rom = null;
         for(Rom room : clientScene.getRooms()) {
@@ -82,6 +106,9 @@ public class SyncClient {
      */
     private void removeBrukerServer(String message) {
         System.out.println("Fjern deltaker starter");
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         Rom rom = null;
         DeltakerTabell deltakerFunnet = null;
@@ -121,10 +148,14 @@ public class SyncClient {
      * @param message melding fra server
      */
     public void newRoomServer(String message) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1],messageArray[2]);
         clientScene.getRooms().add(rom);
         clientScene.getRomSystem().opprettRom(rom);
+        clientScene.visInformasjonsMelding("Det har blitt opprettet et nytt rom med navn: " + messageArray[1]);
     }
 
     /**
@@ -133,6 +164,10 @@ public class SyncClient {
      * @param message melding ta server
      */
     public void newMessageServer(String message) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
+        //3 - melding
         String[] messageArray = message.split(":");
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
@@ -151,6 +186,9 @@ public class SyncClient {
      * @param message melding fra server
      */
     private void newBrukerServer(String message) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         for(Rom room : clientScene.getRooms()) {
             String romNavn = room.getRomNavn();
@@ -185,6 +223,19 @@ public class SyncClient {
             case "removeRoom":
                 removeRoomClient("removeRoom:" + rom.getRomNavn() + ":" + args1 + ":" + bruker.getIpAdress());
                 break;
+            case "newKobling":
+                newKoblingClient("newKobling:" + bruker.getName() + ":" + bruker.getIpAdress());
+                break;
+        }
+    }
+
+    private void newKoblingClient(String message) {
+        try {
+            bufferedWriter.write(message);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

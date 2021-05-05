@@ -10,11 +10,13 @@ import com.eksamen.systems.loggsystem.LoggSystem;
 import com.eksamen.systems.romsystem.RomSystem;
 import com.eksamen.uis.ServerUi;
 import com.eksamen.uis.layouts.RomChat;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 
@@ -48,7 +50,17 @@ public class ServerScene extends Scene {
         romSystem.fyllInnTableview(rooms);
         message = new MessageSystem();
         inputSystem = new ServerInput(serverUi.getHovedLayout().getRomListe(), bruker, serverUi.getHovedLayout(), message, serverUi.getHovedLayout().getRomChat(), romSystem,rooms,nettverk);
-
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                if(bruker.getRom() != null) {
+                    nettverk.removeBruker("removeBruker", bruker.getName());
+                }
+                nettverk.stopNetwork();
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     /**

@@ -44,6 +44,11 @@ public class ClientInput extends InputSystem{
     public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
             String melding = romChat.getMeldingsBoks().getText();
+            melding = melding.replace(":", "");
+            if(melding.equals("")) {
+                Feilmelding.visFeilmelding("Du kan ikke sende en tom melding");
+                return;
+            };
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
@@ -62,11 +67,11 @@ public class ClientInput extends InputSystem{
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
             try{
                 hovedLayout.slettTab();
-                Rom rom = new Rom(romListeUI.getTextField().getText(), bruker.getName());
+                Rom rom = new Rom(romListeUI.getTextField().getText().replace(":", ""), bruker.getName());
                 if(romListeUI.getTextField().getText() != ""){
                     mainRoomList.add(rom);
                     romSystem.opprettRom(rom);
-                    hovedLayout.lagNyTab(romListeUI.getTextField().getText());
+                    hovedLayout.lagNyTab(romListeUI.getTextField().getText().replace(":", ""));
                     deltakerTabell = new DeltakerTabell(bruker.getName());
                     rom.leggTilDeltaker(deltakerTabell);
                     romChat.oppdaterDeltakerListe(romSystem.getDeltakere(rom));
@@ -118,7 +123,6 @@ public class ClientInput extends InputSystem{
                     return;
                 }
                 hovedLayout.slettTab();
-                //mainRoomList.add(rom);
                 hovedLayout.lagNyTab(rom.getRomNavn());
                 deltakerTabell = new DeltakerTabell(bruker.getName());
                 rom.leggTilDeltaker(deltakerTabell);
@@ -130,6 +134,7 @@ public class ClientInput extends InputSystem{
                 forlatRom(deltakerTabell, rom, mainRoomList);
             } catch(Exception e){
                 System.out.println(e);
+                Feilmelding.visFeilmelding("Noe gikk galt");
             }
         });
     }
