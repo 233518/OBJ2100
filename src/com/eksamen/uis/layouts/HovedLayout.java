@@ -10,22 +10,38 @@ public class HovedLayout {
     private TabPane tabPane;
     private Tab tab;
     private LoggLayout loggLayout;
+
+    /**
+     * Constructor for hovedlayout som viser loggsystem, romliste og chatterom
+     * @param loggSystem
+     */
     public HovedLayout(LoggSystem loggSystem){
         romChat = new RomChat();
         romListe = new RomListeUI();
         loggLayout = new LoggLayout(loggSystem);
         lagLayout();
     }
+
+    /**
+     * Constructor for hovedlayout som viser romliste og chatterom
+     */
     public HovedLayout() {
         romChat = new RomChat();
         romListe = new RomListeUI();
         lagLayout();
     }
 
+    /**
+     * Getter for å få romliste
+     * @return RomListeUI
+     */
     public RomListeUI getRomListe() {
         return romListe;
     }
 
+    /**
+     * Lager en ny tabpane og tab for innholdet av romUI
+     */
     public void lagLayout(){
         tabPane = new TabPane();
         Tab tab1 = new Tab("Romliste");
@@ -34,18 +50,34 @@ public class HovedLayout {
         tabPane.getTabs().add(tab1);
     }
 
+    /**
+     * Getter for RomChat
+     * @return RomChat
+     */
     public RomChat getRomChat() {
         return romChat;
     }
 
+    /**
+     * Getter for å få tak i tab
+     * @return Tab
+     */
     public Tab getTab() {
         return tab;
     }
 
+    /**
+     * Getter for å få tak i tabpane som inneholder alle tabs
+     * @return TabPane
+     */
     public TabPane getTabPane() {
         return tabPane;
     }
 
+    /**
+     * Metode for å lage en ny tab i tabpane
+     * @param navn Navnet du vil kalle tabben
+     */
     public void lagNyTab(String navn){
         tab = new Tab();
         tabPane.getTabs().add(tab);
@@ -53,6 +85,9 @@ public class HovedLayout {
         tab.setContent(romChat.getBorderpane());
     }
 
+    /**
+     * Metode for å lage loggetab
+     */
     public void lagLoggingTab(){
         tab = new Tab("Serverlog");
         tab.setClosable(false);
@@ -60,6 +95,10 @@ public class HovedLayout {
         tabPane.getTabs().add(tab);
     }
 
+    /**
+     * Metode for å slette tab.
+     * Brukes for at brukeren skal ha maks 2 tabs
+     */
     public void slettTab(){
         if(getTabPane().getTabs().size() == 2){
             getTabPane().getTabs().remove(1);
