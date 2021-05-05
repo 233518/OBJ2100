@@ -16,7 +16,7 @@ public class HovedLayout {
 
     /**
      * Constructor for hovedlayout som viser loggsystem, romliste og chatterom
-     * @param loggSystem
+     * @param loggSystem Loggesystemet som innebærer tabell og logs
      */
     public HovedLayout(LoggSystem loggSystem){
         romChat = new RomChat();

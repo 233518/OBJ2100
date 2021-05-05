@@ -12,7 +12,7 @@ public class LoggLayout {
 
     /**
      * Constructor for å lage nytt UI/Layout til loggsystemet.
-     * @param loggSystem
+     * @param loggSystem Loggsystemet.
      */
     public LoggLayout(LoggSystem loggSystem) {
         this.hbox = new HBox();

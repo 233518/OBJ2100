@@ -12,8 +12,8 @@ public class InndataTabell {
 
     /**
      * Constructor for inndatatabell
-     * @param brukernavn
-     * @param melding
+     * @param brukernavn Brukernavnet som sendte melding
+     * @param melding Meldingen
      */
     public InndataTabell(String brukernavn, String melding){
         this.brukernavn = brukernavn;
@@ -23,9 +23,9 @@ public class InndataTabell {
 
     /**
      * Constructor for inndatatabell
-     * @param brukernavn
-     * @param melding
-     * @param tidspunkt
+     * @param brukernavn Brukernavnet som sendte melding
+     * @param melding Meldingen
+     * @param tidspunkt Tidspunktet melding ble sendt
      */
     public InndataTabell(String brukernavn, String melding, String tidspunkt) {
         this.brukernavn = brukernavn;
@@ -59,7 +59,7 @@ public class InndataTabell {
 
     /**
      * Metode for å hente ut klokkeslettet i datoen
-     * @param dato
+     * @param dato Dato du vil hente klokkeslett fra
      * @return Dato som String i format HH:MM:SS
      */
     public String hentTidspunkt(LocalDateTime dato){

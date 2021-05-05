@@ -30,7 +30,7 @@ public class RomSystem {
 
     /**
      * Metode for å fylle inn Arraylisten med rom ved hjelp av opprettRom, så oppdatere Tableviewen.
-     * @param roomsListe Arraylist<Rom> Med rom.
+     * @param roomsListe Arraylist Med rom.
      */
     public void fyllInnTableview(ArrayList<Rom> roomsListe) {
         for(Rom room : roomsListe) {
