@@ -15,7 +15,6 @@ public class RomTableView {
 
     /**
      * Lager tableview med navn og kolonner
-     * @return TableView
      */
     public RomTableView() {
         try {
