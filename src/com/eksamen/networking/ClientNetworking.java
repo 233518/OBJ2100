@@ -5,6 +5,7 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.utils.StopNettverk;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * ClientNetworking håndterer nettverksdelen på klientsiden
  *
  */
-public class ClientNetworking extends Thread {
+public class ClientNetworking extends Thread implements StopNettverk {
     private Socket socket;
     private InputStreamReader input;
     private OutputStreamWriter output;
@@ -33,7 +34,7 @@ public class ClientNetworking extends Thread {
     public ClientNetworking(ClientScene clientScene, Bruker bruker) {
         try {
             socket = new Socket("localhost", 1234);
-
+            this.getClass().getResource("").toString();
             input = new InputStreamReader(socket.getInputStream());
             output = new OutputStreamWriter(socket.getOutputStream());
 
@@ -69,7 +70,7 @@ public class ClientNetworking extends Thread {
             System.out.println("Kobling avsluttet");
         } finally {
             //avslutter kobling
-            new CloseConnection().closeConnection(socket, input, output, bufferedReader, bufferedWriter);
+            new CloseConnection().closeConnectionClient(socket, input, output, bufferedReader, bufferedWriter);
         }
     }
 
@@ -167,6 +168,6 @@ public class ClientNetworking extends Thread {
      * Stopper nettverkskoblingen
      */
     public void stopNetwork() {
-        closeConnection.closeConnection(socket,input,output,bufferedReader,bufferedWriter);
+        closeConnection.closeConnectionClient(socket,input,output,bufferedReader,bufferedWriter);
     }
 }

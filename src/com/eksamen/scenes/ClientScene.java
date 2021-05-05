@@ -60,6 +60,9 @@ public class ClientScene extends Scene {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {
+                if(bruker.getRom() != null) {
+                    nettverk.removeBruker("removeBruker", bruker.getRom(), bruker.getName());
+                }
                 nettverk.stopNetwork();
                 Platform.exit();
                 System.exit(0);

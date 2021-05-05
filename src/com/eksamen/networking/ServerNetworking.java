@@ -1,8 +1,8 @@
 package com.eksamen.networking;
 
-import com.eksamen.components.Rom;
 import com.eksamen.scenes.ServerScene;
 import com.eksamen.utils.LogOperations;
+import com.eksamen.utils.StopNettverk;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -12,13 +12,14 @@ import java.util.ArrayList;
 /**
  * ServerNetworking håndterer nettverksdelen for serveren
  */
-public class ServerNetworking extends Thread {
+public class ServerNetworking extends Thread implements StopNettverk {
     private int port = 1234;
     private Socket socket;
     private ServerSocket serverSocket;
     private ArrayList<ClientSocket> clients;
     private ServerScene scene;
     private LogNetwork logNetwork;
+    private CloseConnection closeConnection;
 
     /**
      * Konstruerer en ny ServerNetworking
@@ -30,6 +31,7 @@ public class ServerNetworking extends Thread {
             this.logNetwork = new LogNetwork();
             serverSocket = new ServerSocket(port);
             clients = new ArrayList<>();
+            closeConnection = new CloseConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,10 +55,18 @@ public class ServerNetworking extends Thread {
                 sendInformationToclient(client);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Server avsluttet");
         }
     }
 
+    /**
+     * Sender melding til klientene at serveren har blitt avsluttet
+     */
+    public void closeServer() {
+        for(ClientSocket client : clients) {
+            client.closeServer();
+        }
+    }
     /**
      * Sender melding til klientene at nytt rom har blitt opprettet
      * @param roomName navnet på rommet som har blitt opprettet
@@ -218,5 +228,10 @@ public class ServerNetworking extends Thread {
             }
             client.newKobling(brukernavn);
         }
+    }
+    @Override
+    public void stopNetwork() {
+        closeServer();
+        closeConnection.closeConnectionServer(serverSocket);
     }
 }
