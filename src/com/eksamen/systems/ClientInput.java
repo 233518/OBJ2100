@@ -3,7 +3,6 @@ package com.eksamen.systems;
 import com.eksamen.components.Bruker;
 import com.eksamen.components.Rom;
 import com.eksamen.networking.ClientNetworking;
-import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
 import com.eksamen.systems.romsystem.RomSystem;
@@ -11,20 +10,33 @@ import com.eksamen.uis.layouts.HovedLayout;
 import com.eksamen.uis.layouts.RomChat;
 import com.eksamen.uis.layouts.RomListeUI;
 import com.eksamen.utils.Feilmelding;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 
 import java.util.ArrayList;
 
 public class ClientInput extends InputSystem{
     private ClientNetworking clientNetworking;
 
+    /**
+     * Constructor for ClientInput
+     * @param romListeUI
+     * @param bruker
+     * @param hovedLayout
+     * @param message
+     * @param romChat
+     * @param romSystem
+     * @param mainRoomList
+     * @param clientNetworking
+     */
     public ClientInput(RomListeUI romListeUI, Bruker bruker, HovedLayout hovedLayout, MessageSystem message, RomChat romChat,RomSystem romSystem,ArrayList<Rom> mainRoomList, ClientNetworking clientNetworking) {
         super(romListeUI, bruker, hovedLayout, message, romChat, romSystem, mainRoomList);
         this.clientNetworking = clientNetworking;
     }
 
-
+    /**
+     * Lager ActionEvent på knappen "sendKnapp" i RomChat
+     * Den henter tekst fra textfield "meldingsBoks" og lager et nytt InndataTabell
+     * og oppdaterer selve meldingslisten.
+     */
     @Override
     public void sendMelding() {
         romChat.getSendKnapp().setOnAction(actionEvent -> {
@@ -32,12 +44,16 @@ public class ClientInput extends InputSystem{
             inndataTabell = new InndataTabell(bruker.getName(), melding);
             message.nyMelding(rom, inndataTabell);
             romChat.oppdaterMeldingListe(message.getMeldinger(rom));
-            System.out.println("Kjører en gang");
             clientNetworking.newMessage("newMessage", rom, bruker.getName(), melding);
             romChat.getMeldingsBoks().setText("");
         });
     }
 
+    /**
+     * Lager ActionEvent på "opprettRom" knappen i RomListeUI
+     * Denne henter teksten som brukeren kaller rommet, og lager ett nytt romobjekt og sender dette romobjektet videre,
+     * den "joiner" også brukeren i chatterommet.
+     */
     @Override
     public void opprettRom() {
         romListeUI.getButtonLeggTilRom().setOnAction(actionEvent -> {
@@ -68,7 +84,9 @@ public class ClientInput extends InputSystem{
 
         });
     }
-
+    /**
+     *  Lager ActionEvent for å skjule meldingen som kommer opp om du allerede har opprettet et rom
+     */
     @Override
     public void OkKnappAlleredeOpprettetRom() {
         romListeUI.getAlleredeRomButton().setOnAction(actionEvent -> {
@@ -76,6 +94,11 @@ public class ClientInput extends InputSystem{
         });
     }
 
+    /**
+     * Lager ActionEvent for å bli med i ett chatterom.
+     * Den setter brukeren til det rommet som er valgt listen, og "joiner" brukeren i rommet.
+     * Den henter også tidligere meldinger og aktive brukere i rommet.
+     */
     @Override
     public void bliMedRom() {
         romListeUI.getButtonBliMed().setOnAction(actionEvent -> {
@@ -108,6 +131,17 @@ public class ClientInput extends InputSystem{
         });
     }
 
+    /**
+     * Metode for når en bruker forlater et rom
+     * Andre brukere som er i samme rom vil få en oppdatert deltakerliste og
+     * brukeren vil slettes fra rommets deltakerliste
+     *
+     * Den sjekker også om rommet har deltakere, om rommet når 0 deltakere vil
+     * rommet slettes
+     * @param deltakerTabell Deltakeren
+     * @param rom Rommet
+     * @param romarray Array med rom
+     */
     public void forlatRom(DeltakerTabell deltakerTabell, Rom rom, ArrayList romarray) {
         hovedLayout.getTab().setOnCloseRequest(event -> {
             clientNetworking.removeBruker("removeBruker", rom, bruker.getName());
@@ -117,7 +151,7 @@ public class ClientInput extends InputSystem{
             setRom();
             if(romChat.getDeltakere().getItems().size() == 0){
                 romSystem.slettRom(rom, romarray);
-                clientNetworking.removeRoom("removeRoom", rom);
+                clientNetworking.removeRoom("removeRoom", rom, bruker.getName());
             }
         });
     }

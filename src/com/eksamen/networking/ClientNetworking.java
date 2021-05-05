@@ -155,8 +155,8 @@ public class ClientNetworking extends Thread {
      * @param message hendelsestype
      * @param rom rom som blir fjernet
      */
-    public void removeRoom(String message, Rom rom) {
-        syncClient.syncServer(message, rom, "", "");
+    public void removeRoom(String message, Rom rom, String brukernavn) {
+        syncClient.syncServer(message, rom, brukernavn, "");
     }
 
     /**

@@ -22,20 +22,24 @@ public class ClientSocket extends Thread {
 
     private SyncServer syncServer;
 
+    private LogNetwork logNetwork;
+
     /**
      * Konstruerer en ny ClientSocket
      * @param socket kobling til klient
      * @param serverScene servere scenen den tilhører
      * @param serverNetworking server side nettverksdelen
+     * @param logNetwork logger for nettverk
      */
-    public ClientSocket(Socket socket, ServerScene serverScene, ServerNetworking serverNetworking) {
+    public ClientSocket(Socket socket, ServerScene serverScene, ServerNetworking serverNetworking, LogNetwork logNetwork) {
         this.socket = socket;
+        this.logNetwork = logNetwork;
         try {
             input = new InputStreamReader(this.socket.getInputStream());
             output = new OutputStreamWriter(this.socket.getOutputStream());
             bufferedReader = new BufferedReader(input);
             bufferedWriter = new BufferedWriter(output);
-            syncServer = new SyncServer(bufferedWriter, serverScene, serverNetworking);
+            syncServer = new SyncServer(bufferedWriter, serverScene, serverNetworking, logNetwork);
         } catch (IOException e) {
             e.printStackTrace();
         }
