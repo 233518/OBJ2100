@@ -19,11 +19,13 @@ public class SyncServer {
     private BufferedWriter bufferedWriter;
     private ServerScene serverScene;
     private ServerNetworking serverNetworking;
+    private LogNetwork logNetwork;
 
-    public SyncServer(BufferedWriter bufferedWriter, ServerScene serverScene, ServerNetworking serverNetworking) {
+    public SyncServer(BufferedWriter bufferedWriter, ServerScene serverScene, ServerNetworking serverNetworking, LogNetwork logNetwork) {
         this.bufferedWriter = bufferedWriter;
         this.serverScene = serverScene;
         this.serverNetworking = serverNetworking;
+        this.logNetwork = logNetwork;
     }
 
     /**
@@ -59,6 +61,9 @@ public class SyncServer {
      * @param clientSocket klienten meldingen kom fra
      */
     private void removeRoom(String message, ClientSocket clientSocket) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         Rom rom = null;
         for(Rom room : serverScene.getRooms()) {
@@ -70,6 +75,7 @@ public class SyncServer {
         serverScene.getRooms().remove(rom);
         serverScene.getRomSystem().removeRom(rom);
         serverNetworking.updateClientsWithRemoveRoom(messageArray[1], clientSocket);
+        logNetwork.logToDatabase(messageArray[2], "Rom ble slettet", "IPHER", messageArray[1]);
     }
 
     /**
@@ -79,6 +85,9 @@ public class SyncServer {
      * @param clientSocket klienten meldingen kom fra
      */
     private void removeBrukerServer(String message, ClientSocket clientSocket) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         Rom rom = null;
         DeltakerTabell deltakerFunnet = null;
@@ -107,6 +116,7 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithRemoveUserInRoom(messageArray[1], messageArray[2], clientSocket);
+        logNetwork.logToDatabase(messageArray[2], "Bruker forlot rom", "IPHER", messageArray[1]);
     }
 
     /**
@@ -116,6 +126,9 @@ public class SyncServer {
      * @param clientSocket klienten meldingen tilhører
      */
     private void newBrukerServer(String message, ClientSocket clientSocket) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
@@ -130,6 +143,7 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithNewUserInRoom(messageArray[1], messageArray[2], clientSocket);
+        logNetwork.logToDatabase(messageArray[2], "Bruker ble med i rom", "IPHER", messageArray[1]);
     }
 
     /**
@@ -139,11 +153,15 @@ public class SyncServer {
      * @param clientSocket klienten meldingen tilhører
      */
     private void newRoomServer(String message, ClientSocket clientSocket) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
         String[] messageArray = message.split(":");
         Rom rom = new Rom(messageArray[1], messageArray[2]);
         serverScene.getRooms().add(rom);
         serverScene.getRomSystem().opprettRom(rom);
         serverNetworking.updateClientsWithNewRoom(messageArray[1],  messageArray[2], clientSocket);
+        logNetwork.logToDatabase(messageArray[2], "Bruker opprettet nytt rom", "IPHER", messageArray[1]);
     }
 
     /**
@@ -153,6 +171,10 @@ public class SyncServer {
      * @param clientSocket klienten meldingen tilhører
      */
     private void newMessageServer(String message, ClientSocket clientSocket) {
+        //0 - kommando
+        //1 - romnavn
+        //2 - brukernavn
+        //3 - melding
         String[] messageArray = message.split(":");
         for(Rom room : serverScene.getRooms()) {
             String romNavn = room.getRomNavn();
@@ -166,5 +188,6 @@ public class SyncServer {
             }
         }
         serverNetworking.updateClientsWithNewMessage(messageArray[1],messageArray[2],messageArray[3],clientSocket);
+        logNetwork.logToDatabase(messageArray[2], "Bruker sendte melding i rom", "IPHER", messageArray[1]);
     }
 }

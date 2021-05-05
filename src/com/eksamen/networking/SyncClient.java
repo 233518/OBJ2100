@@ -183,7 +183,7 @@ public class SyncClient {
                 removeBrukerClient("removeBruker:" + rom.getRomNavn() + ":" + args1);
                 break;
             case "removeRoom":
-                removeRoomClient("removeRoom:" + rom.getRomNavn());
+                removeRoomClient("removeRoom:" + rom.getRomNavn() + args1);
                 break;
         }
     }

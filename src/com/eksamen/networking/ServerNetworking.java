@@ -2,6 +2,7 @@ package com.eksamen.networking;
 
 import com.eksamen.components.Rom;
 import com.eksamen.scenes.ServerScene;
+import com.eksamen.utils.LogOperations;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -17,14 +18,16 @@ public class ServerNetworking extends Thread {
     private ServerSocket serverSocket;
     private ArrayList<ClientSocket> clients;
     private ServerScene scene;
+    private LogNetwork logNetwork;
 
     /**
      * Konstruerer en ny ServerNetworking
-     * @param scene servere scenen den tilhører
+     * @param scene server scenen den tilhører
      */
     public ServerNetworking(ServerScene scene) {
         try {
             this.scene = scene;
+            this.logNetwork = new LogNetwork();
             serverSocket = new ServerSocket(port);
             clients = new ArrayList<>();
         } catch (IOException e) {
@@ -42,7 +45,7 @@ public class ServerNetworking extends Thread {
             while (true) {
                 socket = serverSocket.accept(); //"Lytter" etter klient koblinger
                 System.out.println("Client connected");
-                ClientSocket client = new ClientSocket(socket, scene, this);
+                ClientSocket client = new ClientSocket(socket, scene, this, logNetwork);
                 clients.add(client);
                 client.start();
                 sendInformationToclient(client);
@@ -61,6 +64,7 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.newRoom(roomName, brukernavn);
         }
+        logNetwork.logToDatabase(brukernavn, "Rom ble opprettet", "IPHER", roomName);
     }
 
     /**
@@ -113,6 +117,7 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.newMessage(roomName, brukernavn, message);
         }
+        logNetwork.logToDatabase(brukernavn, LogOperations.NY_MELDING_ROM.getHandling(), "IPHER", roomName);
     }
 
     /**
@@ -124,6 +129,7 @@ public class ServerNetworking extends Thread {
         for(ClientSocket client : clients) {
             client.newBruker(roomName, brukernavn);
         }
+        logNetwork.logToDatabase(brukernavn, LogOperations.NY_MELDING_ROM.getHandling(), "IPHER", roomName);
     }
 
     /**
