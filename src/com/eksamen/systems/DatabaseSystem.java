@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Klasse for Databasesystemet som tar vare på alle loggene, samt metode for å vise de.
+ */
 public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
     private LoggSystem loggSystem;
@@ -56,7 +59,6 @@ public class DatabaseSystem implements Logging {
             statement.executeUpdate("insert into logg(bruker, melding, ip, rom, dato) values('"+bruker+"','"+melding+"','"+ip+"','"+rom+"','"+ LocalDateTime.now().toString()+"')");
             //Denne gir feilmelding
             if(loggSystem != null) {
-                System.out.println("Jeg kjører jeg");
                 loggSystem.refreshLoggSystem();
             }
         } catch (SQLException e) {
@@ -70,12 +72,16 @@ public class DatabaseSystem implements Logging {
         }
     }
 
+    /**
+     * Metode for å få tak i de siste 15 loggene fra databasen.
+     * @return Returnerer loggene i form av Logg objekt i en ArrayList.
+     */
     public ArrayList<Logg> getLogs() {
         ArrayList<Logg> logg = new ArrayList<Logg>();
         try {
             sqlConnection = DriverManager.getConnection("jdbc:sqlite:ChatProgramDB.db");
             Statement statement = sqlConnection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from logg ORDER BY id DESC LIMIT 10");
+            ResultSet rs = statement.executeQuery("select * from logg ORDER BY id DESC LIMIT 15");
             while (rs.next()) {
                 logg.add(new Logg(rs.getString("dato"),rs.getString("ip"),rs.getString("bruker"),rs.getString("rom"),rs.getString("melding")));
                 Collections.sort(logg, new Comparator<Logg>() {
