@@ -47,7 +47,7 @@ public class MessageSystem {
             return liste;
         }
 
-        for(int i = meldingListe.size() - 1; i > meldingListe.size() - 9; i--) {
+        for(int i = meldingListe.size() - 1; i > meldingListe.size() - 11; i--) {
             liste.add(meldingListe.get(i));
             nyMeldingsListe.add(meldingListe.get(i));
         }

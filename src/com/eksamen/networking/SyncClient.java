@@ -167,8 +167,10 @@ public class SyncClient {
             String romNavn = room.getRomNavn();
             if(romNavn.equals(messageArray[1])) {
                 clientScene.getMessageSystem().nyMelding(room, new InndataTabell(messageArray[2], messageArray[3]));
-                if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
-                    clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessageSystem().getMeldinger(room));
+                if(clientScene.getBruker().getRom() != null) {
+                    if(romNavn.equals(clientScene.getBruker().getRom().getRomNavn())) {
+                        clientScene.getClientUi().getHovedLayout().getRomChat().oppdaterMeldingListe(clientScene.getMessageSystem().getMeldinger(room));
+                    }
                 }
             }
         }
