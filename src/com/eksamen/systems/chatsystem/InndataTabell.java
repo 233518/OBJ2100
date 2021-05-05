@@ -12,8 +12,8 @@ public class InndataTabell {
 
     /**
      * Constructor for inndatatabell
-     * @param brukernavn String
-     * @param melding String
+     * @param brukernavn Brukernavnet som sendte melding
+     * @param melding Meldingen
      */
     public InndataTabell(String brukernavn, String melding){
         this.brukernavn = brukernavn;
@@ -23,9 +23,9 @@ public class InndataTabell {
 
     /**
      * Constructor for inndatatabell
-     * @param brukernavn String
-     * @param melding String
-     * @param tidspunkt String
+     * @param brukernavn Brukernavnet som sendte melding
+     * @param melding Meldingen
+     * @param tidspunkt Tidspunktet melding ble sendt
      */
     public InndataTabell(String brukernavn, String melding, String tidspunkt) {
         this.brukernavn = brukernavn;

@@ -149,7 +149,7 @@ public class RomChat {
 
     /**
      * Oppdaterer tabellen med deltakere
-     * @param liste
+     * @param liste Liste med deltakere
      */
     public void oppdaterDeltakerListe(ObservableList<DeltakerTabell> liste) {
         ObservableList<DeltakerTabell> deltakerListe = liste;
@@ -158,7 +158,7 @@ public class RomChat {
 
     /**
      * Oppdaterer tabellen med meldinger
-     * @param liste
+     * @param liste Liste med meldinger
      */
     public void oppdaterMeldingListe(ObservableList<InndataTabell> liste) {
         ObservableList<InndataTabell> meldingListe = liste;
