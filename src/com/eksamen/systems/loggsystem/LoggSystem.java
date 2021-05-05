@@ -35,10 +35,13 @@ public class LoggSystem {
     /**
      * Metode for å oppdatere TableViewen med logger.
      */
-    public void oppdaterTableView() {
+    private void oppdaterTableView() {
         loggTableView.oppdaterTableView(getLog());
     }
 
+    /**
+     * Metode for å oppdatere LoggSystemet og TabelViewen med evt nye logger.
+     */
     public void refreshLoggSystem() {
         this.loggArrayList = getArrayListFromDb();
         oppdaterTableView();
