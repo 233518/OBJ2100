@@ -172,6 +172,7 @@ public class ClientNetworking extends Thread implements StopNettverk {
      * Sender melding til server at rom har blitt fjernet
      * @param message hendelsestype
      * @param rom rom som blir fjernet
+     * @param brukernavn navnet på brukeren som fjernet rommet
      */
     public void removeRoom(String message, Rom rom, String brukernavn) {
         syncClient.syncServer(message, rom, brukernavn, "");

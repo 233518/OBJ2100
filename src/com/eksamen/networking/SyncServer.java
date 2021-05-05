@@ -39,6 +39,7 @@ public class SyncServer {
     /**
      * Synker server med info fra klient
      * @param message melding fra klient
+     * @param clientSocket klienten som sendte melding
      */
     public void syncServer(String message, ClientSocket clientSocket)  {
         if(message != null) {

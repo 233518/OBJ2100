@@ -36,7 +36,7 @@ public class CloseConnection {
 
     /**
      * Lukker kobling med
-     * @param serverSocket
+     * @param serverSocket server socket som skal lukkes
      */
     public void closeConnectionServer(ServerSocket serverSocket) {
         try{

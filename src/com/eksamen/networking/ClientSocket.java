@@ -155,6 +155,7 @@ public class ClientSocket extends Thread {
     /**
      * Sender melding til klient at rom har blitt fjernet
      * @param roomName navnet på rommet som har blitt fjernet
+     * @param brukernavn navnet på brukeren som fjernet rommet
      */
     public void removeRoom(String roomName, String brukernavn) {
         try {

@@ -200,6 +200,9 @@ public class SyncClient {
     /**
      * Synker server med info fra klient
      * @param message melding som skal sendes
+     * @param rom rom som handlingen tilhører
+     * @param args1 ekstra parameter som skal legges til
+     * @param args2 ekstra parameter som skal legges til
      */
     public void syncServer(String message, Rom rom, String args1, String args2) {
         switch(message) {
