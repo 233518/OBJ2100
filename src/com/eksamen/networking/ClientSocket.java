@@ -160,9 +160,9 @@ public class ClientSocket extends Thread {
      * Sender melding til klient at rom har blitt fjernet
      * @param roomName navnet på rommet som har blitt fjernet
      */
-    public void removeRoom(String roomName) {
+    public void removeRoom(String roomName, String brukernavn) {
         try {
-            bufferedWriter.write("removeRoom" + ":" + roomName);
+            bufferedWriter.write("removeRoom" + ":" + roomName + ":" + brukernavn);
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch (IOException e) {

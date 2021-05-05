@@ -74,7 +74,7 @@ public class SyncServer {
         }
         serverScene.getRooms().remove(rom);
         serverScene.getRomSystem().removeRom(rom);
-        serverNetworking.updateClientsWithRemoveRoom(messageArray[1], clientSocket);
+        serverNetworking.updateClientsWithRemoveRoom(messageArray[1], messageArray[2], clientSocket);
         logNetwork.logToDatabase(messageArray[2], "Rom ble slettet", "IPHER", messageArray[1]);
     }
 
