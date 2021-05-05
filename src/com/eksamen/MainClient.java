@@ -5,10 +5,18 @@ import com.eksamen.uis.layouts.StartLayout;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * MainClient er klienten
+ * Denne klassen er start punktet
+ */
 public class MainClient extends Application {
     private StartScene scene;
     private StartLayout startLayout;
 
+    /**
+     * Start funksjonen kjører i gang klienten
+     * @param stage stage som skal brukes
+     */
     @Override
     public void start(Stage stage) {
         startLayout = new StartLayout();

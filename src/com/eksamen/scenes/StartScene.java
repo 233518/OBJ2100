@@ -11,6 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+
 /**
  * StartScene skaffer brukernavn til klienten
  */

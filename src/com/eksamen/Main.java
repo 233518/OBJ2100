@@ -7,12 +7,20 @@ import com.eksamen.uis.ServerUi;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Main er tjeneren
+ * Denne klassen er start punktet
+ */
 public class Main extends Application {
     private ServerScene scene;
     private ServerUi serverUi;
     private LoggSystem loggSystem;
     public static DatabaseSystem logger;
 
+    /**
+     * Start funksjonen kjører i gang tjeneren
+     * @param stage stage som skal brukes
+     */
     @Override
     public void start(Stage stage) {
         loggSystem = new LoggSystem();

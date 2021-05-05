@@ -5,10 +5,15 @@ import com.eksamen.components.Rom;
 import com.eksamen.scenes.ClientScene;
 import com.eksamen.systems.chatsystem.DeltakerTabell;
 import com.eksamen.systems.chatsystem.InndataTabell;
+import com.eksamen.utils.Feilmelding;
 import com.eksamen.utils.StopNettverk;
+import javafx.application.Platform;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +38,10 @@ public class ClientNetworking extends Thread implements StopNettverk {
      */
     public ClientNetworking(ClientScene clientScene, Bruker bruker) {
         try {
-            socket = new Socket("localhost", 1234);
+            socket = new Socket();
+            SocketAddress socketadress = new InetSocketAddress("localhost", 1234);
+            int timeout = 10000;
+            socket.connect(socketadress, timeout);
 
             input = new InputStreamReader(socket.getInputStream());
             output = new OutputStreamWriter(socket.getOutputStream());
@@ -48,8 +56,10 @@ public class ClientNetworking extends Thread implements StopNettverk {
             syncClient = new SyncClient(bufferedWriter, clientScene, this, bruker);
 
             getInformation();
-        } catch (IOException e) {
-            System.out.println("Connection refused");
+        }catch (IOException e) {
+            Feilmelding.visFeilmelding("Serveren ser ut til å være nede! Start programmet på nytt for å koble til igjen.");
+            Platform.exit();
+            return;
         }
     }
 
@@ -102,6 +112,10 @@ public class ClientNetworking extends Thread implements StopNettverk {
         }
     }
 
+    /**
+     * Sender melding til server at ny kobling har blitt lagd
+     * @param brukernavn brukernavnet til brukeren
+     */
     public void newKobling(String brukernavn) {
         syncClient.syncServer("newKobling",new Rom("",""),"","");
     }

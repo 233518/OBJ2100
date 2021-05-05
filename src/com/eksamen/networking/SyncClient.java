@@ -224,6 +224,10 @@ public class SyncClient {
         }
     }
 
+    /**
+     * Sender kommando til server at ny kobling har blitt opprettet
+     * @param message melding som skal sendes
+     */
     private void newKoblingClient(String message) {
         try {
             bufferedWriter.write(message);

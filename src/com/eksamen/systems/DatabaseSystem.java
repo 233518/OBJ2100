@@ -16,6 +16,10 @@ public class DatabaseSystem implements Logging {
     private Connection sqlConnection;
     private LoggSystem loggSystem;
 
+    /**
+     * Konstruerer et nytt DatabaseSystem
+     * @param loggSystem loggsystemet som database systemet skal bruke
+     */
     public DatabaseSystem(LoggSystem loggSystem) {
         lagTabell();
         this.loggSystem = loggSystem;
