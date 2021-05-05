@@ -38,7 +38,7 @@ public class ClientScene extends Scene {
      * @param username brukernavn til klienten
      */
     public ClientScene(Stage stage, ClientUi clientUi, String username) {
-        super(clientUi.getHovedPane(), 750, 550);
+        super(clientUi.getHovedPane(), 750, 600);
         this.clientUi = clientUi;
         rooms = new ArrayList<>();
         bruker = new Bruker(username);

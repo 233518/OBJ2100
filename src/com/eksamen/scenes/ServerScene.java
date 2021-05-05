@@ -40,7 +40,7 @@ public class ServerScene extends Scene {
      * @param loggSystem loggsystemet som skal brukes
      */
     public ServerScene(Stage stage, ServerUi serverUi, LoggSystem loggSystem) {
-        super(serverUi.getHovedPane(), 750, 550);
+        super(serverUi.getHovedPane(), 750, 600);
         this.serverUi = serverUi;
         nettverk = new ServerNetworking(this);
         nettverk.start();
