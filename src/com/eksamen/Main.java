@@ -30,6 +30,7 @@ public class Main extends Application {
         serverUi = new ServerUi(loggSystem);
         scene = new ServerScene(stage, serverUi, loggSystem);
         stage.setScene(scene);
+        stage.setTitle("Tjener");
         stage.show();
     }
     public static void main(String[] args) {

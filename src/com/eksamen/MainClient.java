@@ -23,6 +23,7 @@ public class MainClient extends Application {
         startLayout = new StartLayout();
         scene = new StartScene(stage, startLayout);
         stage.setScene(scene);
+        stage.setTitle("Klient");
         stage.show();
     }
     public static void main(String[] args) {
